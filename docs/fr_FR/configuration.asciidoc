@@ -1,0 +1,47 @@
+:imagesdir: ../images
+:icons:
+
+==== Etape 1
+----
+Activer, configurer c'est simple et rapide
+----
+image:rikaha_config1.png[width=400]
+----
+Activation, Cliquez sur Activer
+----
+image:rikaha_config2.png[]
+
+==== Etape 2
+----
+Création et configuration de l'équipement
+----
+
+cliquez sur Ajouter
+
+image:rikaha_config3.png[width=400]
+
+----
+Après avoir nommé l'équipement saisissez :
+----
+
+ 1. L'identifiant de votre compte Firenet dans le champ Identifiant
+ 2. Le mot de passe de votre compte Firenet dans le champ Mot de passe
+ 3. Le numero identifiant votre poêle dans le champ Numéro de l'équipement
+____
+Ce numero est present dans l'url lorsque vous êtes conecté sur le site firenet.
+
+Ex : https://www.rika-firenet.com/web/stove/xxxxxxxx
+
+"xxxxxxxx" est la valeur à renseigner dans le champ Numéro de l'équipement
+____
+image:rikaha_config4.png[]
+
+N'oubliez pas de sauvegarder !
+
+Vous avez terminé la configuration.
+
+Vous pouvez actualiser manuellement les informations en cliquant sur l'icone située en haut à droite du widget.
+
+Par défaut les informations sont actualisées toute les 30 mn
+
+image:rikaha_widget.png[width=400]

@@ -1,0 +1,15 @@
+:imagesdir: ../images
+:icons:
+
+==== Description
+Le plugin Rikaha permet un monitoring des poêles de la marque Rika.
+
+Il est nécessaire que le poêle soit equipé du systeme Firenet.
+
+*Le développement du plugin c'est fait sur la base du modèle Induo*
+
+Testé sur les modèles :
+--
+. Induo
+--
+image:rikaha_widget.png[width=400]
