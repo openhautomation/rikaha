@@ -1,29 +1,35 @@
 <div class="eqLogic-widget eqLogic" style="width: 380px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" >
   <i class='fa fa-refresh pull-right cursor refresh' style="margin-top: 3px;margin-right: 3px;"></i>
   <span class="cmd cmd-widget" data-cmd_id="#local_refresh_id#" style="display:none;"></span>
-  <center class="widget-name"><strong><a href="#eqLink#" style="font-size : 1.1em;#hideEqLogicName#">#name_display# </strong><span style="display: #stoveType_display#;">(#stoveType#)</span></a></center>
+  <center class="widget-name"><strong><a href="#eqLink#" style="font-size : 1.1em;#hideEqLogicName#">#name_display# </strong><span style="#stoveType_display#">(#stoveType#)</span></a></center>
 
   <script>
     $('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
      jeedom.cmd.execute({id: '#local_refresh_id#'});
     });
   </script>
-  <div class="tooltips" data-cmd_id="#local_statusCalculate_id#" style="margin-left:5px;display: #local_statusCalculate_display#;">
- 			<span title="#local_statusCalculate_name#" class="fa fa-fire" style="min-width:15px"></span>
+  <div class="tooltips" data-cmd_id="#local_statusCalculate_id#" style="margin-left:5px;#local_statusCalculate_display#">
+ 			<span title="#local_statusCalculate_name#" class="fa jeedom-feu" style="min-width:15px"></span>
       <span>#local_statusCalculate#</span>
  	</div>
 
-  <div class="tooltips" data-cmd_id="#operatingMode_id#" style="margin-left:5px;display: #operatingMode_display#;">
+  <div class="tooltips" data-cmd_id="#operatingMode_id#" style="margin-left:5px;#operatingMode_display#">
       <span title="#operatingMode_name#" class="fa techno-robot30" style="min-width:15px"></span>
       <span>#operatingMode#</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#heatingPower_id#" style="margin-left:5px;display: #heatingPower_display#;">
+  <div class="tooltips#heatingPower_histo#" data-cmd_id="#heatingPower_id#" style="margin-left:5px;#heatingPower_display#">
       <span title="#heatingPower_name#" class="fa fa-tachometer" style="min-width:15px"></span>
       <span>#heatingPower##heatingPower_unite#</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#frostProtectionActive_id#" style="margin-left:5px;display: #frostProtectionActive_display#;">
+  <div class="tooltips#inputFlameTemperature_histo#" data-cmd_id="#inputFlameTemperature_id#" style="margin-left:5px;#inputFlameTemperature_display#">
+      <span title="#inputFlameTemperature_name#" class="fa fa-fire" style="min-width:15px"></span>
+      <span>#inputFlameTemperature##inputFlameTemperature_unite#</span>
+      <span style="font-size: 0.8em;">(#inputFlameTemperature_name#)</span>
+  </div>
+
+  <div class="tooltips" data-cmd_id="#frostProtectionActive_id#" style="margin-left:5px;#frostProtectionActive_display#">
       <span title="#frostProtectionActive_name#" class="fa nature-snowflake" style="min-width:15px"></span>
       <span id="#frostProtectionActive_id#_check"></span>
       <span style="font-size: 0.8em;">(#frostProtectionActive_name#)</span>
@@ -36,7 +42,7 @@
     }
   </script>
 
-  <div class="tooltips" data-cmd_id="#onOff_id#" style="margin-left:5px;display: #onOff_display#;">
+  <div class="tooltips" data-cmd_id="#onOff_id#" style="margin-left:5px;#onOff_display#">
       <span title="#onOff_name#" class="fa techno-cable1" style="min-width:15px"></span>
       <span id="#onOff_id#_check"></span>
       <span style="font-size: 0.8em;">(#onOff_name#)</span>
@@ -48,44 +54,43 @@
       $('##onOff_id#_check').append('<i class="fa fa-check"></i>');
     }
   </script>
-
-  <div class="tooltips" data-cmd_id="#targetTemperature_id#" style="margin-left:5px;display: #targetTemperature_display#;">
+  <div class="tooltips#targetTemperature_histo#" data-cmd_id="#targetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
       <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
       <span>#targetTemperature##targetTemperature_unite#</span>
-      <span style="font-size: 0.8em;">(#targetTemperature_name#)</span>
+      <span style="font-size: 0.8em;" >(#targetTemperature_name#)</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#inputRoomTemperature_id#" style="margin-left:5px;display: #inputRoomTemperature_display#;">
+  <div class="tooltips#inputRoomTemperature_histo#" data-cmd_id="#inputRoomTemperature_id#" style="margin-left:5px;#inputRoomTemperature_display#">
       <span title="#inputRoomTemperature_name#" class="fa jeedom-thermo-chaud" style="min-width:15px"></span>
       <span>#inputRoomTemperature##inputRoomTemperature_unite#</span>
       <span style="font-size: 0.8em;">(#inputRoomTemperature_name#)</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#frostProtectionTemperature_id#" style="margin-left:5px;display: #frostProtectionTemperature_display#;">
+  <div class="tooltips#frostProtectionTemperature_histo" data-cmd_id="#frostProtectionTemperature_id#" style="margin-left:5px;#frostProtectionTemperature_display#">
       <span title="#frostProtectionTemperature_name#" class="fa jeedom-thermo-froid" style="min-width:15px"></span>
       <span>#frostProtectionTemperature##frostProtectionTemperature_unite#</span>
       <span style="font-size: 0.8em;">(#frostProtectionTemperature_name#)</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#parameterVersionMainBoard_id#" style="margin-left:5px;display: #parameterVersionMainBoard_display#;">
+  <div class="tooltips" data-cmd_id="#parameterVersionMainBoard_id#" style="margin-left:5px;#parameterVersionMainBoard_display#">
       <span title="#parameterVersionMainBoard_name#" class="fa fa-hdd-o" style="min-width:15px"></span>
       <span>#parameterVersionMainBoard#</span>
       <span style="font-size: 0.8em;">(#parameterVersionMainBoard_name#)</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#parameterVersionTFT_id#" style="margin-left:5px;display: #parameterVersionTFT_display#;">
+  <div class="tooltips" data-cmd_id="#parameterVersionTFT_id#" style="margin-left:5px;#parameterVersionTFT_display#">
       <span title="#parameterVersionTFT_name#" class="fa techno-tv" style="min-width:15px"></span>
       <span>#parameterVersionTFT#</span>
       <span style="font-size: 0.8em;">(#parameterVersionTFT_name#)</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#statusError_id#" style="margin-left:5px;display: #statusError_display#;">
+  <div class="tooltips" data-cmd_id="#statusError_id#" style="margin-left:5px;#statusError_display#">
       <span title="#statusError_name#" class="fa jeedom-alerte2" style="min-width:15px"></span>
       <span>#statusError#</span>
       <span style="font-size: 0.8em;">(#statusError_name#)</span>
   </div>
 
-  <div class="tooltips" data-cmd_id="#statusWarning_id#" style="margin-left:5px;display: #statusWarning_display#;">
+  <div class="tooltips" data-cmd_id="#statusWarning_id#" style="margin-left:5px;#statusWarning_display#">
       <span title="#statusWarning_name#" class="fa fa-exclamation-triangle" style="min-width:15px"></span>
       <span>#statusWarning#</span>
       <span style="font-size: 0.8em;">(#statusWarning_name#)</span>

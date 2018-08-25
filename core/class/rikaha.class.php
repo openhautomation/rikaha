@@ -746,7 +746,7 @@ class rikaha extends eqLogic {
         ),
         //inputFlameTemperature
         'inputFlameTemperature'=>array(
-          'name'=>__('inputFlameTemperature', __FILE__),
+          'name'=>__('Temp. de flamme', __FILE__),
           'id'=>'inputFlameTemperature',
           'parent'=>'sensors',
           'type'=>'info',
@@ -2279,7 +2279,7 @@ class rikaha extends eqLogic {
         throw new Exception(__('Impossible de lire les données, détails dans l\'error log',__FILE__));
       }
 
-      //log::add('rikaha', 'debug', var_dump($stovedata));
+      log::add('rikaha', 'debug', var_dump($stovedata));
 
       $stoveStructure=$this->getStoveStructure();
       $mainState="";
@@ -2342,19 +2342,15 @@ class rikaha extends eqLogic {
     }
 
     public function preInsert() {
-
     }
 
     public function postInsert() {
-
     }
 
     public function preSave() {
-
     }
 
     public function postSave() {
-
     }
 
     public function preUpdate() {
@@ -2381,6 +2377,7 @@ class rikaha extends eqLogic {
           log::add('rikaha', 'debug', $value['name'].' /!\created');
         }
         $rikahaCmd->setName($value['name']);
+        log::add('rikaha', 'debug', $value['name']);
         $rikahaCmd->setEqLogic_id($this->id);
         for($i=0;$i<count($value['configuration']);$i++){
           $rikahaCmd->setConfiguration($value['configuration'][$i]['k1'], $value['configuration'][$i]['k2']);
@@ -2393,6 +2390,7 @@ class rikaha extends eqLogic {
           $rikahaCmd->setUnite($value['unite']);
         }
         $rikahaCmd->save();
+        $rikahaCmd->refresh();
         log::add('rikaha', 'debug', $value['name'].' saved');
 
         unset($rikahaCmd);
@@ -2421,84 +2419,96 @@ class rikaha extends eqLogic {
 
       $stoveType = $this->getCmd(null,'stoveType');
       $replace['#stoveType#'] = (is_object($stoveType)) ? $stoveType->execCmd() : '';
-      $replace['#stoveType_display#'] = (is_object($stoveType) && $stoveType->getIsVisible()) ? "#stoveType_display#" : "none";
+      $replace['#stoveType_display#'] = (is_object($stoveType) && $stoveType->getIsVisible()) ? "" : "display: none;";
 
       $local_statusCalculate = $this->getCmd(null,'local_statusCalculate');
       $replace['#local_statusCalculate#'] = (is_object($local_statusCalculate)) ? $local_statusCalculate->execCmd() : '';
       $replace['#local_statusCalculate_id#'] = is_object($local_statusCalculate) ? $local_statusCalculate->getId() : '';
       $replace['#local_statusCalculate_name#'] = is_object($local_statusCalculate) ? $local_statusCalculate->getName() : '';
       $replace['#local_statusCalculate_unite#'] = is_object($local_statusCalculate) ? $local_statusCalculate->getUnite() : '';
-      $replace['#local_statusCalculate_display#'] = (is_object($local_statusCalculate) && $local_statusCalculate->getIsVisible()) ? "#local_statusCalculate_display#" : "none";
+      $replace['#local_statusCalculate_display#'] = (is_object($local_statusCalculate) && $local_statusCalculate->getIsVisible()) ? "" : "display: none;";
 
       $operatingMode = $this->getCmd(null,'operatingMode');
       $replace['#operatingMode#'] = (is_object($operatingMode)) ? $operatingMode->execCmd() : '';
       $replace['#operatingMode_id#'] = is_object($operatingMode) ? $operatingMode->getId() : '';
       $replace['#operatingMode_name#'] = is_object($operatingMode) ? $operatingMode->getName() : '';
-      $replace['#operatingMode_display#'] = (is_object($operatingMode) && $operatingMode->getIsVisible()) ? "#operatingMode_display#" : "none";
+      $replace['#operatingMode_display#'] = (is_object($operatingMode) && $operatingMode->getIsVisible()) ? "" : "display: none;";
 
       $heatingPower = $this->getCmd(null,'heatingPower');
       $replace['#heatingPower#'] = (is_object($heatingPower)) ? $heatingPower->execCmd() : '';
       $replace['#heatingPower_id#'] = is_object($heatingPower) ? $heatingPower->getId() : '';
       $replace['#heatingPower_name#'] = is_object($heatingPower) ? $heatingPower->getName() : '';
       $replace['#heatingPower_unite#'] = is_object($heatingPower) ? $heatingPower->getUnite() : '';
-      $replace['#heatingPower_display#'] = (is_object($heatingPower) && $heatingPower->getIsVisible()) ? "#heatingPower_display#" : "none";
+      $replace['#heatingPower_display#'] = (is_object($heatingPower) && $heatingPower->getIsVisible()) ? "" : "display: none;";
+      $replace['#heatingPower_histo#'] = (is_object($heatingPower) && $heatingPower->getIsHistorized()) ? " history cursor" : "";
+
+      $inputFlameTemperature = $this->getCmd(null,'inputFlameTemperature');
+      $replace['#inputFlameTemperature#'] = (is_object($inputFlameTemperature)) ? $inputFlameTemperature->execCmd() : '';
+      $replace['#inputFlameTemperature_id#'] = is_object($inputFlameTemperature) ? $inputFlameTemperature->getId() : '';
+      $replace['#inputFlameTemperature_name#'] = is_object($inputFlameTemperature) ? $inputFlameTemperature->getName() : '';
+      $replace['#inputFlameTemperature_unite#'] = is_object($inputFlameTemperature) ? $inputFlameTemperature->getUnite() : '';
+      $replace['#inputFlameTemperature_display#'] = (is_object($inputFlameTemperature) && $inputFlameTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#inputFlameTemperature_histo#'] = (is_object($inputFlameTemperature) && $inputFlameTemperature->getIsHistorized()) ? " history cursor" : "";
 
       $targetTemperature = $this->getCmd(null,'targetTemperature');
       $replace['#targetTemperature#'] = (is_object($targetTemperature)) ? $targetTemperature->execCmd() : '';
       $replace['#targetTemperature_id#'] = is_object($targetTemperature) ? $targetTemperature->getId() : '';
       $replace['#targetTemperature_name#'] = is_object($targetTemperature) ? $targetTemperature->getName() : '';
       $replace['#targetTemperature_unite#'] = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
-      $replace['#targetTemperature_display#'] = (is_object($targetTemperature) && $targetTemperature->getIsVisible()) ? "#targetTemperature_display#" : "none";
+      $replace['#targetTemperature_display#'] = (is_object($targetTemperature) && $targetTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#targetTemperature_histo#'] = (is_object($targetTemperature) && $targetTemperature->getIsHistorized()) ? " history cursor" : "";
 
       $inputRoomTemperature = $this->getCmd(null,'inputRoomTemperature');
       $replace['#inputRoomTemperature#'] = (is_object($inputRoomTemperature)) ? $inputRoomTemperature->execCmd() : '';
       $replace['#inputRoomTemperature_id#'] = is_object($inputRoomTemperature) ? $inputRoomTemperature->getId() : '';
       $replace['#inputRoomTemperature_name#'] = is_object($inputRoomTemperature) ? $inputRoomTemperature->getName() : '';
       $replace['#inputRoomTemperature_unite#'] = is_object($inputRoomTemperature) ? $inputRoomTemperature->getUnite() : '';
-      $replace['#inputRoomTemperature_display#'] = (is_object($inputRoomTemperature) && $inputRoomTemperature->getIsVisible()) ? "#inputRoomTemperature_display#" : "none";
+      $replace['#inputRoomTemperature_display#'] = (is_object($inputRoomTemperature) && $inputRoomTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#inputRoomTemperature_histo#'] = (is_object($inputRoomTemperature) && $inputRoomTemperature->getIsHistorized()) ? " history cursor" : "";
 
       $frostProtectionTemperature = $this->getCmd(null,'frostProtectionTemperature');
       $replace['#frostProtectionTemperature#'] = (is_object($frostProtectionTemperature)) ? $frostProtectionTemperature->execCmd() : '';
       $replace['#frostProtectionTemperature_id#'] = is_object($frostProtectionTemperature) ? $frostProtectionTemperature->getId() : '';
       $replace['#frostProtectionTemperature_name#'] = is_object($frostProtectionTemperature) ? $frostProtectionTemperature->getName() : '';
       $replace['#frostProtectionTemperature_unite#'] = is_object($frostProtectionTemperature) ? $frostProtectionTemperature->getUnite() : '';
-      $replace['#frostProtectionTemperature_display#'] = (is_object($frostProtectionTemperature) && $frostProtectionTemperature->getIsVisible()) ? "#frostProtectionTemperature_display#" : "none";
+      $replace['#frostProtectionTemperature_display#'] = (is_object($frostProtectionTemperature) && $frostProtectionTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#frostProtectionTemperature_histo#'] = (is_object($frostProtectionTemperature) && $frostProtectionTemperature->getIsHistorized()) ? " history cursor" : "";
 
       $frostProtectionActive = $this->getCmd(null,'frostProtectionActive');
       $replace['#frostProtectionActive#'] = (is_object($frostProtectionActive)) ? $frostProtectionActive->execCmd() : '';
       $replace['#frostProtectionActive_id#'] = is_object($frostProtectionActive) ? $frostProtectionActive->getId() : '';
       $replace['#frostProtectionActive_name#'] = is_object($frostProtectionActive) ? $frostProtectionActive->getName() : '';
-      $replace['#frostProtectionActive_display#'] = (is_object($frostProtectionActive) && $frostProtectionActive->getIsVisible()) ? "#frostProtectionActive_display#" : "none";
+      $replace['#frostProtectionActive_display#'] = (is_object($frostProtectionActive) && $frostProtectionActive->getIsVisible()) ? "" : "display: none;";
 
       $onOff = $this->getCmd(null,'onOff');
       $replace['#onOff#'] = (is_object($onOff)) ? $onOff->execCmd() : '';
       $replace['#onOff_id#'] = is_object($onOff) ? $onOff->getId() : '';
       $replace['#onOff_name#'] = is_object($onOff) ? $onOff->getName() : '';
-      $replace['#onOff_display#'] = (is_object($onOff) && $onOff->getIsVisible()) ? "#onOff_display#" : "none";
+      $replace['#onOff_display#'] = (is_object($onOff) && $onOff->getIsVisible()) ? "" : "display: none;";
 
       $parameterVersionMainBoard = $this->getCmd(null,'parameterVersionMainBoard');
       $replace['#parameterVersionMainBoard#'] = (is_object($parameterVersionMainBoard)) ? $parameterVersionMainBoard->execCmd() : '';
       $replace['#parameterVersionMainBoard_id#'] = is_object($parameterVersionMainBoard) ? $parameterVersionMainBoard->getId() : '';
       $replace['#parameterVersionMainBoard_name#'] = is_object($parameterVersionMainBoard) ? $parameterVersionMainBoard->getName() : '';
-      $replace['#parameterVersionMainBoard_display#'] = (is_object($parameterVersionMainBoard) && $parameterVersionMainBoard->getIsVisible()) ? "#parameterVersionMainBoard_display#" : "none";
+      $replace['#parameterVersionMainBoard_display#'] = (is_object($parameterVersionMainBoard) && $parameterVersionMainBoard->getIsVisible()) ? "" : "display: none;";
 
       $parameterVersionTFT = $this->getCmd(null,'parameterVersionTFT');
       $replace['#parameterVersionTFT#'] = (is_object($parameterVersionTFT)) ? $parameterVersionTFT->execCmd() : '';
       $replace['#parameterVersionTFT_id#'] = is_object($parameterVersionTFT) ? $parameterVersionTFT->getId() : '';
       $replace['#parameterVersionTFT_name#'] = is_object($parameterVersionTFT) ? $parameterVersionTFT->getName() : '';
-      $replace['#parameterVersionTFT_display#'] = (is_object($parameterVersionTFT) && $parameterVersionTFT->getIsVisible()) ? "#parameterVersionTFT_display#" : "none";
+      $replace['#parameterVersionTFT_display#'] = (is_object($parameterVersionTFT) && $parameterVersionTFT->getIsVisible()) ? "" : "display: none;";
 
       $statusError = $this->getCmd(null,'statusError');
       $replace['#statusError#'] = (is_object($statusError)) ? $statusError->execCmd() : '';
       $replace['#statusError_id#'] = is_object($statusError) ? $statusError->getId() : '';
       $replace['#statusError_name#'] = is_object($statusError) ? $statusError->getName() : '';
-      $replace['#statusError_display#'] = (is_object($statusError) && $statusError->getIsVisible()) ? "#tatusError_display#" : "none";
+      $replace['#statusError_display#'] = (is_object($statusError) && $statusError->getIsVisible()) ? "" : "display: none;";
 
       $statusWarning = $this->getCmd(null,'statusWarning');
       $replace['#statusWarning#'] = (is_object($statusWarning)) ? $statusWarning->execCmd() : '';
       $replace['#statusWarning_id#'] = is_object($statusWarning) ? $statusWarning->getId() : '';
       $replace['#statusWarning_name#'] = is_object($statusWarning) ? $statusWarning->getName() : '';
-      $replace['#statusWarning_display#'] = (is_object($statusWarning) && $statusWarning->getIsVisible()) ? "#statusWarning#" : "none";
+      $replace['#statusWarning_display#'] = (is_object($statusWarning) && $statusWarning->getIsVisible()) ? "" : "display: none;";
 
       $html = template_replace($replace, getTemplate('core', $_version, 'rikaha','rikaha'));
 
