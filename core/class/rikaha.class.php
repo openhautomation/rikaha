@@ -1376,17 +1376,17 @@ class rikaha extends eqLogic {
         ),
         //parameterFeedRateTotal
         'parameterFeedRateTotal'=>array(
-          'name'=>__('parameterFeedRateTotal', __FILE__),
+          'name'=>__('Conso. totale de pellet', __FILE__),
           'id'=>'parameterFeedRateTotal',
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>0,
+          'historized'=>1,
           'visible'=>1,
           'configuration'=>array(
             0=>array('k1'=>'data', 'k2'=>'parameterFeedRateTotal')
           ),
-          'unite'=>''
+          'unite'=>'kg'
         ),
         //parameterFeedRateService
         'parameterFeedRateService'=>array(
@@ -2030,6 +2030,20 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>''
+        ),
+        //local_uptime
+        'local_uptime'=>array(
+          'name'=>__('Démarré depuis', __FILE__),
+          'id'=>'local_uptime',
+          'parent'=>'0',
+          'type'=>'info',
+          'subtype'=>'string',
+          'historized'=>0,
+          'visible'=>1,
+          'configuration'=>array(
+            0=>array('k1'=>'data', 'k2'=>'local_uptime')
+          ),
+          'unite'=>''
         )
       );
 
@@ -2257,6 +2271,20 @@ class rikaha extends eqLogic {
       return $translate;
     }
 
+    private function translateUptime($value=0){
+      $conv = array(86400,3600,60,1);
+      $result = array(0,0,0,0);
+      $i=0;
+
+      while($value>0){
+          $result[$i]= (int)($value/$conv[$i]);
+          $value=$value-($result[$i]*$conv[$i]);
+          $i++;
+       }
+
+       return $result[0].__('j',__FILE__).$result[1].'h'.$result[2].'m';
+    }
+
     public function getInfo(){
       $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.uniqid();
       $jsonFile=jeedom::getTmpFolder('rikaha').'/rikaha_json_'.uniqid().'.json';
@@ -2294,6 +2322,18 @@ class rikaha extends eqLogic {
         if($value['parent']=='0'){
           if(array_key_exists($key, $stovedata)===true){
             $stoveValue=$stovedata[$key];
+
+            switch ($key) {
+              case 'lastSeenMinutes':
+                $this->translateUptime($stoveValue*60);
+                $name = $this->getCmd(null, 'local_uptime');
+                if(is_object($name)){
+                  $name->event($this->translateUptime($stoveValue*60));
+                  $name->save();
+                  log::add('rikaha', 'debug', 'local_uptime ('.$this->translateUptime($stoveValue*60).')'.' saved');
+                }
+                break;
+            }
 
             $name = $this->getCmd(null, $value['id']);
             if(is_object($name)){
@@ -2485,6 +2525,21 @@ class rikaha extends eqLogic {
       $replace['#onOff_id#'] = is_object($onOff) ? $onOff->getId() : '';
       $replace['#onOff_name#'] = is_object($onOff) ? $onOff->getName() : '';
       $replace['#onOff_display#'] = (is_object($onOff) && $onOff->getIsVisible()) ? "" : "display: none;";
+
+      $parameterFeedRateTotal = $this->getCmd(null,'parameterFeedRateTotal');
+      $replace['#parameterFeedRateTotal#'] = (is_object($parameterFeedRateTotal)) ? $parameterFeedRateTotal->execCmd() : '';
+      $replace['#parameterFeedRateTotal_id#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getId() : '';
+      $replace['#parameterFeedRateTotal_name#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getName() : '';
+      $replace['#parameterFeedRateTotal_unite#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getUnite() : '';
+      $replace['#parameterFeedRateTotal_display#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterFeedRateTotal_histo#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsHistorized()) ? " history cursor" : "";
+
+
+      $local_uptime = $this->getCmd(null,'local_uptime');
+      $replace['#local_uptime#'] = (is_object($local_uptime)) ? $local_uptime->execCmd() : '';
+      $replace['#local_uptime_id#'] = is_object($local_uptime) ? $local_uptime->getId() : '';
+      $replace['#local_uptime_name#'] = is_object($local_uptime) ? $local_uptime->getName() : '';
+      $replace['#local_uptime_display#'] = (is_object($local_uptime) && $local_uptime->getIsVisible()) ? "" : "display: none;";
 
       $parameterVersionMainBoard = $this->getCmd(null,'parameterVersionMainBoard');
       $replace['#parameterVersionMainBoard#'] = (is_object($parameterVersionMainBoard)) ? $parameterVersionMainBoard->execCmd() : '';
