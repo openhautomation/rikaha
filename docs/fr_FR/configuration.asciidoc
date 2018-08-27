@@ -28,7 +28,7 @@ Après avoir nommé l'équipement saisissez :
  2. Le mot de passe de votre compte Firenet dans le champ Mot de passe
  3. Le numero identifiant votre poêle dans le champ Numéro de l'équipement
 ____
-Ce numero est present dans l'url lorsque vous êtes conecté sur le site firenet.
+Ce numero est présent dans l'url lorsque vous êtes conecté sur le site firenet.
 
 Ex : https://www.rika-firenet.com/web/stove/xxxxxxxx
 

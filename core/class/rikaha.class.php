@@ -56,18 +56,6 @@ class rikaha extends eqLogic {
     */
 
     /*     * *********************Méthodes d'instance************************* */
-    public static $_widgetPossibility = array('custom' => array(
-        'visibility' => true,
-        'displayName' => true,
-        'displayObjectName' => true,
-        'optionalParameters' => false,
-        'background-color' => true,
-        'text-color' => true,
-        'border' => true,
-        'border-radius' => true,
-        'background-opacity' => true,
-  	));
-
     private function getStoveStructure(){
       $stoveStructure=array(
         //name
@@ -2044,6 +2032,19 @@ class rikaha extends eqLogic {
             0=>array('k1'=>'data', 'k2'=>'local_uptime')
           ),
           'unite'=>''
+        ),
+        'local_lastupdate'=>array(
+          'name'=>__('Dernière maj', __FILE__),
+          'id'=>'local_lastupdate',
+          'parent'=>'0',
+          'type'=>'info',
+          'subtype'=>'string',
+          'historized'=>0,
+          'visible'=>1,
+          'configuration'=>array(
+            0=>array('k1'=>'data', 'k2'=>'local_lastupdate')
+          ),
+          'unite'=>''
         )
       );
 
@@ -2078,7 +2079,7 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
       curl_setopt($ch, CURLOPT_POST, 1);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
       curl_setopt($ch, CURLOPT_TIMEOUT, 6);
       curl_setopt($ch, CURLOPT_COOKIEJAR, $cookieFile);
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
@@ -2107,7 +2108,6 @@ class rikaha extends eqLogic {
       }
       $url='https://www.rika-firenet.com/api/client/';
 
-
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_USERAGENT,$this->getUA());
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -2117,8 +2117,6 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
       curl_setopt($ch, CURLOPT_TIMEOUT, 10);
       curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/status?nocache='.time().'260');
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 6);
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_FILE, $fp);
       $return = curl_exec($ch);
@@ -2371,6 +2369,7 @@ class rikaha extends eqLogic {
       }
       unset($value);
 
+      // Store calculate status
       if(trim($mainState)!='' && trim($subState)!=''){
         $name = $this->getCmd(null, 'local_statusCalculate');
         if(is_object($name)){
@@ -2379,6 +2378,15 @@ class rikaha extends eqLogic {
           log::add('rikaha', 'debug', 'local_statusCalculate ('.$this->translateStatus($mainState, $subState).')'.' saved');
         }
       }
+      // Store last update
+      $name = $this->getCmd(null, 'local_lastupdate');
+      if(is_object($name)){
+        $name->event(date('d-m-Y H:i:s'));
+        $name->save();
+        log::add('rikaha', 'debug', 'local_lastupdate ('.date('d-m-Y H:i:s').')'.' saved');
+      }
+
+      $this->refreshWidget();
     }
 
     public function preInsert() {
@@ -2430,13 +2438,17 @@ class rikaha extends eqLogic {
           $rikahaCmd->setUnite($value['unite']);
         }
         $rikahaCmd->save();
-        $rikahaCmd->refresh();
         log::add('rikaha', 'debug', $value['name'].' saved');
 
         unset($rikahaCmd);
       }
       unset($value);
       unset($stoveStructure);
+      /*
+      if ($this->getIsEnable() == 1) {
+        $this->getInfo();
+      }
+      */
     }
 
     public function preRemove() {
@@ -2447,6 +2459,18 @@ class rikaha extends eqLogic {
 
     }
 
+    public static $_widgetPossibility = array('custom' => array(
+        'visibility' => true,
+        'displayName' => true,
+        'displayObjectName' => true,
+        'optionalParameters' => false,
+        'background-color' => true,
+        'text-color' => true,
+        'border' => true,
+        'border-radius' => true,
+        'background-opacity' => true,
+    ));
+
     public function toHtml($_version = 'dashboard') {
       $replace = $this->preToHtml($_version);
   		if (!is_array($replace)) {
@@ -2456,6 +2480,10 @@ class rikaha extends eqLogic {
 
       $local_refresh = $this->getCmd(null, 'local_refresh');
       $replace['#local_refresh_id#'] = (is_object($local_refresh)) ? $local_refresh->getId() : '';
+
+      $local_lastupdate = $this->getCmd(null,'local_lastupdate');
+      $replace['#local_lastupdate#'] = (is_object($local_lastupdate)) ? $local_lastupdate->execCmd() : '';
+      $replace['#local_lastupdate_name#'] = is_object($local_lastupdate) ? $local_lastupdate->getName() : '';
 
       $stoveType = $this->getCmd(null,'stoveType');
       $replace['#stoveType#'] = (is_object($stoveType)) ? $stoveType->execCmd() : '';
@@ -2605,6 +2633,8 @@ class rikahaCmd extends cmd {
       return true;
       }
      */
+
+    public static $_widgetPossibility = array('custom' => false);
 
     public function execute($_options = array()) {
       log::add('rikaha', 'debug', $this->getLogicalId());

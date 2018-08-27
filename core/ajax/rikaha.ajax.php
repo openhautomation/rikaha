@@ -16,32 +16,20 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-try {
-    require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-    include_file('core', 'authentification', 'php');
+ try {
+     require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+     include_file('core', 'authentification', 'php');
 
-    if (!isConnect('admin')) {
-        throw new Exception(__('401 - Accès non autorisé', __FILE__));
-    }
+     if (!isConnect('admin')) {
+         throw new Exception(__('401 - Accès non autorisé', __FILE__));
+     }
 
-    ajax::init();
+     ajax::init();
 
-    // action qui permet d'obtenir l'ensemble des eqLogic
-    if (init('action') == 'getAll') {
-        $eqLogics = eqLogic::byType('rikaha');
 
-        // la liste des équipements
-        foreach ($eqLogics as $eqLogic) {
-            $data['id'] = $eqLogic->getId();
-            $data['humanSidebar'] = $eqLogic->getHumanName(true, false);
-            $data['humanContainer'] = $eqLogic->getHumanName(true, true);
-            $return[] = $data;
-        }
-        ajax::success($return);
-    }
 
-    throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
-    /*     * *********Catch exeption*************** */
-} catch (Exception $e) {
-    ajax::error(displayException($e), $e->getCode());
-}
+     throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
+     /*     * *********Catch exeption*************** */
+ } catch (Exception $e) {
+     ajax::error(displayException($e), $e->getCode());
+ }
