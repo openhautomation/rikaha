@@ -13,9 +13,9 @@
  			<span title="#local_statusCalculate_name#" class="fa jeedom-feu" style="min-width:15px"></span>
       <span>#local_statusCalculate#</span>
  	</div>
-  <div class="tooltips" data-cmd_id="#operatingMode_id#" style="margin-left:5px;#operatingMode_display#">
-      <span title="#operatingMode_name#" class="fa techno-robot30" style="min-width:15px"></span>
-      <span>#operatingMode#</span>
+  <div class="tooltips" data-cmd_id="#local_operatingModeTranslate_id#" style="margin-left:5px;#local_operatingModeTranslate_display#">
+      <span title="#local_operatingModeTranslate#" class="fa techno-robot30" style="min-width:15px"></span>
+      <span>#local_operatingModeTranslate#</span>
   </div>
   <div class="tooltips#heatingPower_histo#" data-cmd_id="#heatingPower_id#" style="margin-left:5px;#heatingPower_display#">
       <span title="#heatingPower_name#" class="fa fa-tachometer" style="min-width:15px"></span>
@@ -51,10 +51,12 @@
     }
   </script>
 
-  <div class="tooltips" data-cmd_id="#targetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
+  <div class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
     <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
-    <select id="rikaha_#targetTemperature_id#_select" class="selectCmd" style="color::#foreground-color#;background-color:#background-color#;">
+    <select class="selectCmd" style="background-color:#background-color#;">
       <option value="...">...</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
     </select>
     <span style="font-size: 0.8em;" >(#targetTemperature_name#)</span>
   </div>
@@ -64,21 +66,12 @@
       if(i==#targetTemperature#){
         selected='selected="selected "';
       }
-      $('#rikaha_#targetTemperature_id#_select').append('<option '+selected+'value="'+i+'">'+i+'#targetTemperature_unite#</option>');
+      $('.eqLogic[data-eqLogic_id=#id#] .selectCmd').append('<option '+selected+'value="'+i+'">'+i+'#targetTemperature_unite#</option>');
     }
-    $('.rikaha_#targetTemperature_id#_select').on('change', function () {
-
-      jeedom.cmd.execute({id: #targetTemperature_id#, value: $(this).value()});
-      //jeedom.cmd.execute({id: '#local_refresh_id#'});
+    $('.eqLogic[data-eqLogic_id=#id#] .selectCmd').on('change', function () {
+      jeedom.cmd.execute({id: '#local_settargetTemperature_id#', value: $(this).val()});
     });
   </script>
-  <!--
-  <div class="tooltips#targetTemperature_histo#" data-cmd_id="#targetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
-      <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
-      <span>#targetTemperature##targetTemperature_unite#</span>
-      <span style="font-size: 0.8em;" >(#targetTemperature_name#)</span>
-  </div>
-  -->
   <div class="tooltips#inputRoomTemperature_histo#" data-cmd_id="#inputRoomTemperature_id#" style="margin-left:5px;#inputRoomTemperature_display#">
       <span title="#inputRoomTemperature_name#" class="fa jeedom-thermo-chaud" style="min-width:15px"></span>
       <span>#inputRoomTemperature##inputRoomTemperature_unite#</span>
