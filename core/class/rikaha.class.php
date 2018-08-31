@@ -1793,8 +1793,6 @@ class rikaha extends eqLogic {
           'unite'=>''
         )
       );
-
-      //return $stoveStructure;
     }
 
     private function cleanCookieFile($cookieFile){
@@ -2125,7 +2123,6 @@ class rikaha extends eqLogic {
 
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '. json_decode($stovedata));
 
-      //$stoveStructure=$this->getStoveStructure();
       $this->getStoveStructure($stoveStructure);
       $mainState="";
       $subState="";
@@ -2305,7 +2302,6 @@ class rikaha extends eqLogic {
 
     public function postUpdate() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
-      //$stoveStructure=$this->getStoveStructure();
       $this->getStoveStructure($stoveStructure);
 
       foreach ($stoveStructure as $key => $value) {
