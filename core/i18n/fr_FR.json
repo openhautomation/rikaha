@@ -36,7 +36,7 @@
         "lastConfirmedRevision": "lastConfirmedRevision",
         "Révision": "Révision",
         "On\/Off": "On\/Off",
-        "Mode": "Mode",
+        "Operating mode": "Operating mode",
         "Puissance": "Puissance",
         "Temp. de consigne": "Temp. de consigne",
         "Mode éco": "Mode éco",
@@ -168,12 +168,19 @@
         "airFlaps": "airFlaps",
         "logRuntime": "logRuntime",
         "Statut": "Statut",
-        "Rafraichir": "Rafraichir",
+        "Mode": "Mode",
         "Démarré depuis": "Démarré depuis",
         "Dernière maj": "Dernière maj",
+        "Rafraichir": "Rafraichir",
+        "Modifier la temp. de consigne": "Modifier la temp. de consigne",
+        "Votre action a èchouée, merci de consulter vos logs en mode debug": "Votre action a èchouée, merci de consulter vos logs en mode debug",
         "Not set": "Not set",
         "j": "j",
         "Confort": "Confort",
-        "Standby": "Standby"
+        "Standby": "Standby",
+        "Impossible de décoder les données JSON, merci de consulter vos logs en mode debug": "Impossible de décoder les données JSON, merci de consulter vos logs en mode debug",
+        "Impossible de lire les données, merci de consulter vos logs en mode debug": "Impossible de lire les données, merci de consulter vos logs en mode debug",
+        "Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug": "Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug",
+        "Des données sont manquantes afin de realiser cette action sur votre poêle, merci de consulter vos logs en mode debug": "Des données sont manquantes afin de realiser cette action sur votre poêle, merci de consulter vos logs en mode debug"
     }
 }

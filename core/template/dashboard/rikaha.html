@@ -28,37 +28,35 @@
   </div>
   <div class="tooltips" data-cmd_id="#frostProtectionActive_id#" style="margin-left:5px;#frostProtectionActive_display#">
       <span title="#frostProtectionActive_name#" class="fa nature-snowflake" style="min-width:15px"></span>
-      <span id="rikaha_#frostProtectionActive_id#_check"></span>
+      <span class="#frostProtectionActive_id#_check"></span>
       <span style="font-size: 0.8em;">(#frostProtectionActive_name#)</span>
   </div>
   <script>
     if('#frostProtectionActive#' == '0' ){
-      $('#rikaha_#frostProtectionActive_id#_check').append('<i class="fa fa-times"></i>');
+      $('.eqLogic[data-eqLogic_id=#id#] .#frostProtectionActive_id#_check').append('<i class="fa fa-times"></i>');
     }else{
-      $('#rikaha_#frostProtectionActive_id#_check').append('<i class="fa fa-check"></i>');
+      $('.eqLogic[data-eqLogic_id=#id#] .#frostProtectionActive_id#_check').append('<i class="fa fa-check"></i>');
     }
   </script>
   <div class="tooltips" data-cmd_id="#onOff_id#" style="margin-left:5px;#onOff_display#">
       <span title="#onOff_name#" class="fa techno-cable1" style="min-width:15px"></span>
-      <span id="rikaha_#onOff_id#_check"></span>
+      <span class="#onOff_id#_check"></span>
       <span style="font-size: 0.8em;">(#onOff_name#)</span>
   </div>
   <script>
     if('#onOff#' == '0' ){
-      $('#rikaha_#onOff_id#_check').append('<i class="fa fa-times"></i>');
+      $('.eqLogic[data-eqLogic_id=#id#] .#onOff_id#_check').append('<i class="fa fa-times"></i>');
     }else{
-      $('#rikaha_#onOff_id#_check').append('<i class="fa fa-check"></i>');
+      $('.eqLogic[data-eqLogic_id=#id#] .#onOff_id#_check').append('<i class="fa fa-check"></i>');
     }
   </script>
 
   <div class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
     <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
-    <select class="selectCmd" style="background-color:#background-color#;">
+    <select class="#local_settargetTemperature_id#_selectCmd refresh" style="background-color:#background-color#;">
       <option value="...">...</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
     </select>
-    <span style="font-size: 0.8em;" >(#targetTemperature_name#)</span>
+    <span class=">(#targetTemperature_histo#" style="font-size: 0.8em;" >(#targetTemperature_name#)</span>
   </div>
   <script>
     for(var i=10;i<28;i++){
@@ -66,9 +64,9 @@
       if(i==#targetTemperature#){
         selected='selected="selected "';
       }
-      $('.eqLogic[data-eqLogic_id=#id#] .selectCmd').append('<option '+selected+'value="'+i+'">'+i+'#targetTemperature_unite#</option>');
+      $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').append('<option '+selected+'value="'+i+'">'+i+'#targetTemperature_unite#</option>');
     }
-    $('.eqLogic[data-eqLogic_id=#id#] .selectCmd').on('change', function () {
+    $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').on('change', function () {
       jeedom.cmd.execute({id: '#local_settargetTemperature_id#', value: $(this).val()});
     });
   </script>
