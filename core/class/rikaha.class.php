@@ -2339,11 +2339,9 @@ class rikaha extends eqLogic {
     }
 
     public function preRemove() {
-
     }
 
     public function postRemove() {
-
     }
 
     public static $_widgetPossibility = array('custom' => array(
