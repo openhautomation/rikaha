@@ -137,7 +137,7 @@ class rikaha extends eqLogic {
         ),
         //operatingMode
         'operatingMode'=>array(
-          'name'=>__('Operating mode', __FILE__),
+          'name'=>__('Mode', __FILE__),
           'id'=>'operatingMode',
           'parent'=>'controls',
           'type'=>'info',
@@ -1733,18 +1733,6 @@ class rikaha extends eqLogic {
           'configuration'=>array(),
           'unite'=>''
         ),
-        //local_statusCalculate
-        'local_operatingModeTranslate'=>array(
-          'name'=>__('Mode', __FILE__),
-          'id'=>'local_operatingModeTranslate',
-          'parent'=>'0',
-          'type'=>'info',
-          'subtype'=>'string',
-          'historized'=>0,
-          'visible'=>1,
-          'configuration'=>array(),
-          'unite'=>''
-        ),
         //local_uptime
         'local_uptime'=>array(
           'name'=>__('Démarré depuis', __FILE__),
@@ -1780,7 +1768,7 @@ class rikaha extends eqLogic {
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'getInfo')),
           'unite'=>''
         ),
-        //Refesh action
+        //Set target temp. action
         'local_settargetTemperature'=>array(
           'name'=>__('Modifier la temp. de consigne', __FILE__),
           'id'=>'local_settargetTemperature',
@@ -1790,6 +1778,18 @@ class rikaha extends eqLogic {
           'historized'=>0,
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'settargetTemperature'),array('k1'=>'stovekey', 'k2'=>'targetTemperature')),
+          'unite'=>''
+        ),
+        //Set target temp. action
+        'local_setoperatingMode'=>array(
+          'name'=>__('Modifier le mode', __FILE__),
+          'id'=>'local_setoperatingMode',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'other',
+          'historized'=>0,
+          'visible'=>1,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
           'unite'=>''
         )
       );
@@ -2151,6 +2151,9 @@ class rikaha extends eqLogic {
             $name = $this->getCmd(null, $value['id']);
             if(is_object($name)){
               $name->event($stoveValue);
+              if($name->getIsHistorized()){
+                $name->addHistoryValue($stoveValue);
+              }
               $name->save();
               log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '.$value['id'].' ('.$stoveValue.')'.' saved');
             }
@@ -2162,14 +2165,6 @@ class rikaha extends eqLogic {
               $stoveValue=$stovedata[$value['parent']][$key];
 
               switch ($key) {
-                case 'operatingMode':
-                  $name = $this->getCmd(null, 'local_operatingModeTranslate');
-                  if(is_object($name)){
-                    $name->event($this->translateOperatingMode($stoveValue));
-                    $name->save();
-                    log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' operatingMode ('.$this->translateOperatingMode($stoveValue).')'.' saved');
-                  }
-                  break;
                 case 'statusMainState':
                   $mainState=$stoveValue;
                   break;
@@ -2181,6 +2176,9 @@ class rikaha extends eqLogic {
               $name = $this->getCmd(null, $value['id']);
               if(is_object($name)){
                 $name->event($stoveValue);
+                if($name->getIsHistorized()){
+                  $name->addHistoryValue($stoveValue);
+                }
                 $name->save();
                 log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '.$value['id'].' ('.$stoveValue.')'.' saved');
               }
@@ -2202,9 +2200,13 @@ class rikaha extends eqLogic {
       // Store last update
       $name = $this->getCmd(null, 'local_lastupdate');
       if(is_object($name)){
-        $name->event(date('d-m-Y H:i:s'));
+        $luDate=date('d-m-Y H:i:s');
+        $name->event($luDate);
+        if($name->getIsHistorized()){
+          $name->addHistoryValue($luDate);
+        }
         $name->save();
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_lastupdate ('.date('d-m-Y H:i:s').')'.' saved');
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_lastupdate ('.$luDate.')'.' saved');
       }
 
       $this->refreshWidget();
@@ -2271,6 +2273,7 @@ class rikaha extends eqLogic {
       if(is_object($name)){
         $name->event(trim($_options));
         $name->save();
+        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Obj: '.$stovekey.' data: ' .$_options.' saved');
       }
 
       return true ;
@@ -2283,6 +2286,7 @@ class rikaha extends eqLogic {
     }
 
     public function preSave() {
+      $this->setDisplay("width","300px");
     }
 
     public function postSave() {
@@ -2335,11 +2339,9 @@ class rikaha extends eqLogic {
     }
 
     public function preRemove() {
-
     }
 
     public function postRemove() {
-
     }
 
     public static $_widgetPossibility = array('custom' => array(
@@ -2353,6 +2355,18 @@ class rikaha extends eqLogic {
         'border-radius'      => true,
         'background-opacity' => true,
     ));
+
+    public function HtmlBuildOptions($data=array(), $selected=''){
+      $SO='<option value="...">...</option>';
+      for($i=0;$i<count($data);$i++){
+        if(trim($selected)==trim($data[$i]['value'])){
+          $SO.='<option selected="selected" value="'.$data[$i]['value'].'">'.$data[$i]['label'].'</option>';
+          continue;
+        }
+        $SO.='<option value="'.$data[$i]['value'].'">'.$data[$i]['label'].'</option>';
+      }
+      return $SO;
+    }
 
     public function toHtml($_version = 'dashboard') {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
@@ -2380,11 +2394,17 @@ class rikaha extends eqLogic {
       $replace['#local_statusCalculate_unite#'] = is_object($local_statusCalculate) ? $local_statusCalculate->getUnite() : '';
       $replace['#local_statusCalculate_display#'] = (is_object($local_statusCalculate) && $local_statusCalculate->getIsVisible()) ? "" : "display: none;";
 
-      $local_operatingModeTranslate = $this->getCmd(null,'local_operatingModeTranslate');
-      $replace['#local_operatingModeTranslate#'] = (is_object($local_operatingModeTranslate)) ? $local_operatingModeTranslate->execCmd() : '';
-      $replace['#local_operatingModeTranslate_id#'] = is_object($local_operatingModeTranslate) ? $local_operatingModeTranslate->getId() : '';
-      $replace['#local_operatingModeTranslate_name#'] = is_object($local_operatingModeTranslate) ? $local_operatingModeTranslate->getName() : '';
-      $replace['#local_operatingModeTranslate_display#'] = (is_object($local_operatingModeTranslate) && $local_operatingModeTranslate->getIsVisible()) ? "" : "display: none;";
+      $operatingMode = $this->getCmd(null,'operatingMode');
+      $local_setoperatingMode = $this->getCmd(null,'local_setoperatingMode');
+      $replace['#local_setoperatingMode_id#'] = is_object($local_setoperatingMode) ? $local_setoperatingMode->getId() : '';
+      $replace['#operatingMode_name#'] = is_object($operatingMode) ? $operatingMode->getName() : '';
+      $options = array();
+      $selected= is_object($operatingMode) ? $operatingMode->execCmd() : '';
+      for($i=0;$i<3;$i++){
+        $options[]=array('value'=>$i, 'label'=>$this->translateOperatingMode($i));
+      }
+      $replace['#operatingMode_options#']=$this->HtmlBuildOptions($options, $selected);
+      $replace['#operatingMode_display#'] = (is_object($operatingMode) && $operatingMode->getIsVisible()) ? "" : "display: none;";
 
       $heatingPower = $this->getCmd(null,'heatingPower');
       $replace['#heatingPower#'] = (is_object($heatingPower)) ? $heatingPower->execCmd() : '';
@@ -2405,9 +2425,14 @@ class rikaha extends eqLogic {
       $targetTemperature = $this->getCmd(null,'targetTemperature');
       $local_settargetTemperature = $this->getCmd(null,'local_settargetTemperature');
       $replace['#local_settargetTemperature_id#'] = is_object($local_settargetTemperature) ? $local_settargetTemperature->getId() : '';
-      $replace['#targetTemperature#'] = (is_object($targetTemperature)) ? $targetTemperature->execCmd() : '';
       $replace['#targetTemperature_name#'] = is_object($targetTemperature) ? $targetTemperature->getName() : '';
-      $replace['#targetTemperature_unite#'] = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
+      $options = array();
+      $unite   = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
+      $selected= is_object($targetTemperature) ? $targetTemperature->execCmd() : '';
+      for($i=10;$i<27;$i++){
+        $options[]=array('value'=>$i, 'label'=>$i.$unite);
+      }
+      $replace['#targetTemperature_options#']=$this->HtmlBuildOptions($options, $selected);
       $replace['#targetTemperature_display#'] = (is_object($targetTemperature) && $targetTemperature->getIsVisible()) ? "" : "display: none;";
       $replace['#targetTemperature_histo#'] = (is_object($targetTemperature) && $targetTemperature->getIsHistorized()) ? " history cursor" : "";
 
@@ -2531,10 +2556,13 @@ class rikahaCmd extends cmd {
             $this->getEqLogic()->getInfo();
             break;
           case 'settargetTemperature':
+          //case 'setoperatingMode':
             $this->getEqLogic()->getInfo();
             $this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
             $this->getEqLogic()->refreshWidget();
             break;
+          default:
+            throw new Exception(__('Commande non implémentée actuellement', __FILE__));
         }
       }else{
         throw new Exception(__('Commande non implémentée actuellement', __FILE__));

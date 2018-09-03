@@ -13,10 +13,17 @@
  			<span title="#local_statusCalculate_name#" class="fa jeedom-feu" style="min-width:15px"></span>
       <span>#local_statusCalculate#</span>
  	</div>
-  <div class="tooltips" data-cmd_id="#local_operatingModeTranslate_id#" style="margin-left:5px;#local_operatingModeTranslate_display#">
-      <span title="#local_operatingModeTranslate#" class="fa techno-robot30" style="min-width:15px"></span>
-      <span>#local_operatingModeTranslate#</span>
+  <div class="tooltips" data-cmd_id="#local_setoperatingMode_id#" style="margin-left:5px;#operatingMode_display#">
+      <span title="#operatingMode_name#" class="fa techno-robot30" style="min-width:15px"></span>
+      <select class="#local_setoperatingMode_id#_selectCmd" style="background-color:#background-color#;">
+        #operatingMode_options#
+      </select>
   </div>
+  <script>
+    $('.eqLogic[data-eqLogic_id=#id#] .#local_setoperatingMode_id#_selectCmd').on('change', function () {
+      jeedom.cmd.execute({id: '#local_setoperatingMode_id#', value: $(this).val()});
+    });
+  </script>
   <div class="tooltips#heatingPower_histo#" data-cmd_id="#heatingPower_id#" style="margin-left:5px;#heatingPower_display#">
       <span title="#heatingPower_name#" class="fa fa-tachometer" style="min-width:15px"></span>
       <span>#heatingPower##heatingPower_unite#</span>
@@ -53,19 +60,12 @@
 
   <div class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
     <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
-    <select class="#local_settargetTemperature_id#_selectCmd refresh" style="background-color:#background-color#;">
-      <option value="...">...</option>
+    <select class="#local_settargetTemperature_id#_selectCmd" style="background-color:#background-color#;">
+      #targetTemperature_options#
     </select>
     <span class=">(#targetTemperature_histo#" style="font-size: 0.8em;" >(#targetTemperature_name#)</span>
   </div>
   <script>
-    for(var i=10;i<28;i++){
-      var selected='';
-      if(i==#targetTemperature#){
-        selected='selected="selected "';
-      }
-      $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').append('<option '+selected+'value="'+i+'">'+i+'#targetTemperature_unite#</option>');
-    }
     $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').on('change', function () {
       jeedom.cmd.execute({id: '#local_settargetTemperature_id#', value: $(this).val()});
     });
