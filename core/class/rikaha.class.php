@@ -2142,6 +2142,10 @@ class rikaha extends eqLogic {
                 $name = $this->getCmd(null, 'local_uptime');
                 if(is_object($name)){
                   $name->event($this->translateUptime($stoveValue*60));
+                  if($name->getIsHistorized()){
+                    $name->addHistoryValue($this->translateUptime($stoveValue*60)););
+                  }
+                  $name->save();
                   $name->save();
                   log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_uptime ('.$this->translateUptime($stoveValue*60).')'.' saved');
                 }
