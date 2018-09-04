@@ -2562,7 +2562,7 @@ class rikahaCmd extends cmd {
             $this->getEqLogic()->getInfo();
             break;
           case 'settargetTemperature':
-          //case 'setoperatingMode':
+          case 'setoperatingMode':
             $this->getEqLogic()->getInfo();
             $this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
             $this->getEqLogic()->refreshWidget();
