@@ -9,8 +9,8 @@
     "hasDependency" : false,
     "hasOwnDeamon" : false,
     "maxDependancyInstallTime" : 0,
-    "changelog" : "https://jeedom.github.io/rikhaha/fr_FR/changelog",
-    "documentation" : "https://jeedom.github.io/rikaha/fr_FR/",
+    "changelog" : "https://jeedom.github.io/rikaha/#language#/changelog",
+    "documentation" : "https://jeedom.github.io/rikaha/#language#/",
     "language" : ["fr_FR", "en_US"],
-    "compatibility" : ["smart","rpi"]
+    "compatibility" : ["smart","rpi","diy"]
 }
