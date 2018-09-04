@@ -1158,27 +1158,27 @@ class rikaha extends eqLogic {
         ),
         //parameterRuntimePellets
         'parameterRuntimePellets'=>array(
-          'name'=>__('parameterRuntimePellets', __FILE__),
+          'name'=>__('Utilisation mode pellet', __FILE__),
           'id'=>'parameterRuntimePellets',
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>0,
+          'historized'=>1,
           'visible'=>1,
           'configuration'=>array(),
-          'unite'=>''
+          'unite'=>'h'
         ),
         //parameterRuntimeLogs
         'parameterRuntimeLogs'=>array(
-          'name'=>__('parameterRuntimeLogs', __FILE__),
+          'name'=>__('Utilisation mode bois', __FILE__),
           'id'=>'parameterRuntimeLogs',
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>0,
+          'historized'=>1,
           'visible'=>1,
           'configuration'=>array(),
-          'unite'=>''
+          'unite'=>'h'
         ),
         //parameterFeedRateTotal
         'parameterFeedRateTotal'=>array(
@@ -2141,13 +2141,13 @@ class rikaha extends eqLogic {
               case 'lastSeenMinutes':
                 $name = $this->getCmd(null, 'local_uptime');
                 if(is_object($name)){
-                  $name->event($this->translateUptime($stoveValue*60));
+                  $tmpBuffer=$this->translateUptime($stoveValue*60);
+                  $name->event($tmpBuffer);
                   if($name->getIsHistorized()){
-                    $name->addHistoryValue($this->translateUptime($stoveValue*60)););
+                    $name->addHistoryValue($tmpBuffer);
                   }
                   $name->save();
-                  $name->save();
-                  log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_uptime ('.$this->translateUptime($stoveValue*60).')'.' saved');
+                  log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_uptime ('.$tmpBuffer.'-'.$stoveValue.')'.' saved');
                 }
                 break;
             }
@@ -2204,13 +2204,13 @@ class rikaha extends eqLogic {
       // Store last update
       $name = $this->getCmd(null, 'local_lastupdate');
       if(is_object($name)){
-        $luDate=date('d-m-Y H:i:s');
-        $name->event($luDate);
+        $tmpBuffer=date('d-m-Y H:i:s');
+        $name->event($tmpBuffer);
         if($name->getIsHistorized()){
-          $name->addHistoryValue($luDate);
+          $name->addHistoryValue($tmpBuffer);
         }
         $name->save();
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_lastupdate ('.$luDate.')'.' saved');
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_lastupdate ('.$tmpBuffer.')'.' saved');
       }
 
       $this->refreshWidget();
@@ -2435,7 +2435,7 @@ class rikaha extends eqLogic {
       $options = array();
       $unite   = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
       $selected= is_object($targetTemperature) ? $targetTemperature->execCmd() : '';
-      for($i=10;$i<27;$i++){
+      for($i=14;$i<29;$i++){
         $options[]=array('value'=>$i, 'label'=>$i.$unite);
       }
       $replace['#targetTemperature_options#']=$this->HtmlBuildOptions($options, $selected);
@@ -2470,6 +2470,22 @@ class rikaha extends eqLogic {
       $replace['#onOff_name#'] = is_object($onOff) ? $onOff->getName() : '';
       $replace['#onOff_display#'] = (is_object($onOff) && $onOff->getIsVisible()) ? "" : "display: none;";
 
+      $parameterRuntimePellets = $this->getCmd(null,'parameterRuntimePellets');
+      $replace['#parameterRuntimePellets#'] = (is_object($parameterRuntimePellets)) ? $parameterRuntimePellets->execCmd() : '';
+      $replace['#parameterRuntimePellets_id#'] = is_object($parameterRuntimePellets) ? $parameterRuntimePellets->getId() : '';
+      $replace['#parameterRuntimePellets_name#'] = is_object($parameterRuntimePellets) ? $parameterRuntimePellets->getName() : '';
+      $replace['#parameterRuntimePellets_unite#'] = is_object($parameterRuntimePellets) ? $parameterRuntimePellets->getUnite() : '';
+      $replace['#parameterRuntimePellets_display#'] = (is_object($parameterRuntimePellets) && $parameterRuntimePellets->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterRuntimePellets_histo#'] = (is_object($parameterRuntimePellets) && $parameterRuntimePellets->getIsHistorized()) ? " history cursor" : "";
+
+      $parameterRuntimeLogs = $this->getCmd(null,'parameterRuntimeLogs');
+      $replace['#parameterRuntimeLogs#'] = (is_object($parameterRuntimeLogs)) ? $parameterRuntimeLogs->execCmd() : '';
+      $replace['#pparameterRuntimeLogs_id#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getId() : '';
+      $replace['#parameterRuntimeLogs_name#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getName() : '';
+      $replace['#parameterRuntimeLogs_unite#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getUnite() : '';
+      $replace['#parameterRuntimeLogs_display#'] = (is_object($parameterRuntimeLogs) && $parameterRuntimeLogs->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterRuntimeLogs_histo#'] = (is_object($parameterRuntimeLogs) && $parameterRuntimeLogs->getIsHistorized()) ? " history cursor" : "";
+
       $parameterFeedRateTotal = $this->getCmd(null,'parameterFeedRateTotal');
       $replace['#parameterFeedRateTotal#'] = (is_object($parameterFeedRateTotal)) ? $parameterFeedRateTotal->execCmd() : '';
       $replace['#parameterFeedRateTotal_id#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getId() : '';
@@ -2477,7 +2493,6 @@ class rikaha extends eqLogic {
       $replace['#parameterFeedRateTotal_unite#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getUnite() : '';
       $replace['#parameterFeedRateTotal_display#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsVisible()) ? "" : "display: none;";
       $replace['#parameterFeedRateTotal_histo#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsHistorized()) ? " history cursor" : "";
-
 
       $local_uptime = $this->getCmd(null,'local_uptime');
       $replace['#local_uptime#'] = (is_object($local_uptime)) ? $local_uptime->execCmd() : '';
