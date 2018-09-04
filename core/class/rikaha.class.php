@@ -2204,6 +2204,7 @@ class rikaha extends eqLogic {
       // Store last update
       $name = $this->getCmd(null, 'local_lastupdate');
       if(is_object($name)){
+<<<<<<< HEAD
         $tmpBuffer=date('d-m-Y H:i:s');
         $name->event($tmpBuffer);
         if($name->getIsHistorized()){
