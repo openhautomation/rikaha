@@ -2211,6 +2211,15 @@ class rikaha extends eqLogic {
         }
         $name->save();
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_lastupdate ('.$tmpBuffer.')'.' saved');
+=======
+        $luDate=date('d-m-Y H:i:s');
+        $name->event($luDate);
+        if($name->getIsHistorized()){
+          $name->addHistoryValue($luDate);
+        }
+        $name->save();
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_lastupdate ('.$luDate.')'.' saved');
+>>>>>>> 3f0f3f7196249efca3a212dfefacfdcccbb67626
       }
 
       $this->refreshWidget();
@@ -2343,11 +2352,9 @@ class rikaha extends eqLogic {
     }
 
     public function preRemove() {
-
     }
 
     public function postRemove() {
-
     }
 
     public static $_widgetPossibility = array('custom' => array(
@@ -2435,7 +2442,11 @@ class rikaha extends eqLogic {
       $options = array();
       $unite   = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
       $selected= is_object($targetTemperature) ? $targetTemperature->execCmd() : '';
+<<<<<<< HEAD
       for($i=14;$i<29;$i++){
+=======
+      for($i=10;$i<27;$i++){
+>>>>>>> 3f0f3f7196249efca3a212dfefacfdcccbb67626
         $options[]=array('value'=>$i, 'label'=>$i.$unite);
       }
       $replace['#targetTemperature_options#']=$this->HtmlBuildOptions($options, $selected);
@@ -2577,7 +2588,11 @@ class rikahaCmd extends cmd {
             $this->getEqLogic()->getInfo();
             break;
           case 'settargetTemperature':
+<<<<<<< HEAD
           case 'setoperatingMode':
+=======
+          //case 'setoperatingMode':
+>>>>>>> 3f0f3f7196249efca3a212dfefacfdcccbb67626
             $this->getEqLogic()->getInfo();
             $this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
             $this->getEqLogic()->refreshWidget();
