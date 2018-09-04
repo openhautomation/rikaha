@@ -2204,7 +2204,6 @@ class rikaha extends eqLogic {
       // Store last update
       $name = $this->getCmd(null, 'local_lastupdate');
       if(is_object($name)){
-<<<<<<< HEAD
         $tmpBuffer=date('d-m-Y H:i:s');
         $name->event($tmpBuffer);
         if($name->getIsHistorized()){
@@ -2443,7 +2442,6 @@ class rikaha extends eqLogic {
       $options = array();
       $unite   = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
       $selected= is_object($targetTemperature) ? $targetTemperature->execCmd() : '';
-<<<<<<< HEAD
       for($i=14;$i<29;$i++){
 =======
       for($i=10;$i<27;$i++){
@@ -2589,7 +2587,6 @@ class rikahaCmd extends cmd {
             $this->getEqLogic()->getInfo();
             break;
           case 'settargetTemperature':
-<<<<<<< HEAD
           case 'setoperatingMode':
 =======
           //case 'setoperatingMode':
