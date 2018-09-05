@@ -21,7 +21,9 @@
   </div>
   <script>
     $('.eqLogic[data-eqLogic_id=#id#] .#local_setoperatingMode_id#_selectCmd').on('change', function () {
+      $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
       jeedom.cmd.execute({id: '#local_setoperatingMode_id#', value: $(this).val()});
+      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2000);
     });
   </script>
   <div class="tooltips#heatingPower_histo#" data-cmd_id="#heatingPower_id#" style="margin-left:5px;#heatingPower_display#">
@@ -57,17 +59,18 @@
       $('.eqLogic[data-eqLogic_id=#id#] .#onOff_id#_check').append('<i class="fa fa-check"></i>');
     }
   </script>
-
-  <div class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
-    <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
-    <select class="#local_settargetTemperature_id#_selectCmd" style="background-color:#background-color#;">
-      #targetTemperature_options#
-    </select>
-    <span class=">(#targetTemperature_histo#" style="font-size: 0.8em;" >(#targetTemperature_name#)</span>
-  </div>
+<div class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="margin-left:5px;#targetTemperature_display#">
+  <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
+  <select class="#local_settargetTemperature_id#_selectCmd" style="background-color:#background-color#;">
+    #targetTemperature_options#
+  </select>
+  <span data-cmd_id="#targetTemperature_id#" class=">#targetTemperature_histo#" style="font-size: 0.8em;" >(#targetTemperature_name#)<i style="display: none;">#targetTemperature#</i></span>
+</div>
   <script>
     $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').on('change', function () {
+      $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
       jeedom.cmd.execute({id: '#local_settargetTemperature_id#', value: $(this).val()});
+      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2000);
     });
   </script>
   <div class="tooltips#inputRoomTemperature_histo#" data-cmd_id="#inputRoomTemperature_id#" style="margin-left:5px;#inputRoomTemperature_display#">
@@ -80,12 +83,12 @@
       <span>#frostProtectionTemperature##frostProtectionTemperature_unite#</span>
       <span style="font-size: 0.8em;">(#frostProtectionTemperature_name#)</span>
   </div>
-  <div class="parameterRuntimePellets_histo#" data-cmd_id="#parameterRuntimePellets_id#" style="margin-left:5px;#parameterRuntimePellets_display#">
+  <div class="tooltips#parameterRuntimePellets_histo#" data-cmd_id="#parameterRuntimePellets_id#" style="margin-left:5px;#parameterRuntimePellets_display#">
       <span title="#parameterRuntimePellets_name#" class="fa fa-clock-o" style="min-width:15px"></span>
       <span>#parameterRuntimePellets##parameterRuntimePellets_unite#</span>
       <span style="font-size: 0.8em;">(#parameterRuntimePellets_name#)</span>
   </div>
-  <div class="parameterRuntimeLogs_histo#" data-cmd_id="#parameterRuntimeLogs_id#" style="margin-left:5px;#parameterRuntimeLogs_display#">
+  <div class="tooltips#parameterRuntimeLogs_histo#" data-cmd_id="#parameterRuntimeLogs_id#" style="margin-left:5px;#parameterRuntimeLogs_display#">
       <span title="parameterRuntimeLogs_name#" class="fa fa-clock-o" style="min-width:15px"></span>
       <span>#parameterRuntimeLogs##parameterRuntimeLogs_unite#</span>
       <span style="font-size: 0.8em;">(#parameterRuntimeLogs_name#)</span>

@@ -2426,16 +2426,18 @@ class rikaha extends eqLogic {
       $replace['#inputFlameTemperature_display#'] = (is_object($inputFlameTemperature) && $inputFlameTemperature->getIsVisible()) ? "" : "display: none;";
       $replace['#inputFlameTemperature_histo#'] = (is_object($inputFlameTemperature) && $inputFlameTemperature->getIsHistorized()) ? " history cursor" : "";
 
-      $targetTemperature = $this->getCmd(null,'targetTemperature');
       $local_settargetTemperature = $this->getCmd(null,'local_settargetTemperature');
       $replace['#local_settargetTemperature_id#'] = is_object($local_settargetTemperature) ? $local_settargetTemperature->getId() : '';
-      $replace['#targetTemperature_name#'] = is_object($targetTemperature) ? $targetTemperature->getName() : '';
-      $options = array();
-      $unite   = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
-      $selected= is_object($targetTemperature) ? $targetTemperature->execCmd() : '';
+      $targetTemperature = $this->getCmd(null,'targetTemperature');
+      $options  = array();
+      $unite    = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
+      $selected = is_object($targetTemperature) ? $targetTemperature->execCmd() : '';
       for($i=14;$i<29;$i++){
         $options[]=array('value'=>$i, 'label'=>$i.$unite);
       }
+      $replace['#targetTemperature#'] = $selected;
+      $replace['#targetTemperature_id#'] = is_object($targetTemperature) ? $targetTemperature->getId() : '';
+      $replace['#targetTemperature_name#'] = is_object($targetTemperature) ? $targetTemperature->getName() : '';
       $replace['#targetTemperature_options#']=$this->HtmlBuildOptions($options, $selected);
       $replace['#targetTemperature_display#'] = (is_object($targetTemperature) && $targetTemperature->getIsVisible()) ? "" : "display: none;";
       $replace['#targetTemperature_histo#'] = (is_object($targetTemperature) && $targetTemperature->getIsHistorized()) ? " history cursor" : "";
@@ -2478,7 +2480,7 @@ class rikaha extends eqLogic {
 
       $parameterRuntimeLogs = $this->getCmd(null,'parameterRuntimeLogs');
       $replace['#parameterRuntimeLogs#'] = (is_object($parameterRuntimeLogs)) ? $parameterRuntimeLogs->execCmd() : '';
-      $replace['#pparameterRuntimeLogs_id#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getId() : '';
+      $replace['#parameterRuntimeLogs_id#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getId() : '';
       $replace['#parameterRuntimeLogs_name#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getName() : '';
       $replace['#parameterRuntimeLogs_unite#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getUnite() : '';
       $replace['#parameterRuntimeLogs_display#'] = (is_object($parameterRuntimeLogs) && $parameterRuntimeLogs->getIsVisible()) ? "" : "display: none;";
@@ -2575,7 +2577,7 @@ class rikahaCmd extends cmd {
             $this->getEqLogic()->getInfo();
             break;
           case 'settargetTemperature':
-          case 'setoperatingMode':
+          //case 'setoperatingMode':
             $this->getEqLogic()->getInfo();
             $this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
             $this->getEqLogic()->refreshWidget();
