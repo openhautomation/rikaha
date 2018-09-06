@@ -1,2 +1,2 @@
 # rikaha
-Plugin Jeedom pour les poêles Rika
+**Le plugin Rikaha** interface les poêles de la marque Autrichienne Rika avec Jeedom.
