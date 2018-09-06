@@ -3,7 +3,7 @@ Présentation
 
 **Le plugin Rikaha** interface les poêles de la marque Autrichienne Rika avec Jeedom.
 
-![rikaha-logo](../images/rikaha_icon.png){:width="128px"}
+![rikaha-logo](../images/rikaha_icon.png)
 
 Les principales fonctionnalités de Rikaha sont :
 
@@ -17,7 +17,7 @@ Ex: La puissance de chauffre, la température de consigne, la température de fl
 
 **Le widget Rikaha**
 
-![rikaha-widget](../images/rikaha_widget.png){:width="400px"}
+![rikaha-widget](../images/rikaha_widget.png)
 
 **Informations**
 
@@ -35,7 +35,7 @@ Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 Une seule action, vous devez cliquer sur _Activer_.
 Le plugin est croné toute les 30 mn.
 
-![rikaha-config2](../images/rikaha_config2.png){:width="400px"}
+![rikaha-config2](../images/rikaha_config2.png)
 
 **Creation de votre équipement**
 
@@ -51,7 +51,7 @@ Ex : `https://www.rika-firenet.com/web/stove/xxxxxxxx`
 
 "xxxxxxxx" est la valeur à renseigner dans le champ Numéro de l'équipement
 
-![rikaha-config](../images/rikaha_config4.png){:width="400px"}
+![rikaha-config](../images/rikaha_config4.png)
 
 N'oubliez pas de sauvegarder !
 
