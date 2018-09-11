@@ -13,7 +13,7 @@ Les principales fonctionnalités de Rikaha sont :
 Ex: La puissance de chauffre, la température de consigne, la température de flamme, la température de la sonde externe, la consommation de pellets ...
 
 **Le pilotage**
-> Vous pouvez depuis votre Jeedom piloter des fonctionnalités du poêle. En particulier vous pouvez modifier la température de consigne, le mode de fonctionnement (Manuel, Automatique, Confort) ainsi que l'état (On/Off)
+> Vous pouvez depuis votre Jeedom piloter des fonctionnalités du poêle. En particulier vous pouvez modifier la température de consigne, le mode de fonctionnement (Manuel, Automatique, Confort)
 
 **Le widget Rikaha**
 
