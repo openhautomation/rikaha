@@ -2365,7 +2365,7 @@ class rikaha extends eqLogic {
       for($i=0;$i<count($data);$i++){
         if(trim($selected)==trim($data[$i]['value'])){
           $SO.='<option selected="selected" value="'.$data[$i]['value'].'">'.$data[$i]['label'].'</option>';
-          continue;
+          continue ;
         }
         $SO.='<option value="'.$data[$i]['value'].'">'.$data[$i]['label'].'</option>';
       }
