@@ -1791,6 +1791,18 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
           'unite'=>''
+        ),
+        //Set OnOff action
+        'local_setonOff'=>array(
+          'name'=>__("Modifier l'état", __FILE__),
+          'id'=>'local_setonOff',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'other',
+          'historized'=>0,
+          'visible'=>1,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setonOff'),array('k1'=>'stovekey', 'k2'=>'onOff')),
+          'unite'=>''
         )
       );
     }
@@ -2246,7 +2258,19 @@ class rikaha extends eqLogic {
         log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' not found in allowed structure');
         throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
       }
-      $stoveStructure[$stovekey]=trim($_options);
+
+      switch ($stovekey) {
+        case 'onOff':
+          if($_options==1){
+            $stoveStructure[$stovekey]='TRUE';
+          }else{
+            $stoveStructure[$stovekey]='FALSE';
+          }
+          break;
+
+          default:
+            $stoveStructure[$stovekey]=trim($_options);
+      }
 
       foreach ($stoveStructure as $key => $value) {
         if(trim($value)==''){
@@ -2465,9 +2489,14 @@ class rikaha extends eqLogic {
       $replace['#frostProtectionActive_display#'] = (is_object($frostProtectionActive) && $frostProtectionActive->getIsVisible()) ? "" : "display: none;";
 
       $onOff = $this->getCmd(null,'onOff');
-      $replace['#onOff#'] = (is_object($onOff)) ? $onOff->execCmd() : '';
-      $replace['#onOff_id#'] = is_object($onOff) ? $onOff->getId() : '';
+      $local_setonOff = $this->getCmd(null,'local_setonOff');
+      $replace['#local_setonOff_id#'] = is_object($local_setonOff) ? $local_setonOff->getId() : '';
       $replace['#onOff_name#'] = is_object($onOff) ? $onOff->getName() : '';
+      $options = array();
+      $selected= is_object($onOff) ? $onOff->execCmd() : '';
+      $options[]=array('value'=>0, 'label'=>__('Off',__FILE__));
+      $options[]=array('value'=>1, 'label'=>__('On',__FILE__));
+      $replace['#onOff_options#']=$this->HtmlBuildOptions($options, $selected);
       $replace['#onOff_display#'] = (is_object($onOff) && $onOff->getIsVisible()) ? "" : "display: none;";
 
       $parameterRuntimePellets = $this->getCmd(null,'parameterRuntimePellets');
@@ -2578,6 +2607,7 @@ class rikahaCmd extends cmd {
             break;
           case 'settargetTemperature':
           case 'setoperatingMode':
+          case 'setonOff':
             $this->getEqLogic()->getInfo();
             $this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
             $this->getEqLogic()->refreshWidget();
