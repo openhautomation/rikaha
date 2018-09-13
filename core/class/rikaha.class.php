@@ -2259,17 +2259,12 @@ class rikaha extends eqLogic {
         throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
       }
 
-      switch ($stovekey) {
-        case 'onOff':
-          if($_options==1){
-            $stoveStructure[$stovekey]='TRUE';
-          }else{
-            $stoveStructure[$stovekey]='FALSE';
-          }
-          break;
+      $stoveStructure[$stovekey]=trim($_options);
 
-          default:
-            $stoveStructure[$stovekey]=trim($_options);
+      if($stoveStructure['onOff']==1){
+        $stoveStructure['onOff']='TRUE';
+      }else{
+        $stoveStructure['onOff']='FALSE';
       }
 
       foreach ($stoveStructure as $key => $value) {
