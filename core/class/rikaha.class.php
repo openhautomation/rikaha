@@ -2094,6 +2094,32 @@ class rikaha extends eqLogic {
        return $result[0].__('j',__FILE__).$result[1].'h'.$result[2].'m';
     }
 
+    private function cmdSave($cmd, $data){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      $name = $this->getCmd(null, $cmd);
+      if(is_object($name)){
+        $name->event($data);
+        if($name->getIsHistorized()){
+          $name->addHistoryValue($data);
+        }
+        $name->save();
+        if($name->getSubtype()=='binary'){
+          switch ($data) {
+            case 0:
+              $data="FALSE";
+              break;
+            case 1:
+              $data="TRUE";
+              break;
+            default:
+              $data="NOT binary value";
+            }
+        }
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ID: ' . $cmd . ' Subtype: '.$name->getSubtype().' Value: '.$data.' saved');
+      }
+    }
+
     public function getInfo(){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
@@ -2145,41 +2171,23 @@ class rikaha extends eqLogic {
         }
         $stoveValue=__('Not set',__FILE__);
         if($value['parent']=='0'){
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' no parent found');
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' NO parent found');
+
           if(array_key_exists($key, $stovedata)===true){
             $stoveValue=$stovedata[$key];
-
             switch ($key) {
               case 'lastSeenMinutes':
-                $name = $this->getCmd(null, 'local_uptime');
-                if(is_object($name)){
-                  $tmpBuffer=$this->translateUptime($stoveValue*60);
-                  $name->event($tmpBuffer);
-                  if($name->getIsHistorized()){
-                    $name->addHistoryValue($tmpBuffer);
-                  }
-                  $name->save();
-                  log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_uptime ('.$tmpBuffer.'-'.$stoveValue.')'.' saved');
-                }
+                $this->cmdSave('local_uptime', $this->translateUptime($stoveValue*60));
                 break;
             }
-
-            $name = $this->getCmd(null, $value['id']);
-            if(is_object($name)){
-              $name->event($stoveValue);
-              if($name->getIsHistorized()){
-                $name->addHistoryValue($stoveValue);
-              }
-              $name->save();
-              log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '.$value['id'].' ('.$stoveValue.')'.' saved');
-            }
+            $this->cmdSave($value['id'], $stoveValue);
           }
         }else{
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' parent found: '. $value['parent']);
+
           if(array_key_exists($value['parent'], $stovedata)===true){
             if(array_key_exists($key, $stovedata[$value['parent']])===true){
               $stoveValue=$stovedata[$value['parent']][$key];
-
               switch ($key) {
                 case 'statusMainState':
                   $mainState=$stoveValue;
@@ -2188,16 +2196,7 @@ class rikaha extends eqLogic {
                   $subState=$stoveValue;
                   break;
               }
-
-              $name = $this->getCmd(null, $value['id']);
-              if(is_object($name)){
-                $name->event($stoveValue);
-                if($name->getIsHistorized()){
-                  $name->addHistoryValue($stoveValue);
-                }
-                $name->save();
-                log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '.$value['id'].' ('.$stoveValue.')'.' saved');
-              }
+              $this->cmdSave($value['id'], $stoveValue);
             }
           }
         }
@@ -2206,25 +2205,10 @@ class rikaha extends eqLogic {
 
       // Store calculate status
       if(trim($mainState)!='' && trim($subState)!=''){
-        $name = $this->getCmd(null, 'local_statusCalculate');
-        if(is_object($name)){
-          $name->event($this->translateStatus($mainState, $subState));
-          $name->save();
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_statusCalculate ('.$this->translateStatus($mainState, $subState).')'.' saved');
-        }
+        $this->cmdSave('local_statusCalculate', $this->translateStatus($mainState, $subState));
       }
       // Store last update
-      $name = $this->getCmd(null, 'local_lastupdate');
-      if(is_object($name)){
-        $tmpBuffer=date('d-m-Y H:i:s');
-        $name->event($tmpBuffer);
-        if($name->getIsHistorized()){
-          $name->addHistoryValue($tmpBuffer);
-        }
-        $name->save();
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' local_lastupdate ('.$tmpBuffer.')'.' saved');
-      }
-
+      $this->cmdSave('local_lastupdate', date('d-m-Y H:i:s'));
       $this->refreshWidget();
     }
 
