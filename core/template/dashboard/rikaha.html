@@ -23,7 +23,7 @@
     $('.eqLogic[data-eqLogic_id=#id#] .#local_setoperatingMode_id#_selectCmd').on('change', function () {
       $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
       jeedom.cmd.execute({id: '#local_setoperatingMode_id#', value: $(this).val()});
-      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2000);
+      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
     });
   </script>
   <div class="tooltips#heatingPower_histo#" data-cmd_id="#heatingPower_id#" style="padding-top:4px;margin-left:5px;#heatingPower_display#">
@@ -57,7 +57,7 @@
     $('.eqLogic[data-eqLogic_id=#id#] .#local_setonOff_id#_selectCmd').on('change', function () {
       $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
       jeedom.cmd.execute({id: '#local_setonOff_id#', value: $(this).val()});
-      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2000);
+      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
     });
   </script>
 <div class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="padding-top:4px;margin-left:5px;#targetTemperature_display#">
@@ -71,7 +71,7 @@
     $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').on('change', function () {
       $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
       jeedom.cmd.execute({id: '#local_settargetTemperature_id#', value: $(this).val()});
-      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2000);
+      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
     });
   </script>
   <div class="tooltips#inputRoomTemperature_histo#" data-cmd_id="#inputRoomTemperature_id#" style="padding-top:4px;margin-left:5px;#inputRoomTemperature_display#">
