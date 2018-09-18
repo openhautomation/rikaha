@@ -25,19 +25,42 @@ class rikaha extends eqLogic {
     /*     * ***********************Methode static*************************** */
     /*
     public static function cron() {
-      // debug leve == 100
-      if (log::getLogLevel('rikaha') != 100) {
-           self::cron30();
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      foreach (eqLogic::byType('rikaha') as $rikaha) {
+        $rikaha->getInfo();
+        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
+        $mc->remove();
+        $rikaha->toHtml('dashboard');
+        $rikaha->refreshWidget();
       }
     }
     */
-    /*
+
     public static function cron5() {
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      foreach (eqLogic::byType('rikaha') as $rikaha) {
+        $rikaha->getInfo();
+        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
+        $mc->remove();
+        $rikaha->toHtml('dashboard');
+        $rikaha->refreshWidget();
+      }
     }
 
     public static function cron15() {
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      foreach (eqLogic::byType('rikaha') as $rikaha) {
+        $rikaha->getInfo();
+        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
+        $mc->remove();
+        $rikaha->toHtml('dashboard');
+        $rikaha->refreshWidget();
+      }
     }
-    */
+
     public static function cron30() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
