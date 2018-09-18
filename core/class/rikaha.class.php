@@ -72,7 +72,7 @@ class rikaha extends eqLogic {
         $rikaha->refreshWidget();
       }
     }
-    
+
     public static function cronHourly() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
@@ -2604,7 +2604,7 @@ class rikahaCmd extends cmd {
       }
      */
 
-    public static $_widgetPossibility = array('custom' => false);
+    //public static $_widgetPossibility = array('custom' => false);
 
     public function execute($_options = array()) {
       log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' LogicalId: '. $this->getLogicalId());
