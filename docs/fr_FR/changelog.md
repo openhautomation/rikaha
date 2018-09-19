@@ -6,6 +6,8 @@ Liste des évolutions majeures de la version courante :
 
 19 09 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
 
+Prise en compte dans les scénarios des actions de modification de la temp. de consigne, du mode et de l'état.
+
 Ajout des cron 5, 15 minutes et une heure
 
 Ajout sur le widget de la consommation restante avant entretien
