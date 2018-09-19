@@ -27,6 +27,8 @@ Le développement du plugin est basé sur le modèle Induo
 
 Le plugin Rikaha a été testé sur les modèles :
 1. Induo
+2. Revo
+3. Sumo
 
 Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 

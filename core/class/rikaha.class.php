@@ -2604,7 +2604,10 @@ class rikahaCmd extends cmd {
       }
      */
 
+<<<<<<< HEAD
     //public static $_widgetPossibility = array('custom' => false);
+=======
+>>>>>>> 487be0fc1c0fa5d4f91077195e8c61b971c265a1
 
     public function execute($_options = array()) {
       log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' LogicalId: '. $this->getLogicalId());
