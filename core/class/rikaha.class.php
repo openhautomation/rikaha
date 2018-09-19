@@ -1806,7 +1806,9 @@ class rikaha extends eqLogic {
           'id'=>'local_settargetTemperature',
           'parent'=>'0',
           'type'=>'action',
-          'subtype'=>'other',
+          'subtype'=>'message',
+          'message_placeholder'=> __('Valeur de la température', __FILE__),
+          'title_disable'=> 1,
           'historized'=>0,
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'settargetTemperature'),array('k1'=>'stovekey', 'k2'=>'targetTemperature')),
@@ -1818,7 +1820,9 @@ class rikaha extends eqLogic {
           'id'=>'local_setoperatingMode',
           'parent'=>'0',
           'type'=>'action',
-          'subtype'=>'other',
+          'subtype'=>'message',
+          'message_placeholder'=> __('0=MANUEL, 1=AUTOMATIQUE, 2=CONFORT', __FILE__),
+          'title_disable'=> 1,
           'historized'=>0,
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
@@ -1826,11 +1830,13 @@ class rikaha extends eqLogic {
         ),
         //Set OnOff action
         'local_setonOff'=>array(
-          'name'=>__("Modifier l'état", __FILE__),
+          'name'=>__("Modifier état", __FILE__),
           'id'=>'local_setonOff',
           'parent'=>'0',
           'type'=>'action',
-          'subtype'=>'other',
+          'subtype'=>'message',
+          'message_placeholder'=> __('0=OFF, 1=ON', __FILE__),
+          'title_disable'=> 1,
           'historized'=>0,
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setonOff'),array('k1'=>'stovekey', 'k2'=>'onOff')),
@@ -2275,7 +2281,13 @@ class rikaha extends eqLogic {
         throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
       }
 
-      $stoveStructure[$stovekey]=trim($_options);
+      if(is_array($_options)===true){
+        if(array_key_exists('message', $_options)===true){
+          $stoveStructure[$stovekey]=trim($_options['message']);
+        }
+      }else{
+        $stoveStructure[$stovekey]=trim($_options);
+      }
 
       if($stoveStructure['onOff']==1){
         $stoveStructure['onOff']='TRUE';
@@ -2368,6 +2380,12 @@ class rikaha extends eqLogic {
         $rikahaCmd->setIsVisible($value['visible']);
         if(trim($value['unite'])!=''){
           $rikahaCmd->setUnite($value['unite']);
+        }
+        if(array_key_exists('message_placeholder', $value)===true){
+          $rikahaCmd->setDisplay('message_placeholder', $value['message_placeholder']);
+        }
+        if(array_key_exists('title_disable', $value)===true){
+          $rikahaCmd->setDisplay('title_disable', $value['title_disable']);
         }
         $rikahaCmd->save();
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' saved');
