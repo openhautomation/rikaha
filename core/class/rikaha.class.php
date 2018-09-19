@@ -1226,6 +1226,7 @@ class rikaha extends eqLogic {
         ),
         //parameterFeedRateService
         'parameterFeedRateService'=>array(
+          'name'=>__('Conso. avant entretien', __FILE__),
           'id'=>'parameterFeedRateService',
           'parent'=>'sensors',
           'type'=>'info',
@@ -1233,6 +1234,7 @@ class rikaha extends eqLogic {
           'historized'=>0,
           'visible'=>1,
           'configuration'=>array(),
+          'unite'=>'kg'
         ),
         //parameterServiceCountdownKg
         'parameterServiceCountdownKg'=>array(
@@ -1764,6 +1766,9 @@ class rikaha extends eqLogic {
           'unite'=>''
         ),
         //local_uptime
+        'local_downtime'=>array(
+          'name'=>__('Hors ligne depuis', __FILE__),
+          'id'=>'local_downtime',
           'parent'=>'0',
           'type'=>'info',
           'subtype'=>'string',
@@ -2204,6 +2209,7 @@ class rikaha extends eqLogic {
             $stoveValue=$stovedata[$key];
             switch ($key) {
               case 'lastSeenMinutes':
+                $this->cmdSave('local_downtime', $this->translateUptime($stoveValue*60));
                 break;
             }
             $this->cmdSave($value['id'], $stoveValue);
@@ -2444,6 +2450,11 @@ class rikaha extends eqLogic {
       $replace['#heatingPower_id#'] = is_object($heatingPower) ? $heatingPower->getId() : '';
       $replace['#heatingPower_name#'] = is_object($heatingPower) ? $heatingPower->getName() : '';
       $replace['#heatingPower_unite#'] = is_object($heatingPower) ? $heatingPower->getUnite() : '';
+      if($operatingMode->execCmd() == 2){
+        $replace['#heatingPower_display#']="display: none;";
+      }else{
+        $replace['#heatingPower_display#'] = (is_object($heatingPower) && $heatingPower->getIsVisible()) ? "" : "display: none;";
+      }
       $replace['#heatingPower_histo#'] = (is_object($heatingPower) && $heatingPower->getIsHistorized()) ? " history cursor" : "";
 
       $inputFlameTemperature = $this->getCmd(null,'inputFlameTemperature');
@@ -2527,6 +2538,25 @@ class rikaha extends eqLogic {
       $replace['#parameterFeedRateTotal_display#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsVisible()) ? "" : "display: none;";
       $replace['#parameterFeedRateTotal_histo#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsHistorized()) ? " history cursor" : "";
 
+      $parameterFeedRateService = $this->getCmd(null,'parameterFeedRateService');
+      $replace['#parameterFeedRateService#'] = (is_object($parameterFeedRateService)) ? $parameterFeedRateService->execCmd() : '';
+      $replace['#parameterFeedRateService_id#'] = is_object($parameterFeedRateService) ? $parameterFeedRateService->getId() : '';
+      $replace['#parameterFeedRateService_name#'] = is_object($parameterFeedRateService) ? $parameterFeedRateService->getName() : '';
+      $replace['#parameterFeedRateService_unite#'] = is_object($parameterFeedRateService) ? $parameterFeedRateService->getUnite() : '';
+      $replace['#parameterFeedRateService_display#'] = (is_object($parameterFeedRateService) && $parameterFeedRateService->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterFeedRateService_histo#'] = (is_object($parameterFeedRateService) && $parameterFeedRateService->getIsHistorized()) ? " history cursor" : "";
+
+      $local_downtime = $this->getCmd(null,'local_downtime');
+      $replace['#local_downtime#'] = (is_object($local_downtime)) ? $local_downtime->execCmd() : '';
+      $replace['#local_downtime_id#'] = is_object($local_downtime) ? $local_downtime->getId() : '';
+      $replace['#local_downtime_name#'] = is_object($local_downtime) ? $local_downtime->getName() : '';
+      $lastSeenMinutes = $this->getCmd(null,'lastSeenMinutes');
+      $lastSeenMinutesValue=(is_object($lastSeenMinutes)) ? $lastSeenMinutes->execCmd() : 0;
+      if($lastSeenMinutesValue==0){
+        $replace['#local_downtime_display#'] = "display: none;";
+      }else{
+        $replace['#local_downtime_display#'] = (is_object($local_downtime) && $local_downtime->getIsVisible()) ? "" : "display: none;";
+      }
 
       $parameterVersionMainBoard = $this->getCmd(null,'parameterVersionMainBoard');
       $replace['#parameterVersionMainBoard#'] = (is_object($parameterVersionMainBoard)) ? $parameterVersionMainBoard->execCmd() : '';
@@ -2595,6 +2625,7 @@ class rikahaCmd extends cmd {
 <<<<<<< HEAD
     //public static $_widgetPossibility = array('custom' => false);
 =======
+    public static $_widgetPossibility = array('custom' => true);
 >>>>>>> 487be0fc1c0fa5d4f91077195e8c61b971c265a1
 
     public function execute($_options = array()) {
