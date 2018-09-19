@@ -1226,7 +1226,6 @@ class rikaha extends eqLogic {
         ),
         //parameterFeedRateService
         'parameterFeedRateService'=>array(
-          'name'=>__('parameterFeedRateService', __FILE__),
           'id'=>'parameterFeedRateService',
           'parent'=>'sensors',
           'type'=>'info',
@@ -1234,7 +1233,6 @@ class rikaha extends eqLogic {
           'historized'=>0,
           'visible'=>1,
           'configuration'=>array(),
-          'unite'=>''
         ),
         //parameterServiceCountdownKg
         'parameterServiceCountdownKg'=>array(
@@ -1766,9 +1764,6 @@ class rikaha extends eqLogic {
           'unite'=>''
         ),
         //local_uptime
-        'local_uptime'=>array(
-          'name'=>__('Démarré depuis', __FILE__),
-          'id'=>'local_uptime',
           'parent'=>'0',
           'type'=>'info',
           'subtype'=>'string',
@@ -2209,7 +2204,6 @@ class rikaha extends eqLogic {
             $stoveValue=$stovedata[$key];
             switch ($key) {
               case 'lastSeenMinutes':
-                $this->cmdSave('local_uptime', $this->translateUptime($stoveValue*60));
                 break;
             }
             $this->cmdSave($value['id'], $stoveValue);
@@ -2450,7 +2444,6 @@ class rikaha extends eqLogic {
       $replace['#heatingPower_id#'] = is_object($heatingPower) ? $heatingPower->getId() : '';
       $replace['#heatingPower_name#'] = is_object($heatingPower) ? $heatingPower->getName() : '';
       $replace['#heatingPower_unite#'] = is_object($heatingPower) ? $heatingPower->getUnite() : '';
-      $replace['#heatingPower_display#'] = (is_object($heatingPower) && $heatingPower->getIsVisible()) ? "" : "display: none;";
       $replace['#heatingPower_histo#'] = (is_object($heatingPower) && $heatingPower->getIsHistorized()) ? " history cursor" : "";
 
       $inputFlameTemperature = $this->getCmd(null,'inputFlameTemperature');
@@ -2534,11 +2527,6 @@ class rikaha extends eqLogic {
       $replace['#parameterFeedRateTotal_display#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsVisible()) ? "" : "display: none;";
       $replace['#parameterFeedRateTotal_histo#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsHistorized()) ? " history cursor" : "";
 
-      $local_uptime = $this->getCmd(null,'local_uptime');
-      $replace['#local_uptime#'] = (is_object($local_uptime)) ? $local_uptime->execCmd() : '';
-      $replace['#local_uptime_id#'] = is_object($local_uptime) ? $local_uptime->getId() : '';
-      $replace['#local_uptime_name#'] = is_object($local_uptime) ? $local_uptime->getName() : '';
-      $replace['#local_uptime_display#'] = (is_object($local_uptime) && $local_uptime->getIsVisible()) ? "" : "display: none;";
 
       $parameterVersionMainBoard = $this->getCmd(null,'parameterVersionMainBoard');
       $replace['#parameterVersionMainBoard#'] = (is_object($parameterVersionMainBoard)) ? $parameterVersionMainBoard->execCmd() : '';
