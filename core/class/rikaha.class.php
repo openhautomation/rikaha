@@ -2322,9 +2322,9 @@ class rikaha extends eqLogic {
 
       $name = $this->getCmd(null, $stovekey);
       if(is_object($name)){
-        $name->event(trim($_options));
+        $name->event($stoveStructure[$stovekey]);
         $name->save();
-        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Obj: '.$stovekey.' data: ' .$_options.' saved');
+        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Obj: '.$stovekey.' data: ' .$stoveStructure[$stovekey].' saved');
       }
 
       return true ;
