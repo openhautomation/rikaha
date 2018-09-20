@@ -2233,6 +2233,12 @@ class rikaha extends eqLogic {
                 case 'statusSubState':
                   $subState=$stoveValue;
                   break;
+                case 'inputRoomTemperature':
+                  if($stoveValue==1024){
+                    $stoveValue=0;
+                    log::add('rikaha', 'error', __('Attention merci de vérifier les piles de la sonde de température', __FILE__));
+                  }
+                  break;
               }
               $this->cmdSave($value['id'], $stoveValue);
             }
