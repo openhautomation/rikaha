@@ -4,4 +4,16 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
-11 09 2018 - Possibilité de modifier l'état (On/Off) du poêle.
+19 09 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
+
+Ajout des cron 5, 15 minutes et une heure
+
+Ajout sur le widget de la consommation restante avant entretien
+
+Affichage sur le widget de puissance conditionnée par le mode utilisé
+
+Affichage de temps lorsque le poêle est hors ligne (ne s'affiche que si il est hors ligne).
+
+11 09 2018
+
+Possibilité de modifier l'état (On/Off) du poêle.
