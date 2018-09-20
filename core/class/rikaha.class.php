@@ -2570,7 +2570,7 @@ class rikaha extends eqLogic {
       $replace['#local_downtime_name#'] = is_object($local_downtime) ? $local_downtime->getName() : '';
       $lastSeenMinutes = $this->getCmd(null,'lastSeenMinutes');
       $lastSeenMinutesValue=(is_object($lastSeenMinutes)) ? $lastSeenMinutes->execCmd() : 0;
-      if($lastSeenMinutesValue==0){
+      if($lastSeenMinutesValue<2){
         $replace['#local_downtime_display#'] = "display: none;";
       }else{
         $replace['#local_downtime_display#'] = (is_object($local_downtime) && $local_downtime->getIsVisible()) ? "" : "display: none;";
