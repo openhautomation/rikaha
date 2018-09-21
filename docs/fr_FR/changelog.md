@@ -4,6 +4,10 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+21 09 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
+
+Ajout de la modification de la puissance de chauffe. Le range est compris entre 30 et 100 % par pas de 5.
+
 19 09 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
 
 Prise en compte dans les scénarios des actions de modification de la temp. de consigne, du mode et de l'état.

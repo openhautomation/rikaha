@@ -26,10 +26,20 @@
       setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
     });
   </script>
-  <div align="left" class="tooltips#heatingPower_histo#" data-cmd_id="#heatingPower_id#" style="padding-top:4px;margin-left:5px;#heatingPower_display#">
-      <span title="#heatingPower_name#" class="fa fa-tachometer" style="min-width:15px"></span>
-      <span>#heatingPower##heatingPower_unite#</span>
+  <div align="left" class="tooltips" data-cmd_id="#local_setheatingPower_id#" style="padding-top:4px;margin-left:5px;#heatingPower_display#">
+    <span title="#heatingPower_name#" class="fa fa-tachometer" style="min-width:15px"></span>
+    <select class="#local_setheatingPower_id#_selectCmd" style="background-color:#background-color#;">
+      #heatingPower_options#
+    </select>
+    <span data-cmd_id="#heatingPower_id#" class=">#heatingPower_histo#" style="font-size: 0.8em;" >(#heatingPower_name#)<i style="display: none;">#heatingPower#</i></span>
   </div>
+    <script>
+      $('.eqLogic[data-eqLogic_id=#id#] .#local_setheatingPower_id#_selectCmd').on('change', function () {
+        $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
+        jeedom.cmd.execute({id: '#local_setheatingPower_id#', value: $(this).val()});
+        setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
+      });
+    </script>
   <div align="left" class="tooltips#inputFlameTemperature_histo#" data-cmd_id="#inputFlameTemperature_id#" style="padding-top:4px;margin-left:5px;#inputFlameTemperature_display#">
       <span title="#inputFlameTemperature_name#" class="fa fa-fire" style="min-width:15px"></span>
       <span>#inputFlameTemperature##inputFlameTemperature_unite#</span>
