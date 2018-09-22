@@ -1820,6 +1820,7 @@ class rikaha extends eqLogic {
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'getInfo')),
           'unite'=>''
         ),
+
         //Set target temp. action
         'local_settargetTemperature'=>array(
           'name'=>__('Modifier la temp. de consigne', __FILE__),
@@ -1848,6 +1849,7 @@ class rikaha extends eqLogic {
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
           'unite'=>''
         ),
+
         //Set OnOff action
         'local_setonOff'=>array(
           'name'=>__("Modifier état", __FILE__),
@@ -2440,6 +2442,7 @@ class rikaha extends eqLogic {
         if(array_key_exists('title_disable', $value)===true){
           $rikahaCmd->setDisplay('title_disable', $value['title_disable']);
         }
+        
         $rikahaCmd->save();
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' saved');
         unset($rikahaCmd);
@@ -2701,7 +2704,6 @@ class rikahaCmd extends cmd {
       return true;
       }
      */
-
     public static $_widgetPossibility = array('custom' => true);
 
     public function execute($_options = array()) {
