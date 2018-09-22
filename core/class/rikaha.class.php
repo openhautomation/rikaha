@@ -42,9 +42,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
@@ -54,9 +59,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
@@ -66,9 +76,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
@@ -78,9 +93,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
