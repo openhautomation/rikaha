@@ -42,9 +42,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
@@ -54,9 +59,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
@@ -66,9 +76,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
@@ -78,9 +93,14 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
+        // Mobile
+        $mc = cache::byKey('rikahaWidgetmobile' . $rikaha->getId());
+        $mc->remove();
         $rikaha->toHtml('dashboard');
+        $rikaha->toHtml('mobile');
         $rikaha->refreshWidget();
       }
     }
@@ -1843,6 +1863,20 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setonOff'),array('k1'=>'stovekey', 'k2'=>'onOff')),
           'unite'=>''
+        ),
+        //Set OnOff action
+        'local_setheatingPower'=>array(
+          'name'=>__("Modifier la puissance", __FILE__),
+          'id'=>'local_setheatingPower',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          'message_placeholder'=> __('De 30-100 pas de 5', __FILE__),
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>1,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setheatingPower'),array('k1'=>'stovekey', 'k2'=>'heatingPower')),
+          'unite'=>''
         )
       );
     }
@@ -2134,6 +2168,11 @@ class rikaha extends eqLogic {
        return $result[0].__('j',__FILE__).$result[1].'h'.$result[2].'m';
     }
 
+    private function inRange($val, $min, $max){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      return ($val >= $min && $val <= $max);
+    }
+
     private function cmdSave($cmd, $data){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
@@ -2235,6 +2274,12 @@ class rikaha extends eqLogic {
                 case 'statusSubState':
                   $subState=$stoveValue;
                   break;
+                case 'inputRoomTemperature':
+                  if($stoveValue==1024){
+                    $stoveValue=0;
+                    log::add('rikaha', 'error', __('Attention merci de vérifier les piles de la sonde de température', __FILE__));
+                  }
+                  break;
               }
               $this->cmdSave($value['id'], $stoveValue);
             }
@@ -2254,17 +2299,21 @@ class rikaha extends eqLogic {
 
     public function setStove($stovekey='', $_options=array()){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
-      $stoveStructure=array(
+
+      $valideKeys=array(
         'targetTemperature' => '',
-        'revision'          => '',
         'onOff'             => '',
-        'operatingMode'     => ''
+        'operatingMode'     => '',
+        'heatingPower'      => ''
       );
 
-      $targetTemperature=$this->getCmd(null,'targetTemperature');
-      if(is_object($targetTemperature)){
-        $stoveStructure['targetTemperature']=$targetTemperature->execCmd();
+      if(array_key_exists($stovekey, $valideKeys)===false){
+        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' not found in allowed structure');
+        throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
       }
+
+      $stoveStructure=array();
+      // Set required
       $revision=$this->getCmd(null,'revision');
       if(is_object($revision)){
         $stoveStructure['revision']=$revision->execCmd();
@@ -2273,16 +2322,8 @@ class rikaha extends eqLogic {
       if(is_object($onOff)){
         $stoveStructure['onOff']=$onOff->execCmd();
       }
-      $operatingMode=$this->getCmd(null,'operatingMode');
-      if(is_object($operatingMode)){
-        $stoveStructure['operatingMode']=$operatingMode->execCmd();
-      }
 
-      if(array_key_exists($stovekey, $stoveStructure)===false){
-        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' not found in allowed structure');
-        throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
-      }
-
+      // Change value
       if(is_array($_options)===true){
         if(array_key_exists('message', $_options)===true){
           $stoveStructure[$stovekey]=trim($_options['message']);
@@ -2291,12 +2332,22 @@ class rikaha extends eqLogic {
         $stoveStructure[$stovekey]=trim($_options);
       }
 
-      //$stoveStructure[$stovekey]=trim($_options);
-
-      if($stoveStructure['onOff']==1){
-        $stoveStructure['onOff']='TRUE';
-      }else{
-        $stoveStructure['onOff']='FALSE';
+      // Specifics process
+      foreach(array_keys($stoveStructure) as $key){
+        switch ($key) {
+          case 'onOff':
+            if($stoveStructure[$key]==1){
+              $stoveStructure[$key]='TRUE';
+            }else{
+              $stoveStructure[$key]='FALSE';
+            }
+            break;
+          case 'heatingPower':
+            if($this->inRange($stoveStructure[$key], 30, 100)===false){
+              $stoveStructure[$key]=50;
+            }
+            break ;
+        }
       }
 
       foreach ($stoveStructure as $key => $value) {
@@ -2326,9 +2377,9 @@ class rikaha extends eqLogic {
 
       $name = $this->getCmd(null, $stovekey);
       if(is_object($name)){
-        $name->event(trim($_options));
+        $name->event($stoveStructure[$stovekey]);
         $name->save();
-        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Obj: '.$stovekey.' data: ' .$_options.' saved');
+        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Obj: '.$stovekey.' data: ' .$stoveStructure[$stovekey].' saved');
       }
 
       return true ;
@@ -2391,13 +2442,7 @@ class rikaha extends eqLogic {
         if(array_key_exists('title_disable', $value)===true){
           $rikahaCmd->setDisplay('title_disable', $value['title_disable']);
         }
-        if(array_key_exists('title_placeholder', $value)===true){
-          $rikahaCmd->setDisplay('title_placeholder', $value['title_placeholder']);
-        }
-        if(array_key_exists('title_possibility_list', $value)===true){
-          $rikahaCmd->setDisplay('title_possibility_list', json_encode($value['title_possibility_list']));
-        }
-
+        
         $rikahaCmd->save();
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' saved');
         unset($rikahaCmd);
@@ -2474,11 +2519,20 @@ class rikaha extends eqLogic {
       $replace['#operatingMode_options#']=$this->HtmlBuildOptions($options, $selected);
       $replace['#operatingMode_display#'] = (is_object($operatingMode) && $operatingMode->getIsVisible()) ? "" : "display: none;";
 
+      $local_setheatingPower = $this->getCmd(null,'local_setheatingPower');
+      $replace['#local_setheatingPower_id#'] = is_object($local_setheatingPower) ? $local_setheatingPower->getId() : '';
       $heatingPower = $this->getCmd(null,'heatingPower');
-      $replace['#heatingPower#'] = (is_object($heatingPower)) ? $heatingPower->execCmd() : '';
+      $options  = array();
+      $unite    = is_object($heatingPower) ? $heatingPower->getUnite() : '';
+      $selected = is_object($heatingPower) ? $heatingPower->execCmd() : '';
+      for($i=30;$i<105;){
+        $options[]=array('value'=>$i, 'label'=>$i.$unite);
+        $i+=5;
+      }
+      $replace['#heatingPower#'] = $selected;
       $replace['#heatingPower_id#'] = is_object($heatingPower) ? $heatingPower->getId() : '';
       $replace['#heatingPower_name#'] = is_object($heatingPower) ? $heatingPower->getName() : '';
-      $replace['#heatingPower_unite#'] = is_object($heatingPower) ? $heatingPower->getUnite() : '';
+      $replace['#heatingPower_options#']=$this->HtmlBuildOptions($options, $selected);
       if($operatingMode->execCmd() == 2){
         $replace['#heatingPower_display#']="display: none;";
       }else{
@@ -2581,7 +2635,7 @@ class rikaha extends eqLogic {
       $replace['#local_downtime_name#'] = is_object($local_downtime) ? $local_downtime->getName() : '';
       $lastSeenMinutes = $this->getCmd(null,'lastSeenMinutes');
       $lastSeenMinutesValue=(is_object($lastSeenMinutes)) ? $lastSeenMinutes->execCmd() : 0;
-      if($lastSeenMinutesValue==0){
+      if($lastSeenMinutesValue<2){
         $replace['#local_downtime_display#'] = "display: none;";
       }else{
         $replace['#local_downtime_display#'] = (is_object($local_downtime) && $local_downtime->getIsVisible()) ? "" : "display: none;";
@@ -2665,6 +2719,7 @@ class rikahaCmd extends cmd {
           case 'settargetTemperature':
           case 'setoperatingMode':
           case 'setonOff':
+          case 'setheatingPower':
             $this->getEqLogic()->getInfo();
             $this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
             $this->getEqLogic()->refreshWidget();
