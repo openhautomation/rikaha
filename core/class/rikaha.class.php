@@ -2260,8 +2260,8 @@ class rikaha extends eqLogic {
                   break;
                 case 'inputRoomTemperature':
                   if($stoveValue==1024){
+                    // 1024: pile de la sonde HS ou PAS de sonde
                     $stoveValue=0;
-                    log::add('rikaha', 'error', __('Attention merci de vérifier les piles de la sonde de température', __FILE__));
                   }
                   break;
               }
@@ -2426,7 +2426,7 @@ class rikaha extends eqLogic {
         if(array_key_exists('title_disable', $value)===true){
           $rikahaCmd->setDisplay('title_disable', $value['title_disable']);
         }
-        
+
         $rikahaCmd->save();
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' saved');
         unset($rikahaCmd);
