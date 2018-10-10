@@ -2316,7 +2316,7 @@ class rikaha extends eqLogic {
         /*
         * Wait
         */
-        sleep(3);
+        sleep(4);
 
         /*
         * Read current value
