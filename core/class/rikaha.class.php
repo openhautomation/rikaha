@@ -2281,6 +2281,63 @@ class rikaha extends eqLogic {
       $this->refreshWidget();
     }
 
+    public function controlStove($stovekey='', $_options=array()){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' started');
+
+      $returnValue=false;
+      /*
+      * Target value
+      */
+      $targetValue='';
+      if(is_array($_options)===true){
+        if(array_key_exists('message', $_options)===true){
+          $targetValue=trim($_options['message']);
+        }
+      }else{
+        $targetValue=trim($_options);
+      }
+
+      // Retry 4 times
+      for($i=0;$i<4;$i++){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' Retry: ------------' . ($i+1));
+
+        if($i==0){
+          /*
+          * Update revision value for the first time
+          */
+          $this->getInfo();
+        }
+
+        /*
+        * Write target value
+        */
+        $this->setStove($stovekey, $_options);
+
+        /*
+        * Wait
+        */
+        sleep(3);
+
+        /*
+        * Read current value
+        */
+        $this->getInfo();
+        $currentValue='';
+        $objValue=$this->getCmd(null, $stovekey);
+        if(is_object($objValue)){
+          $currentValue=$objValue->execCmd();
+        }
+
+        if($currentValue==$targetValue){
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
+          $returnValue=true;
+          break;
+        }
+      }
+
+      return $returnValue;
+    }
+
     public function setStove($stovekey='', $_options=array()){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
 
@@ -2704,9 +2761,12 @@ class rikahaCmd extends cmd {
           case 'setoperatingMode':
           case 'setonOff':
           case 'setheatingPower':
-            $this->getEqLogic()->getInfo();
-            $this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
-            $this->getEqLogic()->refreshWidget();
+            if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options)===false){
+              $this->getEqLogic()->refreshWidget();
+            }
+            //$this->getEqLogic()->getInfo();
+            //$this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
+            //$this->getEqLogic()->refreshWidget();
             break;
           default:
             throw new Exception(__('Commande non implémentée actuellement', __FILE__));
