@@ -2309,6 +2309,11 @@ class rikaha extends eqLogic {
         }
 
         /*
+        * Wait
+        */
+        sleep(1);
+
+        /*
         * Write target value
         */
         $this->setStove($stovekey, $_options);
@@ -2416,12 +2421,14 @@ class rikaha extends eqLogic {
       }
       $this->cleanCookieFile($cookieFile);
 
+      /*
       $name = $this->getCmd(null, $stovekey);
       if(is_object($name)){
         $name->event($stoveStructure[$stovekey]);
         $name->save();
         log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Obj: '.$stovekey.' data: ' .$stoveStructure[$stovekey].' saved');
       }
+      */
 
       return true ;
     }
