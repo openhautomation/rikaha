@@ -1887,6 +1887,8 @@ class rikaha extends eqLogic {
       $url='https://www.rika-firenet.com/web/login';
 
       $ch = curl_init();
+      curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
+
       curl_setopt($ch, CURLOPT_HEADER, FALSE);
       curl_setopt($ch, CURLOPT_NOBODY, FALSE);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -1931,6 +1933,8 @@ class rikaha extends eqLogic {
       $url='https://www.rika-firenet.com/api/client/';
 
       $ch = curl_init();
+      curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
+
       curl_setopt($ch, CURLOPT_USERAGENT,$this->getUA());
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -1938,7 +1942,7 @@ class rikaha extends eqLogic {
 
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
       curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/status?nocache='.time().'260');
+      curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/status?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_FILE, $fp);
       $return = curl_exec($ch);
@@ -1978,6 +1982,8 @@ class rikaha extends eqLogic {
       $url = 'https://www.rika-firenet.com/api/client/';
 
       $ch = curl_init();
+      curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
+
       curl_setopt($ch, CURLOPT_USERAGENT,$this->getUA());
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -1985,10 +1991,11 @@ class rikaha extends eqLogic {
 
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
       curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/controls?nocache='.time().'260');
+      curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/controls?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_POST, 1);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
+      curl_setopt($ch, CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded'));
 
       curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
       curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -2159,6 +2166,15 @@ class rikaha extends eqLogic {
 
     private function cmdSave($cmd, $data){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      if(is_bool($data===true)===true){
+        if($data===true){
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' TRUE');
+        }else{
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' FALSE');
+        }
+      }else{
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' ' . $data);
+      }
 
       $name = $this->getCmd(null, $cmd);
       if(is_object($name)){
@@ -2179,7 +2195,7 @@ class rikaha extends eqLogic {
               $data="NOT binary value";
             }
         }
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ID: ' . $cmd . ' Subtype: '.$name->getSubtype().' Value: '.$data.' saved');
+        //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ID: ' . $cmd . ' Subtype: '.$name->getSubtype().' Value: '.$data.' saved');
       }
     }
 
@@ -2221,8 +2237,6 @@ class rikaha extends eqLogic {
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to process data: '.$jsonFile);
         throw new Exception(__('Impossible de lire les données, merci de consulter vos logs en mode debug',__FILE__));
       }
-
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '. json_decode($stovedata));
 
       $this->getStoveStructure($stoveStructure);
       $mainState="";
@@ -2297,35 +2311,16 @@ class rikaha extends eqLogic {
         $targetValue=trim($_options);
       }
 
-      // Retry 4 times
-      for($i=0;$i<4;$i++){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' Retry: ------------' . ($i+1));
+      $nbrRetryGlobal=4;
+      $nbrRetrybeforeCheck=2;
 
-        if($i==0){
-          /*
-          * Update revision value for the first time
-          */
+      for($i=0 ; $i<$nbrRetryGlobal ; $i++){
+        for($j=0 ; $j<$nbrRetrybeforeCheck ; $j++){
           $this->getInfo();
+          sleep(2);
+          $this->setStove($stovekey, $_options);
+          sleep(10);
         }
-
-        /*
-        * Wait
-        */
-        sleep(1);
-
-        /*
-        * Write target value
-        */
-        $this->setStove($stovekey, $_options);
-
-        /*
-        * Wait
-        */
-        sleep(4);
-
-        /*
-        * Read current value
-        */
         $this->getInfo();
         $currentValue='';
         $objValue=$this->getCmd(null, $stovekey);
@@ -2368,6 +2363,10 @@ class rikaha extends eqLogic {
       if(is_object($onOff)){
         $stoveStructure['onOff']=$onOff->execCmd();
       }
+      $heatingPower=$this->getCmd(null,'heatingPower');
+      if(is_object($heatingPower)){
+        $stoveStructure['heatingPower']=$heatingPower->execCmd();
+      }
 
       // Change value
       if(is_array($_options)===true){
@@ -2383,9 +2382,9 @@ class rikaha extends eqLogic {
         switch ($key) {
           case 'onOff':
             if($stoveStructure[$key]==1){
-              $stoveStructure[$key]='TRUE';
+              $stoveStructure[$key]='true';
             }else{
-              $stoveStructure[$key]='FALSE';
+              $stoveStructure[$key]='false';
             }
             break;
           case 'heatingPower':
@@ -2768,7 +2767,7 @@ class rikahaCmd extends cmd {
           case 'setoperatingMode':
           case 'setonOff':
           case 'setheatingPower':
-            if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options)===false){
+            if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options)===true){
               $this->getEqLogic()->refreshWidget();
             }
             //$this->getEqLogic()->getInfo();
