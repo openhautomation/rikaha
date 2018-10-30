@@ -28,20 +28,15 @@ class rikaha extends eqLogic {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
-        $rikaha->getInfo();
-        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
-        $mc->remove();
-        $rikaha->toHtml('dashboard');
-        $rikaha->refreshWidget();
       }
     }
     */
-
     public static function cron5() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        $rikaha->calcTankLevel();
         // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
@@ -55,6 +50,7 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        $rikaha->calcTankLevel();
         // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
@@ -68,6 +64,7 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        $rikaha->calcTankLevel();
         // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
@@ -81,6 +78,7 @@ class rikaha extends eqLogic {
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
         $rikaha->getInfo();
+        $rikaha->calcTankLevel();
         // Dashboard
         $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
         $mc->remove();
@@ -1757,6 +1755,18 @@ class rikaha extends eqLogic {
           'configuration'=>array(),
           'unite'=>''
         ),
+        //local_tankLevel
+        'local_tankLevel'=>array(
+          'name'=>__('Niveau du réservoir à pellet', __FILE__),
+          'id'=>'local_tankLevel',
+          'parent'=>'0',
+          'type'=>'info',
+          'subtype'=>'numeric',
+          'historized'=>0,
+          'visible'=>1,
+          'configuration'=>array(),
+          'unite'=>'kg'
+        ),
         //local_statusCalculate
         'local_statusCalculate'=>array(
           'name'=>__('Statut', __FILE__),
@@ -1804,7 +1814,6 @@ class rikaha extends eqLogic {
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'getInfo')),
           'unite'=>''
         ),
-
         //Set target temp. action
         'local_settargetTemperature'=>array(
           'name'=>__('Modifier la temp. de consigne', __FILE__),
@@ -1860,6 +1869,20 @@ class rikaha extends eqLogic {
           'historized'=>0,
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setheatingPower'),array('k1'=>'stovekey', 'k2'=>'heatingPower')),
+          'unite'=>''
+        ),
+        //Set fulltank action
+        'local_setfullTank'=>array(
+          'name'=>__("Plein du réservoir fait", __FILE__),
+          'id'=>'local_setfullTank',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          //'message_placeholder'=> __('Capacité du réservoir', __FILE__),
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>1,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setfullTank'),array('k1'=>'stovekey', 'k2'=>'tankLevel')),
           'unite'=>''
         )
       );
@@ -2432,6 +2455,55 @@ class rikaha extends eqLogic {
       return true ;
     }
 
+    public function calcTankLevel(){
+      if($this->getConfiguration('tankcapacity')>0){
+        $local_tankLevel=$this->getCmd(null,'local_tankLevel');
+        if(is_object($local_tankLevel)){
+          $currentTankLevel=$local_tankLevel->execCmd();
+          if($currentTankLevel>0){
+            $endUT=time();
+            $startUT=$endUT-7200; // 2 heures
+            $start = date("Y-m-d H:i:s", $startUT);
+            $end = date("Y-m-d H:i:s", $endUT);
+            log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' start: ' . $start);
+            log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' end: ' . $end);
+
+            $parameterFeedRateTotal=$this->getCmd(null,'parameterFeedRateTotal');
+            if(is_object($parameterFeedRateTotal)){
+              $currentCons=$parameterFeedRateTotal->execCmd();
+              log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' current value: ' . $currentCons);
+
+              $histovalue=$parameterFeedRateTotal->getHistory($start, $end) ;
+              $targetIndex=count($histovalue)-2;
+              if($targetIndex>-1){
+                $previusCons=$histovalue[$targetIndex]->getValue();
+                log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' previus value: ' . $previusCons);
+
+                $cons=$currentCons-$previusCons;
+                if($cons>0){
+                  $newTankLevel=$currentTankLevel-$cons;
+                  if($newTankLevel<0){
+                    $newTankLevel=0;
+                  }
+                  $this->cmdSave('local_tankLevel', $newTankLevel);
+                  log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' New tank level: '.$newTankLevel);
+                }
+              }else{
+                log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Not enough history tu calc consumption');
+              }
+            }
+          }
+        }
+      }
+
+      return true;
+    }
+
+    public function setfullTank(){
+      $this->cmdSave('local_tankLevel', $this->getConfiguration('tankcapacity'));
+      return true;
+    }
+
     public function preInsert() {
     }
 
@@ -2454,6 +2526,9 @@ class rikaha extends eqLogic {
       }
       if (empty($this->getConfiguration('stoveid'))) {
         throw new Exception(__('Vous avez oublié de saisir le numéro du poêle',__FILE__));
+      }
+      if (trim($this->getConfiguration('tankcapacity'))=='' || $this->getConfiguration('tankcapacity') < 0 ) {
+        throw new Exception(__('Vous avez oublié de saisir la capacité du réservoir de pellet (en Kg)',__FILE__));
       }
     }
 
@@ -2496,6 +2571,8 @@ class rikaha extends eqLogic {
       }
       unset($value);
       unset($stoveStructure);
+
+      $this->cmdSave('local_tankLevel', 0);
     }
 
     public function preRemove() {
@@ -2712,6 +2789,24 @@ class rikaha extends eqLogic {
       $replace['#statusWarning_name#'] = is_object($statusWarning) ? $statusWarning->getName() : '';
       $replace['#statusWarning_display#'] = (is_object($statusWarning) && $statusWarning->getIsVisible()) ? "" : "display: none;";
 
+      $local_setfullTank = $this->getCmd(null,'local_setfullTank');
+      $replace['#local_setfullTank_id#'] = is_object($local_setfullTank) ? $local_setfullTank->getId() : '';
+      $replace['#local_setfullTank_name#'] = is_object($local_setfullTank) ? $local_setfullTank->getName() : '';
+      if($this->getConfiguration('tankcapacity')>0){
+        $replace['#local_setfullTank_display#'] = (is_object($local_setfullTank) && $local_setfullTank->getIsVisible()) ? "" : "display: none;";
+      }else{
+        $replace['#local_setfullTank_display#'] = "display: none;";
+      }
+      $local_tankLevel = $this->getCmd(null,'local_tankLevel');
+      $replace['#local_tankLevel#'] = (is_object($local_tankLevel)) ? $local_tankLevel->execCmd() : '';
+      $replace['#local_tankLevel_id#'] = is_object($local_tankLevel) ? $local_tankLevel->getId() : '';
+      $replace['#local_tankLevel_name#'] = is_object($local_tankLevel) ? $local_tankLevel->getName() : '';
+      $replace['#local_tankLevel_unite#'] = is_object($local_tankLevel) ? $local_tankLevel->getUnite() : '';
+      if($this->getConfiguration('tankcapacity')>0){
+        $replace['#local_tankLevel_display#'] = (is_object($local_tankLevel) && $local_tankLevel->getIsVisible()) ? "" : "display: none;";
+      }else{
+        $replace['#local_setfullTank_display#'] = "display: none;";
+      }
       $html = template_replace($replace, getTemplate('core', $_version, 'rikaha','rikaha'));
 
   		cache::set('rikahaWidget' . $_version . $this->getId(), $html, 0);
@@ -2773,6 +2868,10 @@ class rikahaCmd extends cmd {
             //$this->getEqLogic()->getInfo();
             //$this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
             //$this->getEqLogic()->refreshWidget();
+            break;
+          case 'setfullTank':
+            $this->getEqLogic()->setfullTank();
+            $this->getEqLogic()->refreshWidget();
             break;
           default:
             throw new Exception(__('Commande non implémentée actuellement', __FILE__));
