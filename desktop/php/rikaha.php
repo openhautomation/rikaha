@@ -126,6 +126,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="stoveid" placeholder="Numéro de l'équipement"/>
 							</div>
 						</div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">{{Capacité du réservoir (Kg)}}</label>
+              <div class="col-md-8">
+                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tankcapacity" placeholder="Capacité du réservoir à pellet"/>
+                {{Permet de gérer des alertes en fonction du niveau de pellet restant. Saisissez 0 pour désactiver cette fonctionnalité}}
+              </div>
+            </div>
 					</fieldset>
 					</form>
 				</div>

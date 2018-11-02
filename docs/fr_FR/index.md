@@ -39,7 +39,7 @@ Le plugin est croné toute les 30 mn.
 
 ![rikaha-config2](../images/rikaha_config2.png)
 
-**Creation de votre équipement**
+**Création de votre équipement**
 
 Après avoir nommé l'équipement saisissez :
 

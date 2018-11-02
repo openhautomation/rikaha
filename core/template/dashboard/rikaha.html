@@ -4,28 +4,31 @@
   <i title="#local_lastupdate_name#" class='fa pull-right' style="margin-top: 6px;margin-right: 3px;font-size: 0.7em;">#local_lastupdate#</i>
   <span class="cmd cmd-widget" data-cmd_id="#local_refresh_id#" style="display:none;"></span>
   <center class="widget-name"><strong><a href="#eqLink#" style="font-size : 1.1em;#hideEqLogicName#">#name_display# </strong><span style="#stoveType_display#">(#stoveType#)</span></a></center>
-  <script>
-    $('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
-     jeedom.cmd.execute({id: '#local_refresh_id#'});
-    });
-  </script>
-  <div align="left" class="tooltips" data-cmd_id="#local_statusCalculate_id#" style="padding-top:4px;margin-left:5px;#local_statusCalculate_display#">
- 			<span title="#local_statusCalculate_name#" class="fa jeedom-feu" style="min-width:15px"></span>
-      <span>#local_statusCalculate#</span>
- 	</div>
-  <div align="left" class="tooltips" data-cmd_id="#local_setoperatingMode_id#" style="padding-top:4px;margin-left:5px;#operatingMode_display#">
-      <span title="#operatingMode_name#" class="fa techno-robot30" style="min-width:15px"></span>
-      <select class="#local_setoperatingMode_id#_selectCmd" style="background-color:#background-color#;">
-        #operatingMode_options#
-      </select>
+
+  <div align="left" class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="padding-top:4px;margin-left:5px;#targetTemperature_display#">
+    <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
+    <select class="#local_settargetTemperature_id#_selectCmd" style="background-color:#background-color#;">
+      #targetTemperature_options#
+    </select>
+    <span data-cmd_id="#targetTemperature_id#" class=">#targetTemperature_histo#" style="font-size: 0.8em;" >(#targetTemperature_name#)<i style="display: none;">#targetTemperature#</i></span>
   </div>
-  <script>
-    $('.eqLogic[data-eqLogic_id=#id#] .#local_setoperatingMode_id#_selectCmd').on('change', function () {
-      $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
-      jeedom.cmd.execute({id: '#local_setoperatingMode_id#', value: $(this).val()});
-      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
-    });
-  </script>
+  <div align="left" class="tooltips" data-cmd_id="#local_setoperatingMode_id#" style="padding-top:4px;margin-left:5px;#operatingMode_display#">
+    <span title="#operatingMode_name#" class="fa techno-robot30" style="min-width:15px"></span>
+    <select class="#local_setoperatingMode_id#_selectCmd" style="background-color:#background-color#;">
+      #operatingMode_options#
+    </select>
+    <span data-cmd_id="#operatingMode_id#" style="font-size: 0.8em;" >(#operatingMode_name#)<i style="display: none;">#operatingMode#</i></span>
+  </div>
+  <div align="left" class="tooltips" data-cmd_id="#local_setonOff_id#" style="padding-top:4px;margin-left:5px;#onOff_display#">
+    <span title="#onOff_name#" class="fa fa-bolt" style="min-width:15px"></span>
+    <select class="#local_setonOff_id#_selectCmd" style="background-color:#background-color#;">
+      #onOff_options#
+    </select>
+  </div>
+  <div align="left" class="tooltips" data-cmd_id="#local_setfullTank_id#" style="padding-top:4px;margin-left:5px;#local_setfullTank_display#">
+      <span title="#local_setfullTank_name#" class="divers-fuel4" style="min-width:15px"></span>
+      <button class="#local_setfullTank_id#_selectCmd" style="background-color:#background-color#;" type="button">#local_setfullTank_name#</button>
+  </div>
   <div align="left" class="tooltips" data-cmd_id="#local_setheatingPower_id#" style="padding-top:4px;margin-left:5px;#heatingPower_display#">
     <span title="#heatingPower_name#" class="fa fa-tachometer" style="min-width:15px"></span>
     <select class="#local_setheatingPower_id#_selectCmd" style="background-color:#background-color#;">
@@ -33,13 +36,31 @@
     </select>
     <span data-cmd_id="#heatingPower_id#" class=">#heatingPower_histo#" style="font-size: 0.8em;" >(#heatingPower_name#)<i style="display: none;">#heatingPower#</i></span>
   </div>
-    <script>
-      $('.eqLogic[data-eqLogic_id=#id#] .#local_setheatingPower_id#_selectCmd').on('change', function () {
-        $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
-        jeedom.cmd.execute({id: '#local_setheatingPower_id#', value: $(this).val()});
-        setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
-      });
-    </script>
+
+  <div align="left" class="tooltips" data-cmd_id="#local_statusCalculate_id#" style="padding-top:4px;margin-left:5px;#local_statusCalculate_display#">
+      <span title="#local_statusCalculate_name#" class="fa jeedom-feu" style="min-width:15px"></span>
+      <span>#local_statusCalculate#</span>
+  </div>
+  <div align="left" class="tooltips#inputRoomTemperature_histo#" data-cmd_id="#inputRoomTemperature_id#" style="padding-top:4px;margin-left:5px;#inputRoomTemperature_display#">
+      <span title="#inputRoomTemperature_name#" class="fa jeedom-thermo-chaud" style="min-width:15px"></span>
+      <span>#inputRoomTemperature##inputRoomTemperature_unite#</span>
+      <span style="font-size: 0.8em;">(#inputRoomTemperature_name#)</span>
+  </div>
+  <div align="left" class="tooltips" data-cmd_id="#local_tankLevel_id#" style="padding-top:4px;margin-left:5px;#local_tankLevel_display#">
+      <span title="#local_tankLevel_name#" class="techno-courbes4" style="min-width:15px"></span>
+      <span>#local_tankLevel##local_tankLevel_unite#</span>
+      <span style="font-size: 0.8em;">(#local_tankLevel_name#)</span>
+  </div>
+  <div align="left" class="tooltips#parameterFeedRateTotal_histo#" data-cmd_id="#parameterFeedRateTotal_id#" style="padding-top:4px;margin-left:5px;#parameterFeedRateTotal_display#">
+      <span title="#parameterFeedRateTotal_name#" class="fa divers-weight11" style="min-width:15px"></span>
+      <span>#parameterFeedRateTotal##parameterFeedRateTotal_unite#</span>
+      <span style="font-size: 0.8em;">(#parameterFeedRateTotal_name#)</span>
+  </div>
+  <div align="left" class="tooltips#parameterRuntimeLogs_histo#" data-cmd_id="#parameterRuntimeLogs_id#" style="padding-top:4px;margin-left:5px;#parameterRuntimeLogs_display#">
+      <span title="parameterRuntimeLogs_name#" class="fa fa-clock-o" style="min-width:15px"></span>
+      <span>#parameterRuntimeLogs##parameterRuntimeLogs_unite#</span>
+      <span style="font-size: 0.8em;">(#parameterRuntimeLogs_name#)</span>
+  </div>
   <div align="left" class="tooltips#inputFlameTemperature_histo#" data-cmd_id="#inputFlameTemperature_id#" style="padding-top:4px;margin-left:5px;#inputFlameTemperature_display#">
       <span title="#inputFlameTemperature_name#" class="fa fa-fire" style="min-width:15px"></span>
       <span>#inputFlameTemperature##inputFlameTemperature_unite#</span>
@@ -50,64 +71,10 @@
       <span class="#frostProtectionActive_id#_check"></span>
       <span style="font-size: 0.8em;">(#frostProtectionActive_name#)</span>
   </div>
-  <script>
-    if('#frostProtectionActive#' == '0' ){
-      $('.eqLogic[data-eqLogic_id=#id#] .#frostProtectionActive_id#_check').append('<i class="fa fa-times"></i>');
-    }else{
-      $('.eqLogic[data-eqLogic_id=#id#] .#frostProtectionActive_id#_check').append('<i class="fa fa-check"></i>');
-    }
-  </script>
-  <div align="left" class="tooltips" data-cmd_id="#local_setonOff_id#" style="padding-top:4px;margin-left:5px;#onOff_display#">
-      <span title="#onOff_name#" class="fa fa-bolt" style="min-width:15px"></span>
-      <select class="#local_setonOff_id#_selectCmd" style="background-color:#background-color#;">
-        #onOff_options#
-      </select>
-  </div>
-  <script>
-    $('.eqLogic[data-eqLogic_id=#id#] .#local_setonOff_id#_selectCmd').on('change', function () {
-      $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
-      jeedom.cmd.execute({id: '#local_setonOff_id#', value: $(this).val()});
-      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
-    });
-  </script>
-<div align="left" class="tooltips" data-cmd_id="#local_settargetTemperature_id#" style="padding-top:4px;margin-left:5px;#targetTemperature_display#">
-  <span title="#targetTemperature_name#" class="fa jeedom-thermo-moyen" style="min-width:15px"></span>
-  <select class="#local_settargetTemperature_id#_selectCmd" style="background-color:#background-color#;">
-    #targetTemperature_options#
-  </select>
-  <span data-cmd_id="#targetTemperature_id#" class=">#targetTemperature_histo#" style="font-size: 0.8em;" >(#targetTemperature_name#)<i style="display: none;">#targetTemperature#</i></span>
-</div>
-  <script>
-    $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').on('change', function () {
-      $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
-      jeedom.cmd.execute({id: '#local_settargetTemperature_id#', value: $(this).val()});
-      setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
-    });
-  </script>
-  <div align="left" class="tooltips#inputRoomTemperature_histo#" data-cmd_id="#inputRoomTemperature_id#" style="padding-top:4px;margin-left:5px;#inputRoomTemperature_display#">
-      <span title="#inputRoomTemperature_name#" class="fa jeedom-thermo-chaud" style="min-width:15px"></span>
-      <span>#inputRoomTemperature##inputRoomTemperature_unite#</span>
-      <span style="font-size: 0.8em;">(#inputRoomTemperature_name#)</span>
-  </div>
   <div align="left" class="tooltips#frostProtectionTemperature_histo" data-cmd_id="#frostProtectionTemperature_id#" style="padding-top:4px;margin-left:5px;#frostProtectionTemperature_display#">
       <span title="#frostProtectionTemperature_name#" class="fa jeedom-thermo-froid" style="min-width:15px"></span>
       <span>#frostProtectionTemperature##frostProtectionTemperature_unite#</span>
       <span style="font-size: 0.8em;">(#frostProtectionTemperature_name#)</span>
-  </div>
-  <div align="left" class="tooltips#parameterRuntimePellets_histo#" data-cmd_id="#parameterRuntimePellets_id#" style="padding-top:4px;margin-left:5px;#parameterRuntimePellets_display#">
-      <span title="#parameterRuntimePellets_name#" class="fa fa-clock-o" style="min-width:15px"></span>
-      <span>#parameterRuntimePellets##parameterRuntimePellets_unite#</span>
-      <span style="font-size: 0.8em;">(#parameterRuntimePellets_name#)</span>
-  </div>
-  <div align="left" class="tooltips#parameterRuntimeLogs_histo#" data-cmd_id="#parameterRuntimeLogs_id#" style="padding-top:4px;margin-left:5px;#parameterRuntimeLogs_display#">
-      <span title="parameterRuntimeLogs_name#" class="fa fa-clock-o" style="min-width:15px"></span>
-      <span>#parameterRuntimeLogs##parameterRuntimeLogs_unite#</span>
-      <span style="font-size: 0.8em;">(#parameterRuntimeLogs_name#)</span>
-  </div>
-  <div align="left" class="tooltips#parameterFeedRateTotal_histo#" data-cmd_id="#parameterFeedRateTotal_id#" style="padding-top:4px;margin-left:5px;#parameterFeedRateTotal_display#">
-      <span title="#parameterFeedRateTotal_name#" class="fa divers-weight11" style="min-width:15px"></span>
-      <span>#parameterFeedRateTotal##parameterFeedRateTotal_unite#</span>
-      <span style="font-size: 0.8em;">(#parameterFeedRateTotal_name#)</span>
   </div>
   <div align="left" class="tooltips#parameterFeedRateService_histo#" data-cmd_id="#parameterFeedRateService_id#" style="padding-top:4px;margin-left:5px;#parameterFeedRateService_display#">
       <span title="#parameterFeedRateService_name#" class="fa fa-wrench" style="min-width:15px"></span>
@@ -139,4 +106,39 @@
       <span>#statusWarning#</span>
       <span style="font-size: 0.8em;">(#statusWarning_name#)</span>
   </div>
+  <script>
+  $('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
+   jeedom.cmd.execute({id: '#local_refresh_id#'});
+  });
+  $('.eqLogic[data-eqLogic_id=#id#] .#local_setoperatingMode_id#_selectCmd').on('change', function () {
+    $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
+    jeedom.cmd.execute({id: '#local_setoperatingMode_id#', value: $(this).val()});
+    setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
+  });
+  $('.eqLogic[data-eqLogic_id=#id#] .#local_setheatingPower_id#_selectCmd').on('change', function () {
+    $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
+    jeedom.cmd.execute({id: '#local_setheatingPower_id#', value: $(this).val()});
+    setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
+  });
+  if('#frostProtectionActive#' == '0' ){
+    $('.eqLogic[data-eqLogic_id=#id#] .#frostProtectionActive_id#_check').append('<i class="fa fa-times"></i>');
+  }else{
+    $('.eqLogic[data-eqLogic_id=#id#] .#frostProtectionActive_id#_check').append('<i class="fa fa-check"></i>');
+  }
+  $('.eqLogic[data-eqLogic_id=#id#] .#local_setonOff_id#_selectCmd').on('change', function () {
+    $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
+    jeedom.cmd.execute({id: '#local_setonOff_id#', value: $(this).val()});
+    setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
+  });
+  $('.eqLogic[data-eqLogic_id=#id#] .#local_settargetTemperature_id#_selectCmd').on('change', function () {
+    $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
+    jeedom.cmd.execute({id: '#local_settargetTemperature_id#', value: $(this).val()});
+    setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
+  });
+  $('.eqLogic[data-eqLogic_id=#id#] .#local_setfullTank_id#_selectCmd').on('click', function () {
+    $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
+    jeedom.cmd.execute({id: '#local_setfullTank_id#', value: 1});
+    setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
+  });
+  </script>
 </div>
