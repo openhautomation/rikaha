@@ -2334,27 +2334,37 @@ class rikaha extends eqLogic {
         $targetValue=trim($_options);
       }
 
-      $nbrRetryGlobal=4;
-      $nbrRetrybeforeCheck=2;
+      $timerRetry=array(
+        array(15, 30, 45),
+        array(60, 60, 60)
+      );
 
-      for($i=0 ; $i<$nbrRetryGlobal ; $i++){
-        for($j=0 ; $j<$nbrRetrybeforeCheck ; $j++){
+      for($i=0;$i<count($timerRetry);$i++){
+        // Global retry
+        for($j=0;$j<count($timerRetry[$i]);$j++){
+          // Retry before ckeck
           $this->getInfo();
-          sleep(2);
+          sleep(3);
+
           $this->setStove($stovekey, $_options);
-          sleep(10);
+          sleep($timerRetry[$i][$j]);
         }
+
+        // check
         $this->getInfo();
         $currentValue='';
         $objValue=$this->getCmd(null, $stovekey);
         if(is_object($objValue)){
           $currentValue=$objValue->execCmd();
-        }
 
-        if($currentValue==$targetValue){
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
-          $returnValue=true;
-          break;
+          if($currentValue==$targetValue){
+            log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
+            $returnValue=true;
+            break(2);
+          }
+        }else{
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' stovekey: '.$stovekey . ' not an object');
+          break(2);
         }
       }
 

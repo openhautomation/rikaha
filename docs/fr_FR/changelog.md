@@ -4,6 +4,12 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+19 11 2018
+
+Validation du fonctionnement du plugin après la mise à jour de la clef Firenet
+
+Modification du système de retry des ordres envoyés au poêle
+
 30 10 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
 
 Gestion du niveau de pellet dans le réservoir. Vous pouvez gérer des actions en configurant dans votre Jeedom la commande "Niveau du réservoir à pellet"
