@@ -4,7 +4,19 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+30 10 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
+
+Gestion du niveau de pellet dans le réservoir. Vous pouvez gérer des actions en configurant dans votre Jeedom la commande "Niveau du réservoir à pellet"
+
+Réorganisation du widget du dashboard
+
+21 09 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
+
+Ajout de la modification de la puissance de chauffe. Le range est compris entre 30 et 100 % par pas de 5.
+
 19 09 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
+
+Prise en compte dans les scénarios des actions de modification de la temp. de consigne, du mode et de l'état.
 
 Ajout des cron 5, 15 minutes et une heure
 
