@@ -2128,7 +2128,7 @@ class rikaha extends eqLogic {
               break ;
             case 1:
             case 3:
-              $translate=__('Standby', __FILE__);
+              $translate=__('En veille', __FILE__);
               break;
             case 2:
               $translate=__('Commande externe', __FILE__);
