@@ -2128,7 +2128,7 @@ class rikaha extends eqLogic {
               break ;
             case 1:
             case 3:
-              $translate=__('Standby', __FILE__);
+              $translate=__('En veille', __FILE__);
               break;
             case 2:
               $translate=__('Commande externe', __FILE__);
@@ -2360,11 +2360,11 @@ class rikaha extends eqLogic {
           if($currentValue==$targetValue){
             log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
             $returnValue=true;
-            break(2);
+            break;
           }
         }else{
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' stovekey: '.$stovekey . ' not an object');
-          break(2);
+          break;
         }
       }
 
