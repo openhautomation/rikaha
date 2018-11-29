@@ -2360,11 +2360,11 @@ class rikaha extends eqLogic {
           if($currentValue==$targetValue){
             log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
             $returnValue=true;
-            break(2);
+            break;
           }
         }else{
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' stovekey: '.$stovekey . ' not an object');
-          break(2);
+          break;
         }
       }
 
