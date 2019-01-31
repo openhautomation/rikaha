@@ -2138,8 +2138,13 @@ class rikaha extends eqLogic {
           }
           break;
         case 2:
-          $translate=__('Réveil', __FILE__);
-          break;
+          switch ($statusSubState) {
+            case 6:
+              $translate=__('Allumage', __FILE__);
+              break;
+            default:
+              $translate=__('Réveil', __FILE__);
+          }
         case 3:
           $translate=__('Démarrage', __FILE__);
           break;
@@ -2158,6 +2163,15 @@ class rikaha extends eqLogic {
           break;
         case 6:
           $translate=__('Fin de combustion', __FILE__);
+          break;
+        case 21:
+          switch ($statusSubState) {
+            case 12:
+              $translate=__('Mode bois', __FILE__);
+              break;
+            default:
+              $translate=__('Etat inconnu', __FILE__);
+          }
           break;
         default:
           $translate=__('Etat inconnu', __FILE__);
