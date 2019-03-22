@@ -2032,21 +2032,6 @@ class rikaha extends eqLogic {
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setfullTank'),array('k1'=>'stovekey', 'k2'=>'tankLevel')),
           'unite'=>'',
           'order'=>0
-        ),
-        //Set convectionFan1
-        'local_setconvectionFan1'=>array(
-          'name'=>__("Etat ventillateur 1", __FILE__),
-          'id'=>'local_setconvectionFan1',
-          'parent'=>'0',
-          'type'=>'action',
-          'subtype'=>'message',
-          'message_placeholder'=> __('0=OFF, 1=ON', __FILE__),
-          'title_disable'=> 1,
-          'historized'=>0,
-          'visible'=>1,
-          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Active')),
-          'unite'=>'',
-          'order'=>0
         )
       );
     }
@@ -2284,6 +2269,7 @@ class rikaha extends eqLogic {
 
       $translate='';
       switch ($statusMainState) {
+        //---
         case 1:
           switch ($statusSubState) {
             case 0:
@@ -2300,6 +2286,7 @@ class rikaha extends eqLogic {
               $translate=__('Etat inconnu', __FILE__);
           }
           break;
+        //---
         case 2:
           switch ($statusSubState) {
             case 6:
@@ -2308,12 +2295,16 @@ class rikaha extends eqLogic {
             default:
               $translate=__('Réveil', __FILE__);
           }
+          break;
+        //---
         case 3:
           $translate=__('Démarrage', __FILE__);
           break;
+        //---
         case 4:
           $translate=__('Contrôle', __FILE__);
           break;
+        //---
         case 5:
           switch ($statusSubState) {
             case 3:
@@ -2324,9 +2315,21 @@ class rikaha extends eqLogic {
               $translate=__('Nettoyage', __FILE__);
           }
           break;
+        //---
         case 6:
           $translate=__('Fin de combustion', __FILE__);
           break;
+        //---
+        case 13:
+          switch ($statusSubState) {
+            case 3:
+              $translate=__('Contrôle présence bois', __FILE__);
+              break;
+            default:
+              $translate=__('Etat inconnu', __FILE__);
+          }
+          break;
+        //---
         case 21:
           switch ($statusSubState) {
             case 12:
@@ -2336,6 +2339,7 @@ class rikaha extends eqLogic {
               $translate=__('Etat inconnu', __FILE__);
           }
           break;
+        //---
         default:
           $translate=__('Etat inconnu', __FILE__);
       }
@@ -2551,12 +2555,13 @@ class rikaha extends eqLogic {
     public function setStove($stovekey='', $_options=array()){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
 
+      return true ;
+
       $valideKeys=array(
-        'targetTemperature'    => '',
-        'onOff'                => '',
-        'operatingMode'        => '',
-        'heatingPower'         => '',
-        'convectionFan1Active' => ''
+        'targetTemperature' => '',
+        'onOff'             => '',
+        'operatingMode'     => '',
+        'heatingPower'      => ''
       );
 
       if(array_key_exists($stovekey, $valideKeys)===false){
@@ -2578,10 +2583,6 @@ class rikaha extends eqLogic {
       if(is_object($heatingPower)){
         $stoveStructure['heatingPower']=$heatingPower->execCmd();
       }
-      $convectionFan1Active=$this->getCmd(null,'convectionFan1Active');
-      if(is_object($convectionFan1Active)){
-        $stoveStructure['convectionFan1Active']=$convectionFan1Active->execCmd();
-      }
 
       // Change value
       if(is_array($_options)===true){
@@ -2596,7 +2597,6 @@ class rikaha extends eqLogic {
       foreach(array_keys($stoveStructure) as $key){
         switch ($key) {
           case 'onOff':
-          case 'convectionFan1Active':
             if($stoveStructure[$key]==1){
               $stoveStructure[$key]='true';
             }else{
@@ -2615,7 +2615,7 @@ class rikaha extends eqLogic {
         if(trim($value)==''){
           log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' is not set');
           throw new Exception(__('Des données sont manquantes afin de realiser cette action sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
-        }
+
       }
 
       $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.uniqid();
@@ -2667,7 +2667,7 @@ class rikaha extends eqLogic {
               log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' current value: ' . $currentCons);
 
               $histovalue=$parameterFeedRateTotal->getHistory($start, $end) ;
-              $targetIndex=count($histovalue)-2;
+              $targetIndex=count($histovalue)-1;
               if($targetIndex>-1){
                 $previusCons=$histovalue[$targetIndex]->getValue();
                 log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' previus value: ' . $previusCons);
@@ -2751,6 +2751,9 @@ class rikaha extends eqLogic {
         if(trim($value['unite'])!=''){
           $rikahaCmd->setUnite($value['unite']);
         }
+        if(is_numeric($value['order'])===true){
+          $rikahaCmd->setOrder($value['order']);
+        }
         if(array_key_exists('message_placeholder', $value)===true){
           $rikahaCmd->setDisplay('message_placeholder', $value['message_placeholder']);
         }
@@ -2798,115 +2801,55 @@ class rikaha extends eqLogic {
       return $SO;
     }
 
-    public function toHtml($_version = 'dashboard') {
+    public function array_check($keyCheck, &$arrayCheck)
+    {
+      return (isset($arrayCheck[$keyCheck]) || array_key_exists($keyCheck, $arrayCheck));
+    }
+
+    public function toHtml($_version = 'dashboard'){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
-      // step 1 get data
       $stoveStructure=array();
       $this->getStoveStructure($stoveStructure);
 
       $todisplay=array();
       foreach ($stoveStructure as $key => $value) {
-        $cmd=$this->getCmd(null, $value['id']);
+        $rikahaCmd = $this->getCmd(null, $value['id']);
 
-        if(!is_object($cmd)){
+        if(!is_object($rikahaCmd)){
           continue;
         }
-        if($cmd->getIsVisible()==0){
+        if(!$rikahaCmd->getIsVisible()){
           continue;
         }
-        if(!is_numeric($cmd->getOrder())){
+        if(!is_numeric($rikahaCmd->getOrder())){
           continue ;
         }
 
-        if(isset($todisplay[$cmd->getOrder()])===false){
-          $todisplay[$cmd->getOrder()]=array();
+        if(!$this->array_check($rikahaCmd->getOrder(), $todisplay)){
+          $todisplay[$rikahaCmd->getOrder]=array();
         }
 
-        if($cmd->getType()=='info'){
-          $todisplay[$cmd->getOrder()][]=array(
-            'type'=>$cmd->getType(),
-            'logicalid'=>$cmd->getLogicalId(),
-            'id'=>$cmd->getId(),
-            'value'=>$cmd->execCmd(),
-            'unite'=>$cmd->getUnite(),
-            'name'=>$cmd->getName(),
-            'icon'=>$cmd->getdisplay('icon'),
-            'historized'=>$cmd->getIsHistorized()
-          );
-        }elseif($cmd->getType()=='action'){
-          //Manage needed info
-          $needed_value="";
-          $needed_unite="";
-          $needed_logicalid=NULL;
-          switch ($cmd->getLogicalId()) {
-            case 'local_settargetTemperature':
-              $needed_logicalid='targetTemperature';
-              break;
-            case 'local_setoperatingMode':
-              $needed_logicalid='operatingMode';
-              break;
-            case 'local_setheatingPower':
-              $needed_logicalid='heatingPower';
-              break;
-            case 'local_setonOff':
-              $needed_logicalid='onOff';
-              break;
-            case 'local_setconvectionFan1':
-              $needed_logicalid='convectionFan1Active';
-              break;
-            case 'local_setfullTank':
-              $needed_value=$this->getConfiguration('tankcapacity');
-              break;
-          }
-
-          if($needed_logicalid!==NULL){
-            $needed_cmd=$this->getCmd(null, $needed_logicalid);
-            if(is_object($needed_cmd)){
-              $needed_value=$needed_cmd->execCmd();
-              $needed_unite=$needed_cmd->getUnite();
-            }
-            unset($needed_cmd);
-          }
-
-          $todisplay[$cmd->getOrder()][]=array(
-            'type'=>$cmd->getType(),
-            'logicalid'=>$cmd->getLogicalId(),
-            'id'=>$cmd->getId(),
-            'value'=>$needed_value,
-            'unite'=>$needed_unite,
-            'name'=>$cmd->getName(),
-            'icon'=>$cmd->getdisplay('icon'),
-            'historized'=>0
-          );
-        }
-
-        unset($cmd);
+        $todisplay[$rikahaCmd->getOrder()][]=array(
+          'type'=>$rikahaCmd->getType(),
+          'id'=>$rikahaCmd->getId(),
+          'value'=>$rikahaCmd->execCmd(),
+          'unite'=>$rikahaCmd->getUnite(),
+          'name'=>$rikahaCmd->getName()
+        );
       }
 
       unset($stoveStructure);
       ksort($todisplay);
 
-      // step 2 display
+      //var_export($todisplay);
+      //exit(0);
+
       $replace = $this->preToHtml($_version);
   		if (!is_array($replace)) {
   			return $replace;
   		}
       $version = jeedom::versionAlias($_version);
-
-      $replace['#local_refresh_id#']='';
-      $local_refresh = $this->getCmd(null, 'local_refresh');
-      if(is_object($local_refresh)){
-        $replace['#local_refresh_id#']=$local_refresh->getId();
-      }
-
-      $replace['#local_lastupdate#']='';
-      $replace['#local_lastupdate_name#']='';
-      $local_lastupdate = $this->getCmd(null,'local_lastupdate');
-      if(is_object($local_lastupdate)){
-        $replace['#local_lastupdate#'] = $local_lastupdate->execCmd();
-        $replace['#local_lastupdate_name#'] = $local_lastupdate->getName();
-      }
 
       foreach ($todisplay as $key => $value) {
         for($i=0;$i<count($value);$i++){
@@ -2915,131 +2858,267 @@ class rikaha extends eqLogic {
           if($value[$i]['type']=='info'){
             $info_template = getTemplate('core', $version, 'info', 'rikaha');
 
-            switch ($value[$i]['logicalid']) {
-              case 'operatingMode':
-                $replaceInfo['#cmd_value#']=$this->translateOperatingMode($value[$i]['value']);
-                break;
-              case 'onOff':
-                if($value[$i]['value']==1){
-                  $replaceInfo['#cmd_value#']=__('On',__FILE__);
-                }elseif($value[$i]['value']==0){
-                  $replaceInfo['#cmd_value#']=__('Off',__FILE__);
-                }else{
-                  $replaceInfo['#cmd_value#']="undef";
-                }
-                break;
-              default:
-                $replaceInfo['#cmd_value#']=$value[$i]['value'];
-            }
-
             $replaceInfo['#cmd_id#']=$value[$i]['id'];
+            $replaceInfo['#cmd_value#']=$value[$i]['value'];
             $replaceInfo['#cmd_unite#']=$value[$i]['unite'];
             $replaceInfo['#cmd_name#']=$value[$i]['name'];
-            $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-            $replaceInfo['#historized#']="";
-            if($value[$i]['historized']==1){
-              $replaceInfo['#historized#']="history cursor";
-            }
-
-            $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
 
           }elseif($value[$i]['type']=='action'){
-
-            switch ($value[$i]['logicalid']) {
-              case 'local_settargetTemperature':
-                $info_template = getTemplate('core', $version, 'action', 'rikaha');
-                $options  = array();
-                for($j=14;$j<29;$j++){
-                  $options[]=array('value'=>$j, 'label'=>$j.$value[$i]['unite']);
-                }
-                $replaceInfo['#cmd_id#']=$value[$i]['id'];
-                $replaceInfo['#historized#']="";
-                if($value[$i]['historized']==1){
-                  $replaceInfo['#historized#']="history cursor";
-                }
-                $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
-                $replaceInfo['#cmd_name#']=$value[$i]['name'];
-                $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
-                break;
-
-              case 'local_setoperatingMode':
-                $info_template = getTemplate('core', $version, 'action', 'rikaha');
-                $options  = array();
-                for($j=0;$j<3;$j++){
-                  $options[]=array('value'=>$j, 'label'=>$this->translateOperatingMode($j));
-                }
-                $replaceInfo['#cmd_id#']=$value[$i]['id'];
-                $replaceInfo['#historized#']="";
-                if($value[$i]['historized']==1){
-                  $replaceInfo['#historized#']="history cursor";
-                }
-                $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
-                $replaceInfo['#cmd_name#']=$value[$i]['name'];
-                $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
-                break;
-
-              case 'local_setheatingPower':
-                $info_template = getTemplate('core', $version, 'action', 'rikaha');
-                $options  = array();
-                for($j=30;$j<105;){
-                  $options[]=array('value'=>$j, 'label'=>$j.$value[$i]['unite']);
-                  $j+=5;
-                }
-                $replaceInfo['#cmd_id#']=$value[$i]['id'];
-                $replaceInfo['#historized#']="";
-                if($value[$i]['historized']==1){
-                  $replaceInfo['#historized#']="history cursor";
-                }
-                $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
-                $replaceInfo['#cmd_name#']=$value[$i]['name'];
-                $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
-                break;
-
-              case 'local_setonOff':
-              case 'local_setconvectionFan1':
-                $info_template = getTemplate('core', $version, 'action', 'rikaha');
-                $options  = array();
-                $options[]=array('value'=>0, 'label'=>__('Off',__FILE__));
-                $options[]=array('value'=>1, 'label'=>__('On',__FILE__));
-                $replaceInfo['#cmd_id#']=$value[$i]['id'];
-                $replaceInfo['#historized#']="";
-                if($value[$i]['historized']==1){
-                  $replaceInfo['#historized#']="history cursor";
-                }
-                $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
-                $replaceInfo['#cmd_name#']=$value[$i]['name'];
-                $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
-                break;
-
-              case 'local_setfullTank':
-                if($value[$i]['value']>0){
-                  $info_template = getTemplate('core', $version, 'action', 'rikaha');
-                  $replaceInfo['#cmd_id#']=$value[$i]['id'];
-                  $replaceInfo['#historized#']="";
-                  if($value[$i]['historized']==1){
-                    $replaceInfo['#historized#']="history cursor";
-                  }
-                  $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                  $replaceInfo['#cmd_action#']='<button style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd" type="button">'.$value[$i]['name'].'</button>';
-                  $replaceInfo['#cmd_name#']="";
-                  $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
-                }
-                break;
-            }
+            continue;
           }
+
+          $replace['#test#'] .= template_replace($replaceInfo, $info_template);
         }
       }
 
-      $replace['#cmd#'] .='';
+      $html = template_replace($replace, getTemplate('core', $_version, 'rikaha','rikaha'));
+
+  		cache::set('rikahaWidget' . $_version . $this->getId(), $html, 0);
+  		return $html;
+
+    }
+
+/*
+
+    public function testtoHtml($_version = 'dashboard') {
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      $replace = $this->preToHtml($_version);
+  		if (!is_array($replace)) {
+  			return $replace;
+  		}
+      $version = jeedom::versionAlias($_version);
+
+      //$html = template_replace($replace, getTemplate('core', $_version, 'rikaha','rikaha'));
+
+      $info_template = getTemplate('core', $version, 'info', 'rikaha');
+      for($i=0;$i<2;$i++){
+        $replaceInfo = array();
+
+        $replaceInfo['#cmd_id#']='id'.$i;
+        $replaceInfo['#cmd_value#']='value'.$i;
+        $replaceInfo['#cmd_unite#']='unite'.$i;
+        $replaceInfo['#cmd_name#']='name'.$i;
+
+        $replace['#test#'] .= template_replace($replaceInfo, $info_template);
+
+      }
+
+
       $html = template_replace($replace, getTemplate('core', $_version, 'rikaha','rikaha'));
 
   		cache::set('rikahaWidget' . $_version . $this->getId(), $html, 0);
   		return $html;
     }
+*/
+/*
+    public function toHtml($_version = 'dashboard') {
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      $replace = $this->preToHtml($_version);
+  		if (!is_array($replace)) {
+  			return $replace;
+  		}
+      $version = jeedom::versionAlias($_version);
+
+      $local_refresh = $this->getCmd(null, 'local_refresh');
+      $replace['#local_refresh_id#'] = (is_object($local_refresh)) ? $local_refresh->getId() : '';
+
+      $local_lastupdate = $this->getCmd(null,'local_lastupdate');
+      $replace['#local_lastupdate#'] = (is_object($local_lastupdate)) ? $local_lastupdate->execCmd() : '';
+      $replace['#local_lastupdate_name#'] = is_object($local_lastupdate) ? $local_lastupdate->getName() : '';
+
+      $stoveType = $this->getCmd(null,'stoveType');
+      $replace['#stoveType#'] = (is_object($stoveType)) ? $stoveType->execCmd() : '';
+      $replace['#stoveType_display#'] = (is_object($stoveType) && $stoveType->getIsVisible()) ? "" : "display: none;";
+
+      $local_statusCalculate = $this->getCmd(null,'local_statusCalculate');
+      $replace['#local_statusCalculate#'] = (is_object($local_statusCalculate)) ? $local_statusCalculate->execCmd() : '';
+      $replace['#local_statusCalculate_id#'] = is_object($local_statusCalculate) ? $local_statusCalculate->getId() : '';
+      $replace['#local_statusCalculate_name#'] = is_object($local_statusCalculate) ? $local_statusCalculate->getName() : '';
+      $replace['#local_statusCalculate_unite#'] = is_object($local_statusCalculate) ? $local_statusCalculate->getUnite() : '';
+      $replace['#local_statusCalculate_display#'] = (is_object($local_statusCalculate) && $local_statusCalculate->getIsVisible()) ? "" : "display: none;";
+
+      $operatingMode = $this->getCmd(null,'operatingMode');
+      $local_setoperatingMode = $this->getCmd(null,'local_setoperatingMode');
+      $replace['#local_setoperatingMode_id#'] = is_object($local_setoperatingMode) ? $local_setoperatingMode->getId() : '';
+      $replace['#operatingMode_name#'] = is_object($operatingMode) ? $operatingMode->getName() : '';
+      $options = array();
+      $selected= is_object($operatingMode) ? $operatingMode->execCmd() : '';
+      for($i=0;$i<3;$i++){
+        $options[]=array('value'=>$i, 'label'=>$this->translateOperatingMode($i));
+      }
+      $replace['#operatingMode_options#']=$this->HtmlBuildOptions($options, $selected);
+      $replace['#operatingMode_display#'] = (is_object($operatingMode) && $operatingMode->getIsVisible()) ? "" : "display: none;";
+
+      $local_setheatingPower = $this->getCmd(null,'local_setheatingPower');
+      $replace['#local_setheatingPower_id#'] = is_object($local_setheatingPower) ? $local_setheatingPower->getId() : '';
+      $heatingPower = $this->getCmd(null,'heatingPower');
+      $options  = array();
+      $unite    = is_object($heatingPower) ? $heatingPower->getUnite() : '';
+      $selected = is_object($heatingPower) ? $heatingPower->execCmd() : '';
+      for($i=30;$i<105;){
+        $options[]=array('value'=>$i, 'label'=>$i.$unite);
+        $i+=5;
+      }
+      $replace['#heatingPower#'] = $selected;
+      $replace['#heatingPower_id#'] = is_object($heatingPower) ? $heatingPower->getId() : '';
+      $replace['#heatingPower_name#'] = is_object($heatingPower) ? $heatingPower->getName() : '';
+      $replace['#heatingPower_options#']=$this->HtmlBuildOptions($options, $selected);
+      if($operatingMode->execCmd() == 2){
+        $replace['#heatingPower_display#']="display: none;";
+      }else{
+        $replace['#heatingPower_display#'] = (is_object($heatingPower) && $heatingPower->getIsVisible()) ? "" : "display: none;";
+      }
+      $replace['#heatingPower_histo#'] = (is_object($heatingPower) && $heatingPower->getIsHistorized()) ? " history cursor" : "";
+
+      $inputFlameTemperature = $this->getCmd(null,'inputFlameTemperature');
+      $replace['#inputFlameTemperature#'] = (is_object($inputFlameTemperature)) ? $inputFlameTemperature->execCmd() : '';
+      $replace['#inputFlameTemperature_id#'] = is_object($inputFlameTemperature) ? $inputFlameTemperature->getId() : '';
+      $replace['#inputFlameTemperature_name#'] = is_object($inputFlameTemperature) ? $inputFlameTemperature->getName() : '';
+      $replace['#inputFlameTemperature_unite#'] = is_object($inputFlameTemperature) ? $inputFlameTemperature->getUnite() : '';
+      $replace['#inputFlameTemperature_display#'] = (is_object($inputFlameTemperature) && $inputFlameTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#inputFlameTemperature_histo#'] = (is_object($inputFlameTemperature) && $inputFlameTemperature->getIsHistorized()) ? " history cursor" : "";
+
+      $local_settargetTemperature = $this->getCmd(null,'local_settargetTemperature');
+      $replace['#local_settargetTemperature_id#'] = is_object($local_settargetTemperature) ? $local_settargetTemperature->getId() : '';
+      $targetTemperature = $this->getCmd(null,'targetTemperature');
+      $options  = array();
+      $unite    = is_object($targetTemperature) ? $targetTemperature->getUnite() : '';
+      $selected = is_object($targetTemperature) ? $targetTemperature->execCmd() : '';
+      for($i=14;$i<29;$i++){
+        $options[]=array('value'=>$i, 'label'=>$i.$unite);
+      }
+      $replace['#targetTemperature#'] = $selected;
+      $replace['#targetTemperature_id#'] = is_object($targetTemperature) ? $targetTemperature->getId() : '';
+      $replace['#targetTemperature_name#'] = is_object($targetTemperature) ? $targetTemperature->getName() : '';
+      $replace['#targetTemperature_options#']=$this->HtmlBuildOptions($options, $selected);
+      $replace['#targetTemperature_display#'] = (is_object($targetTemperature) && $targetTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#targetTemperature_histo#'] = (is_object($targetTemperature) && $targetTemperature->getIsHistorized()) ? " history cursor" : "";
+
+      $inputRoomTemperature = $this->getCmd(null,'inputRoomTemperature');
+      $replace['#inputRoomTemperature#'] = (is_object($inputRoomTemperature)) ? $inputRoomTemperature->execCmd() : '';
+      $replace['#inputRoomTemperature_id#'] = is_object($inputRoomTemperature) ? $inputRoomTemperature->getId() : '';
+      $replace['#inputRoomTemperature_name#'] = is_object($inputRoomTemperature) ? $inputRoomTemperature->getName() : '';
+      $replace['#inputRoomTemperature_unite#'] = is_object($inputRoomTemperature) ? $inputRoomTemperature->getUnite() : '';
+      $replace['#inputRoomTemperature_display#'] = (is_object($inputRoomTemperature) && $inputRoomTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#inputRoomTemperature_histo#'] = (is_object($inputRoomTemperature) && $inputRoomTemperature->getIsHistorized()) ? " history cursor" : "";
+
+      $frostProtectionTemperature = $this->getCmd(null,'frostProtectionTemperature');
+      $replace['#frostProtectionTemperature#'] = (is_object($frostProtectionTemperature)) ? $frostProtectionTemperature->execCmd() : '';
+      $replace['#frostProtectionTemperature_id#'] = is_object($frostProtectionTemperature) ? $frostProtectionTemperature->getId() : '';
+      $replace['#frostProtectionTemperature_name#'] = is_object($frostProtectionTemperature) ? $frostProtectionTemperature->getName() : '';
+      $replace['#frostProtectionTemperature_unite#'] = is_object($frostProtectionTemperature) ? $frostProtectionTemperature->getUnite() : '';
+      $replace['#frostProtectionTemperature_display#'] = (is_object($frostProtectionTemperature) && $frostProtectionTemperature->getIsVisible()) ? "" : "display: none;";
+      $replace['#frostProtectionTemperature_histo#'] = (is_object($frostProtectionTemperature) && $frostProtectionTemperature->getIsHistorized()) ? " history cursor" : "";
+
+      $frostProtectionActive = $this->getCmd(null,'frostProtectionActive');
+      $replace['#frostProtectionActive#'] = (is_object($frostProtectionActive)) ? $frostProtectionActive->execCmd() : '';
+      $replace['#frostProtectionActive_id#'] = is_object($frostProtectionActive) ? $frostProtectionActive->getId() : '';
+      $replace['#frostProtectionActive_name#'] = is_object($frostProtectionActive) ? $frostProtectionActive->getName() : '';
+      $replace['#frostProtectionActive_display#'] = (is_object($frostProtectionActive) && $frostProtectionActive->getIsVisible()) ? "" : "display: none;";
+
+      $onOff = $this->getCmd(null,'onOff');
+      $local_setonOff = $this->getCmd(null,'local_setonOff');
+      $replace['#local_setonOff_id#'] = is_object($local_setonOff) ? $local_setonOff->getId() : '';
+      $replace['#onOff_name#'] = is_object($onOff) ? $onOff->getName() : '';
+      $options = array();
+      $selected= is_object($onOff) ? $onOff->execCmd() : '';
+      $options[]=array('value'=>0, 'label'=>__('Off',__FILE__));
+      $options[]=array('value'=>1, 'label'=>__('On',__FILE__));
+      $replace['#onOff_options#']=$this->HtmlBuildOptions($options, $selected);
+      $replace['#onOff_display#'] = (is_object($onOff) && $onOff->getIsVisible()) ? "" : "display: none;";
+
+      $parameterRuntimePellets = $this->getCmd(null,'parameterRuntimePellets');
+      $replace['#parameterRuntimePellets#'] = (is_object($parameterRuntimePellets)) ? $parameterRuntimePellets->execCmd() : '';
+      $replace['#parameterRuntimePellets_id#'] = is_object($parameterRuntimePellets) ? $parameterRuntimePellets->getId() : '';
+      $replace['#parameterRuntimePellets_name#'] = is_object($parameterRuntimePellets) ? $parameterRuntimePellets->getName() : '';
+      $replace['#parameterRuntimePellets_unite#'] = is_object($parameterRuntimePellets) ? $parameterRuntimePellets->getUnite() : '';
+      $replace['#parameterRuntimePellets_display#'] = (is_object($parameterRuntimePellets) && $parameterRuntimePellets->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterRuntimePellets_histo#'] = (is_object($parameterRuntimePellets) && $parameterRuntimePellets->getIsHistorized()) ? " history cursor" : "";
+
+      $parameterRuntimeLogs = $this->getCmd(null,'parameterRuntimeLogs');
+      $replace['#parameterRuntimeLogs#'] = (is_object($parameterRuntimeLogs)) ? $parameterRuntimeLogs->execCmd() : '';
+      $replace['#parameterRuntimeLogs_id#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getId() : '';
+      $replace['#parameterRuntimeLogs_name#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getName() : '';
+      $replace['#parameterRuntimeLogs_unite#'] = is_object($parameterRuntimeLogs) ? $parameterRuntimeLogs->getUnite() : '';
+      $replace['#parameterRuntimeLogs_display#'] = (is_object($parameterRuntimeLogs) && $parameterRuntimeLogs->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterRuntimeLogs_histo#'] = (is_object($parameterRuntimeLogs) && $parameterRuntimeLogs->getIsHistorized()) ? " history cursor" : "";
+
+      $parameterFeedRateTotal = $this->getCmd(null,'parameterFeedRateTotal');
+      $replace['#parameterFeedRateTotal#'] = (is_object($parameterFeedRateTotal)) ? $parameterFeedRateTotal->execCmd() : '';
+      $replace['#parameterFeedRateTotal_id#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getId() : '';
+      $replace['#parameterFeedRateTotal_name#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getName() : '';
+      $replace['#parameterFeedRateTotal_unite#'] = is_object($parameterFeedRateTotal) ? $parameterFeedRateTotal->getUnite() : '';
+      $replace['#parameterFeedRateTotal_display#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterFeedRateTotal_histo#'] = (is_object($parameterFeedRateTotal) && $parameterFeedRateTotal->getIsHistorized()) ? " history cursor" : "";
+
+      $parameterFeedRateService = $this->getCmd(null,'parameterFeedRateService');
+      $replace['#parameterFeedRateService#'] = (is_object($parameterFeedRateService)) ? $parameterFeedRateService->execCmd() : '';
+      $replace['#parameterFeedRateService_id#'] = is_object($parameterFeedRateService) ? $parameterFeedRateService->getId() : '';
+      $replace['#parameterFeedRateService_name#'] = is_object($parameterFeedRateService) ? $parameterFeedRateService->getName() : '';
+      $replace['#parameterFeedRateService_unite#'] = is_object($parameterFeedRateService) ? $parameterFeedRateService->getUnite() : '';
+      $replace['#parameterFeedRateService_display#'] = (is_object($parameterFeedRateService) && $parameterFeedRateService->getIsVisible()) ? "" : "display: none;";
+      $replace['#parameterFeedRateService_histo#'] = (is_object($parameterFeedRateService) && $parameterFeedRateService->getIsHistorized()) ? " history cursor" : "";
+
+      $local_downtime = $this->getCmd(null,'local_downtime');
+      $replace['#local_downtime#'] = (is_object($local_downtime)) ? $local_downtime->execCmd() : '';
+      $replace['#local_downtime_id#'] = is_object($local_downtime) ? $local_downtime->getId() : '';
+      $replace['#local_downtime_name#'] = is_object($local_downtime) ? $local_downtime->getName() : '';
+      $lastSeenMinutes = $this->getCmd(null,'lastSeenMinutes');
+      $lastSeenMinutesValue=(is_object($lastSeenMinutes)) ? $lastSeenMinutes->execCmd() : 0;
+      if($lastSeenMinutesValue<2){
+        $replace['#local_downtime_display#'] = "display: none;";
+      }else{
+        $replace['#local_downtime_display#'] = (is_object($local_downtime) && $local_downtime->getIsVisible()) ? "" : "display: none;";
+      }
+
+      $parameterVersionMainBoard = $this->getCmd(null,'parameterVersionMainBoard');
+      $replace['#parameterVersionMainBoard#'] = (is_object($parameterVersionMainBoard)) ? $parameterVersionMainBoard->execCmd() : '';
+      $replace['#parameterVersionMainBoard_id#'] = is_object($parameterVersionMainBoard) ? $parameterVersionMainBoard->getId() : '';
+      $replace['#parameterVersionMainBoard_name#'] = is_object($parameterVersionMainBoard) ? $parameterVersionMainBoard->getName() : '';
+      $replace['#parameterVersionMainBoard_display#'] = (is_object($parameterVersionMainBoard) && $parameterVersionMainBoard->getIsVisible()) ? "" : "display: none;";
+
+      $parameterVersionTFT = $this->getCmd(null,'parameterVersionTFT');
+      $replace['#parameterVersionTFT#'] = (is_object($parameterVersionTFT)) ? $parameterVersionTFT->execCmd() : '';
+      $replace['#parameterVersionTFT_id#'] = is_object($parameterVersionTFT) ? $parameterVersionTFT->getId() : '';
+      $replace['#parameterVersionTFT_name#'] = is_object($parameterVersionTFT) ? $parameterVersionTFT->getName() : '';
+      $replace['#parameterVersionTFT_display#'] = (is_object($parameterVersionTFT) && $parameterVersionTFT->getIsVisible()) ? "" : "display: none;";
+
+      $statusError = $this->getCmd(null,'statusError');
+      $replace['#statusError#'] = (is_object($statusError)) ? $statusError->execCmd() : '';
+      $replace['#statusError_id#'] = is_object($statusError) ? $statusError->getId() : '';
+      $replace['#statusError_name#'] = is_object($statusError) ? $statusError->getName() : '';
+      $replace['#statusError_display#'] = (is_object($statusError) && $statusError->getIsVisible()) ? "" : "display: none;";
+
+      $statusWarning = $this->getCmd(null,'statusWarning');
+      $replace['#statusWarning#'] = (is_object($statusWarning)) ? $statusWarning->execCmd() : '';
+      $replace['#statusWarning_id#'] = is_object($statusWarning) ? $statusWarning->getId() : '';
+      $replace['#statusWarning_name#'] = is_object($statusWarning) ? $statusWarning->getName() : '';
+      $replace['#statusWarning_display#'] = (is_object($statusWarning) && $statusWarning->getIsVisible()) ? "" : "display: none;";
+
+      $local_setfullTank = $this->getCmd(null,'local_setfullTank');
+      $replace['#local_setfullTank_id#'] = is_object($local_setfullTank) ? $local_setfullTank->getId() : '';
+      $replace['#local_setfullTank_name#'] = is_object($local_setfullTank) ? $local_setfullTank->getName() : '';
+      if($this->getConfiguration('tankcapacity')>0){
+        $replace['#local_setfullTank_display#'] = (is_object($local_setfullTank) && $local_setfullTank->getIsVisible()) ? "" : "display: none;";
+      }else{
+        $replace['#local_setfullTank_display#'] = "display: none;";
+      }
+      $local_tankLevel = $this->getCmd(null,'local_tankLevel');
+      $replace['#local_tankLevel#'] = (is_object($local_tankLevel)) ? $local_tankLevel->execCmd() : '';
+      $replace['#local_tankLevel_id#'] = is_object($local_tankLevel) ? $local_tankLevel->getId() : '';
+      $replace['#local_tankLevel_name#'] = is_object($local_tankLevel) ? $local_tankLevel->getName() : '';
+      $replace['#local_tankLevel_unite#'] = is_object($local_tankLevel) ? $local_tankLevel->getUnite() : '';
+      if($this->getConfiguration('tankcapacity')>0){
+        $replace['#local_tankLevel_display#'] = (is_object($local_tankLevel) && $local_tankLevel->getIsVisible()) ? "" : "display: none;";
+      }else{
+        $replace['#local_setfullTank_display#'] = "display: none;";
+      }
+      $html = template_replace($replace, getTemplate('core', $_version, 'rikaha','rikaha'));
+
+  		cache::set('rikahaWidget' . $_version . $this->getId(), $html, 0);
+  		return $html;
+    }
+*/
 
     /*
      * Non obligatoire mais ca permet de déclencher une action après modification de variable de configuration
@@ -3090,7 +3169,6 @@ class rikahaCmd extends cmd {
           case 'setoperatingMode':
           case 'setonOff':
           case 'setheatingPower':
-          case 'setconvectionFan1':
             if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options)===true){
               $this->getEqLogic()->refreshWidget();
             }

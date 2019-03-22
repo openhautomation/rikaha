@@ -147,7 +147,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					<thead>
 						<tr>
 							<th>{{Nom}}</th>
+              <th>{{Icone}}</th>
 							<th>{{Afficher/Historiser}}</th>
+              <th>{{Ordre d'affichage}}</th>
 							<th>{{Type}}</th>
 							<th>{{Action}}</th>
 						</tr>
