@@ -151,7 +151,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<th>{{Afficher/Historiser}}</th>
               <th>{{Ordre d'affichage}}</th>
 							<th>{{Type}}</th>
-							<th>{{Action}}</th>
+							<th>{{Actions}}</th>
 						</tr>
 					</thead>
 					<tbody>

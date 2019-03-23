@@ -2765,7 +2765,13 @@ class rikaha extends eqLogic {
       unset($value);
       unset($stoveStructure);
 
-      $this->cmdSave('local_tankLevel', 0);
+      $rikahaCmd = $this->getCmd(null, 'local_tankLevel');
+      if (is_object($rikahaCmd)){
+        $tankLevel=$rikahaCmd->execCmd();
+        if(!is_numeric($tankLevel)){
+          $this->cmdSave('local_tankLevel', 0);
+        }
+      }
     }
 
     public function preRemove() {
