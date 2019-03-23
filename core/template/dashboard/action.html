@@ -4,8 +4,8 @@
     <span style="font-size: 0.7em;">#cmd_name#</span>
 </div>
 <script>
-  $('.eqLogic[data-eqLogic_id=#id#] .#cmd_id#_selectCmd').on('change', function () {
-    $('.eqLogic[data-eqLogic_id=#id#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
+  $('.eqLogic[data-eqLogic_id=#eqlogicid#] .#cmd_id#_selectCmd').on('#action#', function () {
+    $('.eqLogic[data-eqLogic_id=#eqlogicid#] .statusCmd').append('<i data-rikaha="processing" class="fa fa-rss" style="margin-top: 3px;margin-right: 3px;"></i>');
     jeedom.cmd.execute({id: '#cmd_id#', value: $(this).val()});
     setTimeout(function(){$("[data-rikaha=processing]").remove();}, 2500);
   });

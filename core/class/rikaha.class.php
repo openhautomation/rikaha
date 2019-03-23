@@ -2877,7 +2877,8 @@ class rikaha extends eqLogic {
             'unite'=>$needed_unite,
             'name'=>$cmd->getName(),
             'icon'=>$cmd->getdisplay('icon'),
-            'historized'=>0
+            'historized'=>0,
+            'eqlogicid'=>$cmd->getEqLogic_id()
           );
         }
 
@@ -2960,6 +2961,8 @@ class rikaha extends eqLogic {
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
                 $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
+                $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                $replaceInfo['#action#']="change";
                 $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
                 break;
 
@@ -2977,6 +2980,8 @@ class rikaha extends eqLogic {
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
                 $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
+                $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                $replaceInfo['#action#']="change";
                 $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
                 break;
 
@@ -2995,6 +3000,8 @@ class rikaha extends eqLogic {
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
                 $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
+                $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                $replaceInfo['#action#']="change";
                 $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
                 break;
 
@@ -3012,6 +3019,8 @@ class rikaha extends eqLogic {
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
                 $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
+                $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                $replaceInfo['#action#']="change";
                 $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
                 break;
 
@@ -3026,6 +3035,8 @@ class rikaha extends eqLogic {
                   $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
                   $replaceInfo['#cmd_action#']='<button style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd" type="button">'.$value[$i]['name'].'</button>';
                   $replaceInfo['#cmd_name#']="";
+                  $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                  $replaceInfo['#action#']="click";
                   $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
                 }
                 break;
