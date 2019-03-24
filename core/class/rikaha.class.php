@@ -104,7 +104,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'string',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -117,7 +117,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -130,7 +130,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -143,7 +143,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -157,7 +157,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -170,7 +170,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -183,7 +183,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -196,7 +196,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'%',
           'order'=>0
@@ -209,7 +209,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>1,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
@@ -222,7 +222,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -235,7 +235,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -248,7 +248,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -261,7 +261,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -274,7 +274,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -287,7 +287,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -300,7 +300,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -313,7 +313,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -326,7 +326,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -339,7 +339,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -352,7 +352,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -365,7 +365,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -378,7 +378,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -391,7 +391,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -404,7 +404,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -417,7 +417,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -430,46 +430,46 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
         ),
         //convectionFan1Active
         'convectionFan1Active'=>array(
-          'name'=>__('convectionFan1Active', __FILE__),
+          'name'=>__('Etat ventillateur 1', __FILE__),
           'id'=>'convectionFan1Active',
           'parent'=>'controls',
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
         ),
         //convectionFan1Level
         'convectionFan1Level'=>array(
-          'name'=>__('convectionFan1Level', __FILE__),
+          'name'=>__('Puissance ventillateur 1', __FILE__),
           'id'=>'convectionFan1Level',
           'parent'=>'controls',
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
-          'unite'=>'',
+          'unite'=>'%',
           'order'=>0
         ),
         //convectionFan1Area
         'convectionFan1Area'=>array(
-          'name'=>__('convectionFan1Area', __FILE__),
+          'name'=>__('Vitesse ventillateur 1', __FILE__),
           'id'=>'convectionFan1Area',
           'parent'=>'controls',
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -482,9 +482,9 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
-          'unite'=>'',
+          'unite'=>'%',
           'order'=>0
         ),
         //convectionFan2Level
@@ -495,7 +495,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -508,7 +508,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -521,7 +521,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -534,7 +534,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
@@ -547,7 +547,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
@@ -560,7 +560,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -573,7 +573,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -586,7 +586,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -599,7 +599,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -612,7 +612,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -625,7 +625,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -638,7 +638,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -651,7 +651,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -664,7 +664,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -677,7 +677,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -690,7 +690,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -703,7 +703,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -717,7 +717,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>1,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
@@ -730,7 +730,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
@@ -743,7 +743,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -756,7 +756,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -769,7 +769,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -782,7 +782,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -795,7 +795,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -808,7 +808,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -821,7 +821,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -834,7 +834,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -847,7 +847,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -860,7 +860,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -873,7 +873,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -886,7 +886,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -899,7 +899,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -912,7 +912,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -925,7 +925,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -938,7 +938,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -951,7 +951,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -964,7 +964,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -977,7 +977,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -990,7 +990,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1003,7 +1003,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1016,7 +1016,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1029,7 +1029,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1042,7 +1042,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1055,7 +1055,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
@@ -1068,7 +1068,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1081,7 +1081,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1094,7 +1094,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1107,7 +1107,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1120,7 +1120,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1133,7 +1133,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1146,7 +1146,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1159,7 +1159,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1172,7 +1172,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1185,7 +1185,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1198,7 +1198,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1214,7 +1214,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>6
         ),
         //parameterVersionTFT
         'parameterVersionTFT'=>array(
@@ -1224,7 +1224,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1237,7 +1237,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1250,7 +1250,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1263,7 +1263,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1276,7 +1276,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1289,7 +1289,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>1,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'h',
           'order'=>0
@@ -1302,7 +1302,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>1,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'h',
           'order'=>0
@@ -1315,7 +1315,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>1,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'kg',
           'order'=>0
@@ -1331,7 +1331,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'kg',
-          'order'=>0
+          'order'=>5
         ),
         //parameterServiceCountdownKg
         'parameterServiceCountdownKg'=>array(
@@ -1341,7 +1341,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1354,7 +1354,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1367,7 +1367,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1380,7 +1380,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1393,7 +1393,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1406,7 +1406,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1419,7 +1419,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1432,7 +1432,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1445,7 +1445,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1458,7 +1458,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1471,7 +1471,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1484,7 +1484,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1497,7 +1497,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1510,7 +1510,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1523,7 +1523,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1536,7 +1536,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1549,7 +1549,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1562,7 +1562,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1575,7 +1575,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1588,7 +1588,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1601,7 +1601,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1614,7 +1614,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1627,7 +1627,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1640,7 +1640,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1653,7 +1653,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1666,7 +1666,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1679,7 +1679,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1692,7 +1692,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1705,7 +1705,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1718,7 +1718,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1731,7 +1731,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1744,7 +1744,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1757,7 +1757,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1770,7 +1770,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1783,7 +1783,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1796,7 +1796,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1809,7 +1809,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1822,7 +1822,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'string',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1836,7 +1836,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1849,7 +1849,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1862,7 +1862,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1875,7 +1875,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1888,7 +1888,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1901,7 +1901,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'kg',
           'order'=>0
@@ -1917,7 +1917,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>1
         ),
         //local_uptime
         'local_downtime'=>array(
@@ -1927,7 +1927,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'string',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1939,7 +1939,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'string',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -1952,7 +1952,7 @@ class rikaha extends eqLogic {
           'type'=>'action',
           'subtype'=>'other',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'getInfo')),
           'unite'=>'',
           'order'=>0
@@ -1970,7 +1970,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'settargetTemperature'),array('k1'=>'stovekey', 'k2'=>'targetTemperature')),
           'unite'=>'',
-          'order'=>0
+          'order'=>3
         ),
         //Set target temp. action
         'local_setoperatingMode'=>array(
@@ -1985,7 +1985,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
           'unite'=>'',
-          'order'=>0
+          'order'=>1
         ),
 
         //Set OnOff action
@@ -2001,7 +2001,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setonOff'),array('k1'=>'stovekey', 'k2'=>'onOff')),
           'unite'=>'',
-          'order'=>0
+          'order'=>2
         ),
         //Set OnOff action
         'local_setheatingPower'=>array(
@@ -2013,9 +2013,9 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('De 30-100 pas de 5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setheatingPower'),array('k1'=>'stovekey', 'k2'=>'heatingPower')),
-          'unite'=>'',
+          'unite'=>'%',
           'order'=>0
         ),
         //Set fulltank action
@@ -2028,24 +2028,54 @@ class rikaha extends eqLogic {
           //'message_placeholder'=> __('Capacité du réservoir', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setfullTank'),array('k1'=>'stovekey', 'k2'=>'tankLevel')),
           'unite'=>'',
           'order'=>0
         ),
         //Set convectionFan1
-        'local_setconvectionFan1'=>array(
-          'name'=>__("Etat ventillateur 1", __FILE__),
-          'id'=>'local_setconvectionFan1',
+        'local_setconvectionFan1Active'=>array(
+          'name'=>__("Modif. état ventillateur 1", __FILE__),
+          'id'=>'local_setconvectionFan1Active',
           'parent'=>'0',
           'type'=>'action',
           'subtype'=>'message',
           'message_placeholder'=> __('0=OFF, 1=ON', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
-          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Active')),
+          'visible'=>0,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Active'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Active')),
           'unite'=>'',
+          'order'=>0
+        ),
+        //Set convectionFan1Area
+        'local_setconvectionFan1Area'=>array(
+          'name'=>__("Modif. vitesse ventillateur 1", __FILE__),
+          'id'=>'local_setconvectionFan1Area1',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          'message_placeholder'=> __('De 0-5', __FILE__),
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>0,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Area'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Area')),
+          'unite'=>'',
+          'order'=>0
+        ),
+        //Set convectionFan1Area
+        'local_setconvectionFan1Level'=>array(
+          'name'=>__("Modif. puissance ventillateur 1", __FILE__),
+          'id'=>'local_setconvectionFan1Level',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          'message_placeholder'=> __('De -30 à +30 % pas de 5', __FILE__),
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>0,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Level'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Level')),
+          'unite'=>'%',
           'order'=>0
         )
       );
@@ -2495,14 +2525,11 @@ class rikaha extends eqLogic {
       $this->refreshWidget();
     }
 
-    public function controlStove($stovekey='', $_options=array()){
+    public function controlStove($stovekey='', $_options=array(), $retry=true){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' started');
 
       $returnValue=false;
-      /*
-      * Target value
-      */
-      $targetValue='';
+
       if(is_array($_options)===true){
         if(array_key_exists('message', $_options)===true){
           $targetValue=trim($_options['message']);
@@ -2511,38 +2538,47 @@ class rikaha extends eqLogic {
         $targetValue=trim($_options);
       }
 
-      $timerRetry=array(
-        array(15, 30, 45),
-        array(60, 60, 60)
-      );
+      if($retry===true){
+        // retry configuration
+        $timerRetry=array(
+          array(15, 30, 45),
+          array(60, 60, 60)
+        );
 
-      for($i=0;$i<count($timerRetry);$i++){
-        // Global retry
-        for($j=0;$j<count($timerRetry[$i]);$j++){
-          // Retry before ckeck
+        // start retry
+        for($i=0;$i<count($timerRetry);$i++){
+          // Global retry
+          for($j=0;$j<count($timerRetry[$i]);$j++){
+            // Retry before ckeck
+            $this->getInfo();
+            sleep(3);
+
+            $this->setStove($stovekey, $_options);
+            sleep($timerRetry[$i][$j]);
+          }
+
+          // check
           $this->getInfo();
-          sleep(3);
-
-          $this->setStove($stovekey, $_options);
-          sleep($timerRetry[$i][$j]);
-        }
-
-        // check
-        $this->getInfo();
-        $currentValue='';
-        $objValue=$this->getCmd(null, $stovekey);
-        if(is_object($objValue)){
-          $currentValue=$objValue->execCmd();
-
-          if($currentValue==$targetValue){
-            log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
-            $returnValue=true;
+          $currentValue='';
+          $objValue=$this->getCmd(null, $stovekey);
+          if(is_object($objValue)){
+            $currentValue=$objValue->execCmd();
+            if($currentValue==$targetValue){
+              log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
+              $returnValue=true;
+              break;
+            }
+          }else{
+            log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' stovekey: '.$stovekey . ' not an object');
             break;
           }
-        }else{
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' stovekey: '.$stovekey . ' not an object');
-          break;
         }
+      }else{
+        $this->getInfo();
+        sleep(3);
+        $this->setStove($stovekey, $_options);
+
+        $returnValue=true;
       }
 
       return $returnValue;
@@ -2551,12 +2587,108 @@ class rikaha extends eqLogic {
     public function setStove($stovekey='', $_options=array()){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
 
+      // Step 1
       $valideKeys=array(
         'targetTemperature'    => '',
         'onOff'                => '',
         'operatingMode'        => '',
         'heatingPower'         => '',
-        'convectionFan1Active' => ''
+        'convectionFan1Active' => '',
+        'convectionFan1Area'   => '',
+        'convectionFan1Level'  => ''
+      );
+      if(array_key_exists($stovekey, $valideKeys)===false){
+        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' not found in allowed structure');
+        throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
+      }
+
+      // Step 2
+      $stoveStructure=array();
+      if(is_array($_options)===true){
+        if(array_key_exists('message', $_options)===true){
+          $stoveStructure[$stovekey]=trim($_options['message']);
+        }
+      }else{
+        $stoveStructure[$stovekey]=trim($_options);
+      }
+
+      // Step 3 (required)
+      $revision=$this->getCmd(null,'revision');
+      if(is_object($revision)){
+        $stoveStructure['revision']=$revision->execCmd();
+      }
+      $onOff=$this->getCmd(null,'onOff');
+      if(is_object($onOff)){
+        $stoveStructure['onOff']=$onOff->execCmd();
+      }
+
+      // Step 4 Specifics process
+      foreach(array_keys($stoveStructure) as $key){
+        switch ($key) {
+          case 'onOff':
+          case 'convectionFan1Active':
+            if($stoveStructure[$key]==1){
+              $stoveStructure[$key]='true';
+            }else{
+              $stoveStructure[$key]='false';
+            }
+            break;
+          case 'heatingPower':
+            if($this->inRange($stoveStructure[$key], 30, 100)===false){
+              $stoveStructure[$key]=50;
+            }
+            break ;
+        }
+      }
+
+      foreach ($stoveStructure as $key => $value) {
+        if(trim($value)==''){
+          log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' is not set');
+          throw new Exception(__('Des données sont manquantes afin de realiser cette action sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
+        }
+      }
+
+      $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.uniqid();
+      //rikaLogin
+      if($this->rikaLogin($cookieFile)===false){
+        $this->cleanCookieFile($cookieFile);
+        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+      }
+      //rikaControls
+      if($this->rikaControls($cookieFile, $stoveStructure)===false){
+        $this->cleanCookieFile($cookieFile);
+        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+      }
+      //rikaLogout
+      if($this->rikaLogout($cookieFile)===false){
+        $this->cleanCookieFile($cookieFile);
+        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+      }
+      $this->cleanCookieFile($cookieFile);
+
+      /*
+      $name = $this->getCmd(null, $stovekey);
+      if(is_object($name)){
+        $name->event($stoveStructure[$stovekey]);
+        $name->save();
+        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Obj: '.$stovekey.' data: ' .$stoveStructure[$stovekey].' saved');
+      }
+      */
+
+      return true ;
+    }
+
+    public function OLDsetStove($stovekey='', $_options=array()){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
+
+      $valideKeys=array(
+        'targetTemperature'    => '',
+        'onOff'                => '',
+        'operatingMode'        => '',
+        'heatingPower'         => '',
+        'convectionFan1Active' => '',
+        'convectionFan1Area'   => '',
+        'convectionFan1Level'  => ''
       );
 
       if(array_key_exists($stovekey, $valideKeys)===false){
@@ -2858,8 +2990,14 @@ class rikaha extends eqLogic {
             case 'local_setonOff':
               $needed_logicalid='onOff';
               break;
-            case 'local_setconvectionFan1':
+            case 'local_setconvectionFan1Active':
               $needed_logicalid='convectionFan1Active';
+              break;
+            case 'local_setconvectionFan1Area':
+              $needed_value=$this->getConfiguration('convectionFan1Area');
+              break;
+            case 'local_setconvectionFan1Level':
+              $needed_value=$this->getConfiguration('convectionFan1Level');
               break;
             case 'local_setfullTank':
               $needed_value=$this->getConfiguration('tankcapacity');
@@ -2880,7 +3018,7 @@ class rikaha extends eqLogic {
             'logicalid'=>$cmd->getLogicalId(),
             'id'=>$cmd->getId(),
             'value'=>$needed_value,
-            'unite'=>$needed_unite,
+            'unite'=>$cmd->getUnite(),
             'name'=>$cmd->getName(),
             'icon'=>$cmd->getdisplay('icon'),
             'historized'=>0,
@@ -2927,6 +3065,7 @@ class rikaha extends eqLogic {
                 $replaceInfo['#cmd_value#']=$this->translateOperatingMode($value[$i]['value']);
                 break;
               case 'onOff':
+              case 'convectionFan1Active':
                 if($value[$i]['value']==1){
                   $replaceInfo['#cmd_value#']=__('On',__FILE__);
                 }elseif($value[$i]['value']==0){
@@ -2934,6 +3073,12 @@ class rikaha extends eqLogic {
                 }else{
                   $replaceInfo['#cmd_value#']="undef";
                 }
+                break;
+              case 'convectionFan1Area':
+                if($value[$i]['value']==0){
+                  $value[$i]['value']=__('Auto',__FILE__);
+                }
+                $replaceInfo['#cmd_value#']=$value[$i]['value'];
                 break;
               default:
                 $replaceInfo['#cmd_value#']=$value[$i]['value'];
@@ -2951,6 +3096,8 @@ class rikaha extends eqLogic {
             $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
 
           }elseif($value[$i]['type']=='action'){
+
+            //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ====' . $value[$i]['logicalid']);
 
             switch ($value[$i]['logicalid']) {
               case 'local_settargetTemperature':
@@ -3012,11 +3159,54 @@ class rikaha extends eqLogic {
                 break;
 
               case 'local_setonOff':
-              case 'local_setconvectionFan1':
+              case (string) 'local_setconvectionFan1Active':
                 $info_template = getTemplate('core', $version, 'action', 'rikaha');
                 $options  = array();
                 $options[]=array('value'=>0, 'label'=>__('Off',__FILE__));
                 $options[]=array('value'=>1, 'label'=>__('On',__FILE__));
+                $replaceInfo['#cmd_id#']=$value[$i]['id'];
+                $replaceInfo['#historized#']="";
+                if($value[$i]['historized']==1){
+                  $replaceInfo['#historized#']="history cursor";
+                }
+                $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
+                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_name#']=$value[$i]['name'];
+                $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                $replaceInfo['#action#']="change";
+                $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
+                break;
+
+              case (string) 'local_setconvectionFan1Area1':
+                $info_template = getTemplate('core', $version, 'action', 'rikaha');
+                $options  = array();
+                for($j=0;$j<6;$j++){
+                  if($j==0){
+                    $options[]=array('value'=>$j, 'label'=>__('Auto',__FILE__));
+                  }else{
+                    $options[]=array('value'=>$j, 'label'=>$j);
+                  }
+                }
+                $replaceInfo['#cmd_id#']=$value[$i]['id'];
+                $replaceInfo['#historized#']="";
+                if($value[$i]['historized']==1){
+                  $replaceInfo['#historized#']="history cursor";
+                }
+                $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
+                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_name#']=$value[$i]['name'];
+                $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                $replaceInfo['#action#']="change";
+                $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
+                break;
+
+              case (string) 'local_setconvectionFan1Level':
+                $info_template = getTemplate('core', $version, 'action', 'rikaha');
+                $options  = array();
+                for($j=-30;$j<35;){
+                  $options[]=array('value'=>$j, 'label'=>$j.$value[$i]['unite']);
+                  $j+=5;
+                }
                 $replaceInfo['#cmd_id#']=$value[$i]['id'];
                 $replaceInfo['#historized#']="";
                 if($value[$i]['historized']==1){
@@ -3107,14 +3297,18 @@ class rikahaCmd extends cmd {
           case 'setoperatingMode':
           case 'setonOff':
           case 'setheatingPower':
-          case 'setconvectionFan1':
+          //case 'setconvectionFan1Active':
+          case 'setconvectionFan1Area':
+          case 'setconvectionFan1Level':
             if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options)===true){
               $this->getEqLogic()->refreshWidget();
             }
-            //$this->getEqLogic()->getInfo();
-            //$this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options);
-            //$this->getEqLogic()->refreshWidget();
             break;
+          case 'setconvectionFan1Active':
+            if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options, false)===true){
+              $this->getEqLogic()->refreshWidget();
+            }
+            break ;
           case 'setfullTank':
             $this->getEqLogic()->setfullTank();
             $this->getEqLogic()->refreshWidget();
