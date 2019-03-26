@@ -124,13 +124,13 @@ class rikaha extends eqLogic {
         ),
         //lastSeenMinutes
         'lastSeenMinutes'=>array(
-          'name'=>__('lastSeenMinutes', __FILE__),
+          'name'=>__('Hors ligne', __FILE__),
           'id'=>'lastSeenMinutes',
           'parent'=>'0',
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -437,7 +437,7 @@ class rikaha extends eqLogic {
         ),
         //convectionFan1Active
         'convectionFan1Active'=>array(
-          'name'=>__('Etat ventillateur 1', __FILE__),
+          'name'=>__('Etat Convection MultiAir 1', __FILE__),
           'id'=>'convectionFan1Active',
           'parent'=>'controls',
           'type'=>'info',
@@ -458,7 +458,7 @@ class rikaha extends eqLogic {
           'historized'=>0,
           'visible'=>0,
           'configuration'=>array(),
-          'unite'=>'%',
+          'unite'=>'',
           'order'=>0
         ),
         //convectionFan1Area
@@ -471,12 +471,12 @@ class rikaha extends eqLogic {
           'historized'=>0,
           'visible'=>0,
           'configuration'=>array(),
-          'unite'=>'',
+          'unite'=>'%',
           'order'=>0
         ),
         //convectionFan2Active
         'convectionFan2Active'=>array(
-          'name'=>__('convectionFan2Active', __FILE__),
+          'name'=>__('Etat Convection MultiAir 2', __FILE__),
           'id'=>'convectionFan2Active',
           'parent'=>'controls',
           'type'=>'info',
@@ -489,7 +489,7 @@ class rikaha extends eqLogic {
         ),
         //convectionFan2Level
         'convectionFan2Level'=>array(
-          'name'=>__('convectionFan2Level', __FILE__),
+          'name'=>__('Degré de convection MultiAir 2', __FILE__),
           'id'=>'convectionFan2Level',
           'parent'=>'controls',
           'type'=>'info',
@@ -502,7 +502,7 @@ class rikaha extends eqLogic {
         ),
         //convectionFan2Area
         'convectionFan2Area'=>array(
-          'name'=>__('convectionFan2Area', __FILE__),
+          'name'=>__('Étendue de convection MultiAir 2', __FILE__),
           'id'=>'convectionFan2Area',
           'parent'=>'controls',
           'type'=>'info',
@@ -521,7 +521,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>0
@@ -534,7 +534,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>0
@@ -643,6 +643,7 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>0
         ),
+        /*
         //debug0
         'debug0'=>array(
           'name'=>__('debug0', __FILE__),
@@ -708,6 +709,7 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>0
         ),
+        */
         //sensors
         //inputRoomTemperature
         'inputRoomTemperature'=>array(
@@ -1214,7 +1216,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>6
+          'order'=>0
         ),
         //parameterVersionTFT
         'parameterVersionTFT'=>array(
@@ -1289,7 +1291,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>1,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(),
           'unite'=>'h',
           'order'=>0
@@ -1315,7 +1317,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>1,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(),
           'unite'=>'kg',
           'order'=>0
@@ -1331,7 +1333,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'kg',
-          'order'=>5
+          'order'=>0
         ),
         //parameterServiceCountdownKg
         'parameterServiceCountdownKg'=>array(
@@ -1411,6 +1413,7 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>0
         ),
+        /*
         //parameterErrorCount0
         'parameterErrorCount0'=>array(
           'name'=>__('parameterErrorCount0', __FILE__),
@@ -1671,6 +1674,7 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>0
         ),
+        */
         //statusHeatingTimesNotProgrammed
         'statusHeatingTimesNotProgrammed'=>array(
           'name'=>__('statusHeatingTimesNotProgrammed', __FILE__),
@@ -1749,6 +1753,7 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>0
         ),
+        /*
         //parameterDebug0
         'parameterDebug0'=>array(
           'name'=>__('parameterDebug0', __FILE__),
@@ -1814,6 +1819,7 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>0
         ),
+        */
         //stoveType
         'stoveType'=>array(
           'name'=>__('Type', __FILE__),
@@ -1919,19 +1925,7 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>1
         ),
-        //local_uptime
-        'local_downtime'=>array(
-          'name'=>__('Hors ligne depuis', __FILE__),
-          'id'=>'local_downtime',
-          'parent'=>'0',
-          'type'=>'info',
-          'subtype'=>'string',
-          'historized'=>0,
-          'visible'=>0,
-          'configuration'=>array(),
-          'unite'=>'',
-          'order'=>0
-        ),
+        //
         'local_lastupdate'=>array(
           'name'=>__('Dernière maj', __FILE__),
           'id'=>'local_lastupdate',
@@ -1970,7 +1964,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'settargetTemperature'),array('k1'=>'stovekey', 'k2'=>'targetTemperature')),
           'unite'=>'',
-          'order'=>3
+          'order'=>0
         ),
         //Set target temp. action
         'local_setoperatingMode'=>array(
@@ -1985,7 +1979,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
           'unite'=>'',
-          'order'=>1
+          'order'=>0
         ),
 
         //Set OnOff action
@@ -2001,7 +1995,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setonOff'),array('k1'=>'stovekey', 'k2'=>'onOff')),
           'unite'=>'',
-          'order'=>2
+          'order'=>0
         ),
         //Set OnOff action
         'local_setheatingPower'=>array(
@@ -2013,7 +2007,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('De 30-100 pas de 5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setheatingPower'),array('k1'=>'stovekey', 'k2'=>'heatingPower')),
           'unite'=>'%',
           'order'=>0
@@ -2033,9 +2027,9 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>0
         ),
-        //Set convectionFan1
+        //Set convectionFan1Active
         'local_setconvectionFan1Active'=>array(
-          'name'=>__("Modif. état ventillateur 1", __FILE__),
+          'name'=>__("Modif. état Convection MultiAir 1", __FILE__),
           'id'=>'local_setconvectionFan1Active',
           'parent'=>'0',
           'type'=>'action',
@@ -2043,7 +2037,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('0=OFF, 1=ON', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Active'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Active')),
           'unite'=>'',
           'order'=>0
@@ -2051,19 +2045,19 @@ class rikaha extends eqLogic {
         //Set convectionFan1Area
         'local_setconvectionFan1Area'=>array(
           'name'=>__("Modif étendue de convection MultiAir 1", __FILE__),
-          'id'=>'local_setconvectionFan1Area1',
+          'id'=>'local_setconvectionFan1Area',
           'parent'=>'0',
           'type'=>'action',
           'subtype'=>'message',
           'message_placeholder'=> __('De -30 à +30 % pas de 5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Area'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Area')),
-          'unite'=>'',
+          'unite'=>'%',
           'order'=>0
         ),
-        //Set convectionFan1Area
+        //Set convectionFan1Level
         'local_setconvectionFan1Level'=>array(
           'name'=>__("Modif degré de convection MultiAir 1", __FILE__),
           'id'=>'local_setconvectionFan1Level',
@@ -2073,9 +2067,54 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('De 0-5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>0,
+          'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Level'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Level')),
+          'unite'=>'',
+          'order'=>0
+        ),
+        //Set convectionFan2Active
+        'local_setconvectionFan2Active'=>array(
+          'name'=>__("Modif. état Convection MultiAir 2", __FILE__),
+          'id'=>'local_setconvectionFan2Active',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          'message_placeholder'=> __('0=OFF, 1=ON', __FILE__),
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>0,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan2Active'),array('k1'=>'stovekey', 'k2'=>'convectionFan2Active')),
+          'unite'=>'',
+          'order'=>0
+        ),
+        //Set convectionFan2Area
+        'local_setconvectionFan2Area'=>array(
+          'name'=>__("Modif étendue de convection MultiAir 2", __FILE__),
+          'id'=>'local_setconvectionFan2Area',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          'message_placeholder'=> __('De -30 à +30 % pas de 5', __FILE__),
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>0,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan2Area'),array('k1'=>'stovekey', 'k2'=>'convectionFan2Area')),
           'unite'=>'%',
+          'order'=>0
+        ),
+        //Set convectionFan2Level
+        'local_setconvectionFan2Level'=>array(
+          'name'=>__("Modif degré de convection MultiAir 2", __FILE__),
+          'id'=>'local_setconvectionFan2Level',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          'message_placeholder'=> __('De 0-5', __FILE__),
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>0,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan2Level'),array('k1'=>'stovekey', 'k2'=>'convectionFan2Level')),
+          'unite'=>'',
           'order'=>0
         )
       );
@@ -2289,6 +2328,32 @@ class rikaha extends eqLogic {
       return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0";
     }
 
+    private function translateSubTypeBinary($value=''){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called params: '.$value);
+
+      $translate=$value;
+      if($value==0){
+        $translate=__('Off', __FILE__);
+      }elseif($value==1){
+        $translate=__('On', __FILE__);
+      }
+
+      return $translate;
+    }
+
+    private function translateConvectionFan1Level($value=''){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called params: '.$value);
+
+      $translate='';
+      if($value==0){
+        $translate=__('Automatique', __FILE__);
+      }else{
+        $translate=$value;
+      }
+
+      return $translate;
+    }
+
     private function translateOperatingMode($value=''){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called params: '.$value);
 
@@ -2483,11 +2548,6 @@ class rikaha extends eqLogic {
 
           if(array_key_exists($key, $stovedata)===true){
             $stoveValue=$stovedata[$key];
-            switch ($key) {
-              case 'lastSeenMinutes':
-                $this->cmdSave('local_downtime', $this->translateUptime($stoveValue*60));
-                break;
-            }
             $this->cmdSave($value['id'], $stoveValue);
           }
         }else{
@@ -2601,7 +2661,10 @@ class rikaha extends eqLogic {
         'heatingPower'         => '',
         'convectionFan1Active' => '',
         'convectionFan1Area'   => '',
-        'convectionFan1Level'  => ''
+        'convectionFan1Level'  => '',
+        'convectionFan2Active' => '',
+        'convectionFan2Area'   => '',
+        'convectionFan2Level'  => ''
       );
       if(array_key_exists($stovekey, $valideKeys)===false){
         log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' not found in allowed structure');
@@ -2635,6 +2698,7 @@ class rikaha extends eqLogic {
         switch ($key) {
           case 'onOff':
           case 'convectionFan1Active':
+          case 'convectionFan2Active':
             if($stoveStructure[$key]==1){
               $stoveStructure[$key]='true';
             }else{
@@ -2822,6 +2886,7 @@ class rikaha extends eqLogic {
     ));
 
     public function HtmlBuildOptions($data=array(), $selected=''){
+      //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$selected.' selected value');
       $SO='<option value="...">...</option>';
       for($i=0;$i<count($data);$i++){
         if(trim($selected)==trim($data[$i]['value'])){
@@ -2830,6 +2895,8 @@ class rikaha extends eqLogic {
         }
         $SO.='<option value="'.$data[$i]['value'].'">'.$data[$i]['label'].'</option>';
       }
+
+      //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$SO);
       return $SO;
     }
 
@@ -2843,7 +2910,6 @@ class rikaha extends eqLogic {
       $todisplay=array();
       foreach ($stoveStructure as $key => $value) {
         $cmd=$this->getCmd(null, $value['id']);
-
         if(!is_object($cmd)){
           continue;
         }
@@ -2859,18 +2925,20 @@ class rikaha extends eqLogic {
         }
 
         if($cmd->getType()=='info'){
+          // Info (simple)
           $todisplay[$cmd->getOrder()][]=array(
-            'type'=>$cmd->getType(),
-            'logicalid'=>$cmd->getLogicalId(),
-            'id'=>$cmd->getId(),
-            'value'=>$cmd->execCmd(),
-            'unite'=>$cmd->getUnite(),
-            'name'=>$cmd->getName(),
-            'icon'=>$cmd->getdisplay('icon'),
-            'historized'=>$cmd->getIsHistorized()
+            'type'       =>$cmd->getType(),
+            'subtype'    =>$cmd->getSubType(),
+            'logicalid'  =>$cmd->getLogicalId(),
+            'id'         =>$cmd->getId(),
+            'value'      =>$cmd->execCmd(),
+            'unite'      =>$cmd->getUnite(),
+            'name'       =>$cmd->getName(),
+            'icon'       =>$cmd->getdisplay('icon'),
+            'historized' =>$cmd->getIsHistorized()
           );
         }elseif($cmd->getType()=='action'){
-          //Manage needed info
+          // Action more tricky
           $needed_value="";
           $needed_unite="";
           $needed_logicalid=NULL;
@@ -2887,14 +2955,23 @@ class rikaha extends eqLogic {
             case 'local_setonOff':
               $needed_logicalid='onOff';
               break;
-            case 'local_setconvectionFan1Active':
+            case (string) 'local_setconvectionFan1Active':
               $needed_logicalid='convectionFan1Active';
               break;
-            case 'local_setconvectionFan1Area':
-              $needed_value=$this->getConfiguration('convectionFan1Area');
+            case (string) 'local_setconvectionFan1Area':
+              $needed_logicalid='convectionFan1Area';
               break;
-            case 'local_setconvectionFan1Level':
-              $needed_value=$this->getConfiguration('convectionFan1Level');
+            case (string) 'local_setconvectionFan1Level':
+              $needed_logicalid='convectionFan1Level';
+              break;
+            case (string) 'local_setconvectionFan2Active':
+              $needed_logicalid='convectionFan2Active';
+              break;
+            case (string) 'local_setconvectionFan2Area':
+              $needed_logicalid='convectionFan2Area';
+              break;
+            case (string) 'local_setconvectionFan2Level':
+              $needed_logicalid='convectionFan2Level';
               break;
             case 'local_setfullTank':
               $needed_value=$this->getConfiguration('tankcapacity');
@@ -2906,27 +2983,30 @@ class rikaha extends eqLogic {
             if(is_object($needed_cmd)){
               $needed_value=$needed_cmd->execCmd();
               $needed_unite=$needed_cmd->getUnite();
+            }else{
+              log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Needed logicalid not obj found: ' . $needed_logicalid );
             }
             unset($needed_cmd);
           }
 
           $todisplay[$cmd->getOrder()][]=array(
-            'type'=>$cmd->getType(),
-            'logicalid'=>$cmd->getLogicalId(),
-            'id'=>$cmd->getId(),
-            'value'=>$needed_value,
-            'unite'=>$cmd->getUnite(),
-            'name'=>$cmd->getName(),
-            'icon'=>$cmd->getdisplay('icon'),
-            'historized'=>0,
-            'eqlogicid'=>$cmd->getEqLogic_id()
+            'type'       =>$cmd->getType(),
+            'subtype'    =>$cmd->getSubType(),
+            'logicalid'  =>$cmd->getLogicalId(),
+            'id'         =>$cmd->getId(),
+            'value'      =>$needed_value,
+            'unite'      =>$cmd->getUnite(),
+            'name'       =>$cmd->getName(),
+            'icon'       =>$cmd->getdisplay('icon'),
+            'historized' =>0,
+            'eqlogicid'  =>$cmd->getEqLogic_id()
           );
         }
-
         unset($cmd);
       }
-
       unset($stoveStructure);
+
+      // Sort to display
       ksort($todisplay);
 
       // step 2 display
@@ -2961,24 +3041,27 @@ class rikaha extends eqLogic {
               case 'operatingMode':
                 $replaceInfo['#cmd_value#']=$this->translateOperatingMode($value[$i]['value']);
                 break;
-              case 'onOff':
-              case 'convectionFan1Active':
-                if($value[$i]['value']==1){
-                  $replaceInfo['#cmd_value#']=__('On',__FILE__);
-                }elseif($value[$i]['value']==0){
-                  $replaceInfo['#cmd_value#']=__('Off',__FILE__);
+
+              case 'convectionFan1Level':
+              case 'convectionFan2Level':
+                $replaceInfo['#cmd_value#']=$this->translateConvectionFan1Level($value[$i]['value']);
+                break;
+
+              case 'lastSeenMinutes':
+                if($value[$i]['value']<2){
+                  $value[$i]['value']=__('Joignable', __FILE__);
                 }else{
-                  $replaceInfo['#cmd_value#']="undef";
-                }
-                break;
-              case 'convectionFan1Area':
-                if($value[$i]['value']==0){
-                  $value[$i]['value']=__('Auto',__FILE__);
+                  $value[$i]['value']=$this->translateUptime($value[$i]['value']*60);
                 }
                 $replaceInfo['#cmd_value#']=$value[$i]['value'];
                 break;
+
               default:
-                $replaceInfo['#cmd_value#']=$value[$i]['value'];
+                if($value[$i]['subtype']=='binary'){
+                  $replaceInfo['#cmd_value#']=$this->translateSubTypeBinary($value[$i]['value']);
+                }else{
+                  $replaceInfo['#cmd_value#']=$value[$i]['value'];
+                }
             }
 
             $replaceInfo['#cmd_id#']=$value[$i]['id'];
@@ -2993,9 +3076,6 @@ class rikaha extends eqLogic {
             $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
 
           }elseif($value[$i]['type']=='action'){
-
-            //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ====' . $value[$i]['logicalid']);
-
             switch ($value[$i]['logicalid']) {
               case 'local_settargetTemperature':
                 $info_template = getTemplate('core', $version, 'action', 'rikaha');
@@ -3057,6 +3137,7 @@ class rikaha extends eqLogic {
 
               case 'local_setonOff':
               case (string) 'local_setconvectionFan1Active':
+              case (string) 'local_setconvectionFan2Active':
                 $info_template = getTemplate('core', $version, 'action', 'rikaha');
                 $options  = array();
                 $options[]=array('value'=>0, 'label'=>__('Off',__FILE__));
@@ -3074,7 +3155,8 @@ class rikaha extends eqLogic {
                 $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
                 break;
 
-              case (string) 'local_setconvectionFan1Area1':
+              case (string) 'local_setconvectionFan1Area':
+              case (string) 'local_setconvectionFan2Area':
                 $info_template = getTemplate('core', $version, 'action', 'rikaha');
                 $options  = array();
                 for($j=-30;$j<35;){
@@ -3095,14 +3177,11 @@ class rikaha extends eqLogic {
                 break;
 
               case (string) 'local_setconvectionFan1Level':
+              case (string) 'local_setconvectionFan2Level':
                 $info_template = getTemplate('core', $version, 'action', 'rikaha');
                 $options  = array();
                 for($j=0;$j<6;$j++){
-                  if($j==0){
-                    $options[]=array('value'=>$j, 'label'=>__('Auto',__FILE__));
-                  }else{
-                    $options[]=array('value'=>$j, 'label'=>$j);
-                  }
+                  $options[]=array('value'=>$j, 'label'=>$this->translateConvectionFan1Level($j));
                 }
                 $replaceInfo['#cmd_id#']=$value[$i]['id'];
                 $replaceInfo['#historized#']="";
@@ -3198,17 +3277,14 @@ class rikahaCmd extends cmd {
           case 'setconvectionFan1Active':
           case 'setconvectionFan1Area':
           case 'setconvectionFan1Level':
+          case 'setconvectionFan2Active':
+          case 'setconvectionFan2Area':
+          case 'setconvectionFan2Level':
             if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options, false)===true){
               $this->getEqLogic()->refreshWidget();
             }
             break;
-          /*
-          case 'setconvectionFan1Active':
-            if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options, false)===true){
-              $this->getEqLogic()->refreshWidget();
-            }
-            break ;
-          */
+
           case 'setfullTank':
             $this->getEqLogic()->setfullTank();
             $this->getEqLogic()->refreshWidget();
