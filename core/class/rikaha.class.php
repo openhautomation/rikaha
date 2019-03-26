@@ -450,7 +450,7 @@ class rikaha extends eqLogic {
         ),
         //convectionFan1Level
         'convectionFan1Level'=>array(
-          'name'=>__('Puissance ventillateur 1', __FILE__),
+          'name'=>__('Degré de convection MultiAir 1', __FILE__),
           'id'=>'convectionFan1Level',
           'parent'=>'controls',
           'type'=>'info',
@@ -463,7 +463,7 @@ class rikaha extends eqLogic {
         ),
         //convectionFan1Area
         'convectionFan1Area'=>array(
-          'name'=>__('Vitesse ventillateur 1', __FILE__),
+          'name'=>__('Étendue de convection MultiAir 1', __FILE__),
           'id'=>'convectionFan1Area',
           'parent'=>'controls',
           'type'=>'info',
@@ -2050,12 +2050,12 @@ class rikaha extends eqLogic {
         ),
         //Set convectionFan1Area
         'local_setconvectionFan1Area'=>array(
-          'name'=>__("Modif. vitesse ventillateur 1", __FILE__),
+          'name'=>__("Modif étendue de convection MultiAir 1", __FILE__),
           'id'=>'local_setconvectionFan1Area1',
           'parent'=>'0',
           'type'=>'action',
           'subtype'=>'message',
-          'message_placeholder'=> __('De 0-5', __FILE__),
+          'message_placeholder'=> __('De -30 à +30 % pas de 5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
           'visible'=>0,
@@ -2065,12 +2065,12 @@ class rikaha extends eqLogic {
         ),
         //Set convectionFan1Area
         'local_setconvectionFan1Level'=>array(
-          'name'=>__("Modif. puissance ventillateur 1", __FILE__),
+          'name'=>__("Modif degré de convection MultiAir 1", __FILE__),
           'id'=>'local_setconvectionFan1Level',
           'parent'=>'0',
           'type'=>'action',
           'subtype'=>'message',
-          'message_placeholder'=> __('De -30 à +30 % pas de 5', __FILE__),
+          'message_placeholder'=> __('De 0-5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
           'visible'=>0,
@@ -2623,9 +2623,11 @@ class rikaha extends eqLogic {
       if(is_object($revision)){
         $stoveStructure['revision']=$revision->execCmd();
       }
-      $onOff=$this->getCmd(null,'onOff');
-      if(is_object($onOff)){
-        $stoveStructure['onOff']=$onOff->execCmd();
+      if(isset($stoveStructure['onOff'])===false){
+        $onOff=$this->getCmd(null,'onOff');
+        if(is_object($onOff)){
+          $stoveStructure['onOff']=$onOff->execCmd();
+        }
       }
 
       // Step 4 Specifics process
@@ -3075,12 +3077,9 @@ class rikaha extends eqLogic {
               case (string) 'local_setconvectionFan1Area1':
                 $info_template = getTemplate('core', $version, 'action', 'rikaha');
                 $options  = array();
-                for($j=0;$j<6;$j++){
-                  if($j==0){
-                    $options[]=array('value'=>$j, 'label'=>__('Auto',__FILE__));
-                  }else{
-                    $options[]=array('value'=>$j, 'label'=>$j);
-                  }
+                for($j=-30;$j<35;){
+                  $options[]=array('value'=>$j, 'label'=>$j.$value[$i]['unite']);
+                  $j+=5;
                 }
                 $replaceInfo['#cmd_id#']=$value[$i]['id'];
                 $replaceInfo['#historized#']="";
@@ -3098,9 +3097,12 @@ class rikaha extends eqLogic {
               case (string) 'local_setconvectionFan1Level':
                 $info_template = getTemplate('core', $version, 'action', 'rikaha');
                 $options  = array();
-                for($j=-30;$j<35;){
-                  $options[]=array('value'=>$j, 'label'=>$j.$value[$i]['unite']);
-                  $j+=5;
+                for($j=0;$j<6;$j++){
+                  if($j==0){
+                    $options[]=array('value'=>$j, 'label'=>__('Auto',__FILE__));
+                  }else{
+                    $options[]=array('value'=>$j, 'label'=>$j);
+                  }
                 }
                 $replaceInfo['#cmd_id#']=$value[$i]['id'];
                 $replaceInfo['#historized#']="";
