@@ -2602,6 +2602,7 @@ class rikaha extends eqLogic {
       // Step 2 send command to the stove
       if($retry===true){
         // With retry
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry ON');
 
         // retry configuration
         $timerRetry=array(
@@ -2639,10 +2640,11 @@ class rikaha extends eqLogic {
         }
       }else{
         // no retry
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry OFF');
         $this->getInfo();
-        sleep(3);
+        sleep(2);
         $this->setStove($stovekey, $_options);
-        sleep(5);
+        sleep(6);
         $this->getInfo();
         $returnValue=true;
       }
