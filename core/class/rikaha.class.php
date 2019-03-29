@@ -2029,7 +2029,7 @@ class rikaha extends eqLogic {
         ),
         //Set convectionFan1Active
         'local_setconvectionFan1Active'=>array(
-          'name'=>__("Modif. état Convection MultiAir 1", __FILE__),
+          'name'=>__("Modif état Convection MultiAir 1", __FILE__),
           'id'=>'local_setconvectionFan1Active',
           'parent'=>'0',
           'type'=>'action',
@@ -2074,7 +2074,7 @@ class rikaha extends eqLogic {
         ),
         //Set convectionFan2Active
         'local_setconvectionFan2Active'=>array(
-          'name'=>__("Modif. état Convection MultiAir 2", __FILE__),
+          'name'=>__("Modif état Convection MultiAir 2", __FILE__),
           'id'=>'local_setconvectionFan2Active',
           'parent'=>'0',
           'type'=>'action',
@@ -2590,27 +2590,33 @@ class rikaha extends eqLogic {
 
       $returnValue=false;
 
-      // Step 1 store target value
-      if(is_array($_options)===true){
-        if(array_key_exists('message', $_options)===true){
-          $targetValue=trim($_options['message']);
-        }
+      if($retry===false){
+        // no retry
+        $this->getInfo();
+        sleep(2);
+        $this->setStove($stovekey, $_options);
+        sleep(6);
+        $this->getInfo();
+        $returnValue=true;
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry OFF');
       }else{
-        $targetValue=trim($_options);
-      }
+        // with retry
+        // 1 store target value
+        if(is_array($_options)===true){
+          if(array_key_exists('message', $_options)===true){
+            $targetValue=trim($_options['message']);
+          }
+        }else{
+          $targetValue=trim($_options);
+        }
 
-      // Step 2 send command to the stove
-      if($retry===true){
-        // With retry
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry ON');
-
-        // retry configuration
+        // 2 define retry
         $timerRetry=array(
           array(15, 30, 45),
           array(60, 60, 60)
         );
 
-        // start retry
+        // 3 start to send stove command
         for($i=0;$i<count($timerRetry);$i++){
           // Global retry
           for($j=0;$j<count($timerRetry[$i]);$j++){
@@ -2638,15 +2644,7 @@ class rikaha extends eqLogic {
             break;
           }
         }
-      }else{
-        // no retry
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry OFF');
-        $this->getInfo();
-        sleep(2);
-        $this->setStove($stovekey, $_options);
-        sleep(6);
-        $this->getInfo();
-        $returnValue=true;
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry ON');
       }
 
       return $returnValue;
