@@ -107,7 +107,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //stoveID
         'stoveID'=>array(
@@ -120,7 +120,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //lastSeenMinutes
         'lastSeenMinutes'=>array(
@@ -133,7 +133,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //lastConfirmedRevision
         'lastConfirmedRevision'=>array(
@@ -146,7 +146,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //controls
         //revision
@@ -160,7 +160,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //onOff
         'onOff'=>array(
@@ -173,7 +173,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //operatingMode
         'operatingMode'=>array(
@@ -186,7 +186,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingPower
         'heatingPower'=>array(
@@ -199,7 +199,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'%',
-          'order'=>0
+          'order'=>99
         ),
         //targetTemperature
         'targetTemperature'=>array(
@@ -212,7 +212,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
-          'order'=>0
+          'order'=>99
         ),
         //ecoMode
         'ecoMode'=>array(
@@ -225,7 +225,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeMon1
         'heatingTimeMon1'=>array(
@@ -238,7 +238,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeMon2
         'heatingTimeMon2'=>array(
@@ -251,7 +251,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeTue1
         'heatingTimeTue1'=>array(
@@ -264,7 +264,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeTue2
         'heatingTimeTue2'=>array(
@@ -277,7 +277,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeWed1
         'heatingTimeWed1'=>array(
@@ -290,7 +290,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeWed2
         'heatingTimeWed2'=>array(
@@ -303,7 +303,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeThu1
         'heatingTimeThu1'=>array(
@@ -316,7 +316,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeThu2
         'heatingTimeThu2'=>array(
@@ -329,7 +329,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeFri1
         'heatingTimeFri1'=>array(
@@ -342,7 +342,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeFri2
         'heatingTimeFri2'=>array(
@@ -355,7 +355,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeSat1
         'heatingTimeSat1'=>array(
@@ -368,7 +368,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeSat2
         'heatingTimeSat2'=>array(
@@ -381,7 +381,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeSun1
         'heatingTimeSun1'=>array(
@@ -394,7 +394,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimeSun2
         'heatingTimeSun2'=>array(
@@ -407,7 +407,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //heatingTimesActiveForComfort
         'heatingTimesActiveForComfort'=>array(
@@ -420,7 +420,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //setBackTemperature
         'setBackTemperature'=>array(
@@ -433,7 +433,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
-          'order'=>0
+          'order'=>99
         ),
         //convectionFan1Active
         'convectionFan1Active'=>array(
@@ -446,7 +446,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //convectionFan1Level
         'convectionFan1Level'=>array(
@@ -459,7 +459,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //convectionFan1Area
         'convectionFan1Area'=>array(
@@ -472,7 +472,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'%',
-          'order'=>0
+          'order'=>99
         ),
         //convectionFan2Active
         'convectionFan2Active'=>array(
@@ -485,7 +485,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'%',
-          'order'=>0
+          'order'=>99
         ),
         //convectionFan2Level
         'convectionFan2Level'=>array(
@@ -498,7 +498,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //convectionFan2Area
         'convectionFan2Area'=>array(
@@ -511,7 +511,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //frostProtectionActive
         'frostProtectionActive'=>array(
@@ -524,7 +524,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //frostProtectionTemperature
         'frostProtectionTemperature'=>array(
@@ -537,7 +537,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'°C',
-          'order'=>0
+          'order'=>99
         ),
         //temperatureOffset
         'temperatureOffset'=>array(
@@ -550,7 +550,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
-          'order'=>0
+          'order'=>99
         ),
         //RoomPowerRequest
         'RoomPowerRequest'=>array(
@@ -563,7 +563,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //calenderWeekday
         'calenderWeekday'=>array(
@@ -576,7 +576,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //calenderDay
         'calenderDay'=>array(
@@ -589,7 +589,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //calenderMonth
         'calenderMonth'=>array(
@@ -602,7 +602,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //calenderYear
         'calenderYear'=>array(
@@ -615,7 +615,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //calenderHour
         'calenderHour'=>array(
@@ -628,7 +628,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //calenderMinute
         'calenderMinute'=>array(
@@ -641,7 +641,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         /*
         //debug0
@@ -655,7 +655,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //debug1
         'debug1'=>array(
@@ -668,7 +668,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //debug2
         'debug2'=>array(
@@ -681,7 +681,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //debug3
         'debug3'=>array(
@@ -694,7 +694,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //debug4
         'debug4'=>array(
@@ -707,7 +707,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         */
         //sensors
@@ -722,7 +722,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
-          'order'=>0
+          'order'=>99
         ),
         //inputFlameTemperature
         'inputFlameTemperature'=>array(
@@ -735,7 +735,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
-          'order'=>0
+          'order'=>99
         ),
         //statusError
         'statusError'=>array(
@@ -748,7 +748,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //statusWarning
         'statusWarning'=>array(
@@ -761,7 +761,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //statusService
         'statusService'=>array(
@@ -774,7 +774,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputDischargeMotor
         'outputDischargeMotor'=>array(
@@ -787,7 +787,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputDischargeCurrent
         'outputDischargeCurrent'=>array(
@@ -800,7 +800,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputIDFan
         'outputIDFan'=>array(
@@ -813,7 +813,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputIDFanTarget
         'outputIDFanTarget'=>array(
@@ -826,7 +826,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputInsertionMotor
         'outputInsertionMotor'=>array(
@@ -839,7 +839,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputInsertionCurrent
         'outputInsertionCurrent'=>array(
@@ -852,7 +852,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputAirFlaps
         'outputAirFlaps'=>array(
@@ -865,7 +865,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputAirFlapsTargetPosition
         'outputAirFlapsTargetPosition'=>array(
@@ -878,7 +878,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputBurnBackFlapMagnet
         'outputBurnBackFlapMagnet'=>array(
@@ -891,7 +891,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputGridMotor
         'outputGridMotor'=>array(
@@ -904,7 +904,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //outputIgnition
         'outputIgnition'=>array(
@@ -917,7 +917,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputSafetyTemperatureLimiter
         'inputSafetyTemperatureLimiter'=>array(
@@ -930,7 +930,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputUpperTemperatureLimiter
         'inputUpperTemperatureLimiter'=>array(
@@ -943,7 +943,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputPressureSwitch
         'inputPressureSwitch'=>array(
@@ -956,7 +956,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputPressureSensor
         'inputPressureSensor'=>array(
@@ -969,7 +969,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputGridContact
         'inputGridContact'=>array(
@@ -982,7 +982,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputDoor
         'inputDoor'=>array(
@@ -995,7 +995,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputCover
         'inputCover'=>array(
@@ -1008,7 +1008,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputExternalRequest
         'inputExternalRequest'=>array(
@@ -1021,7 +1021,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputBurnBackFlapSwitch
         'inputBurnBackFlapSwitch'=>array(
@@ -1034,7 +1034,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputFlueGasFlapSwitch
         'inputFlueGasFlapSwitch'=>array(
@@ -1047,7 +1047,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputBoardTemperature
         'inputBoardTemperature'=>array(
@@ -1060,7 +1060,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
-          'order'=>0
+          'order'=>99
         ),
         //inputZeroCrossingDelay
         'inputZeroCrossingDelay'=>array(
@@ -1073,7 +1073,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputCurrentStage
         'inputCurrentStage'=>array(
@@ -1086,7 +1086,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputTargetStagePID
         'inputTargetStagePID'=>array(
@@ -1099,7 +1099,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //inputCurrentStagePID
         'inputCurrentStagePID'=>array(
@@ -1112,7 +1112,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //statusMainState
         'statusMainState'=>array(
@@ -1125,7 +1125,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //statusSubState
         'statusSubState'=>array(
@@ -1138,7 +1138,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterEcoModePossible
         'parameterEcoModePossible'=>array(
@@ -1151,7 +1151,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterFabricationNumber
         'parameterFabricationNumber'=>array(
@@ -1164,7 +1164,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterStoveTypeNumber
         'parameterFabricationNumber'=>array(
@@ -1177,7 +1177,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterSubTypeNumber
         'parameterSubTypeNumber'=>array(
@@ -1190,7 +1190,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterLanguageNumber
         'parameterLanguageNumber'=>array(
@@ -1203,7 +1203,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterVersionMainBoard
         'parameterVersionMainBoard'=>array(
@@ -1216,7 +1216,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterVersionTFT
         'parameterVersionTFT'=>array(
@@ -1229,7 +1229,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterVersionMainBoardBootLoader
         'parameterVersionMainBoardBootLoader'=>array(
@@ -1242,7 +1242,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterVersionTFTBootLoader
         'parameterVersionTFTBootLoader'=>array(
@@ -1255,7 +1255,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterVersionMainBoardSub
         'parameterVersionMainBoardSub'=>array(
@@ -1268,7 +1268,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterVersionTFTSub
         'parameterVersionTFTSub'=>array(
@@ -1281,7 +1281,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterRuntimePellets
         'parameterRuntimePellets'=>array(
@@ -1294,7 +1294,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'h',
-          'order'=>0
+          'order'=>99
         ),
         //parameterRuntimeLogs
         'parameterRuntimeLogs'=>array(
@@ -1307,7 +1307,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'h',
-          'order'=>0
+          'order'=>99
         ),
         //parameterFeedRateTotal
         'parameterFeedRateTotal'=>array(
@@ -1320,7 +1320,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'kg',
-          'order'=>0
+          'order'=>99
         ),
         //parameterFeedRateService
         'parameterFeedRateService'=>array(
@@ -1333,7 +1333,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'kg',
-          'order'=>0
+          'order'=>99
         ),
         //parameterServiceCountdownKg
         'parameterServiceCountdownKg'=>array(
@@ -1346,7 +1346,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterServiceCountdownTime
         'parameterServiceCountdownTime'=>array(
@@ -1359,7 +1359,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterIgnitionCount
         'parameterIgnitionCount'=>array(
@@ -1372,7 +1372,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterOnOffCycleCount
         'parameterOnOffCycleCount'=>array(
@@ -1385,7 +1385,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterFlameSensorOffset
         'parameterFlameSensorOffset'=>array(
@@ -1398,7 +1398,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterPressureSensorOffset
         'parameterPressureSensorOffset'=>array(
@@ -1411,7 +1411,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         /*
         //parameterErrorCount0
@@ -1425,7 +1425,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount1
         'parameterErrorCount1'=>array(
@@ -1438,7 +1438,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount2
         'parameterErrorCount2'=>array(
@@ -1451,7 +1451,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount3
         'parameterErrorCount3'=>array(
@@ -1464,7 +1464,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount4
         'parameterErrorCount4'=>array(
@@ -1477,7 +1477,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount5
         'parameterErrorCount5'=>array(
@@ -1490,7 +1490,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount6
         'parameterErrorCount6'=>array(
@@ -1503,7 +1503,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount7
         'parameterErrorCount7'=>array(
@@ -1516,7 +1516,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount8
         'parameterErrorCount8'=>array(
@@ -1529,7 +1529,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount9
         'parameterErrorCount9'=>array(
@@ -1542,7 +1542,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount10
         'parameterErrorCount10'=>array(
@@ -1555,7 +1555,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount11
         'parameterErrorCount11'=>array(
@@ -1568,7 +1568,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount12
         'parameterErrorCount12'=>array(
@@ -1581,7 +1581,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount13
         'parameterErrorCount13'=>array(
@@ -1594,7 +1594,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount14
         'parameterErrorCount14'=>array(
@@ -1607,7 +1607,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount15
         'parameterErrorCount15'=>array(
@@ -1620,7 +1620,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount16
         'parameterErrorCount16'=>array(
@@ -1633,7 +1633,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount17
         'parameterErrorCount17'=>array(
@@ -1646,7 +1646,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount18
         'parameterErrorCount18'=>array(
@@ -1659,7 +1659,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterErrorCount19
         'parameterErrorCount19'=>array(
@@ -1672,7 +1672,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         */
         //statusHeatingTimesNotProgrammed
@@ -1686,7 +1686,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //statusFrostStarted
         'statusFrostStarted'=>array(
@@ -1699,7 +1699,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterSpiralMotorsTuning
         'parameterSpiralMotorsTuning'=>array(
@@ -1712,7 +1712,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterIDFanTuning
         'parameterIDFanTuning'=>array(
@@ -1725,7 +1725,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterCleanIntervalBig
         'parameterCleanIntervalBig'=>array(
@@ -1738,7 +1738,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterKgTillCleaning
         'parameterKgTillCleaning'=>array(
@@ -1751,7 +1751,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         /*
         //parameterDebug0
@@ -1765,7 +1765,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterDebug1
         'parameterDebug1'=>array(
@@ -1778,7 +1778,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterDebug2
         'parameterDebug2'=>array(
@@ -1791,7 +1791,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterDebug3
         'parameterDebug3'=>array(
@@ -1804,7 +1804,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //parameterDebug4
         'parameterDebug4'=>array(
@@ -1817,7 +1817,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         */
         //stoveType
@@ -1831,7 +1831,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //stoveFeatures
         //multiAir1
@@ -1845,7 +1845,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //multiAir2
         'multiAir2'=>array(
@@ -1858,7 +1858,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //insertionMotor
         'insertionMotor'=>array(
@@ -1871,7 +1871,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //airFlaps
         'airFlaps'=>array(
@@ -1884,7 +1884,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //logRuntime
         'logRuntime'=>array(
@@ -1897,7 +1897,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //local_tankLevel
         'local_tankLevel'=>array(
@@ -1910,7 +1910,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'kg',
-          'order'=>0
+          'order'=>99
         ),
         //local_statusCalculate
         'local_statusCalculate'=>array(
@@ -1923,7 +1923,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>1
+          'order'=>99
         ),
         //
         'local_lastupdate'=>array(
@@ -1936,7 +1936,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Refesh action
         'local_refresh'=>array(
@@ -1949,7 +1949,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'getInfo')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Set target temp. action
         'local_settargetTemperature'=>array(
@@ -1964,7 +1964,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'settargetTemperature'),array('k1'=>'stovekey', 'k2'=>'targetTemperature')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Set target temp. action
         'local_setoperatingMode'=>array(
@@ -1979,7 +1979,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
 
         //Set OnOff action
@@ -1995,7 +1995,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setonOff'),array('k1'=>'stovekey', 'k2'=>'onOff')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Set OnOff action
         'local_setheatingPower'=>array(
@@ -2010,7 +2010,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setheatingPower'),array('k1'=>'stovekey', 'k2'=>'heatingPower')),
           'unite'=>'%',
-          'order'=>0
+          'order'=>99
         ),
         //Set fulltank action
         'local_setfullTank'=>array(
@@ -2025,7 +2025,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setfullTank'),array('k1'=>'stovekey', 'k2'=>'tankLevel')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Set convectionFan1Active
         'local_setconvectionFan1Active'=>array(
@@ -2040,7 +2040,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Active'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Active')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Set convectionFan1Area
         'local_setconvectionFan1Area'=>array(
@@ -2055,7 +2055,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Area'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Area')),
           'unite'=>'%',
-          'order'=>0
+          'order'=>99
         ),
         //Set convectionFan1Level
         'local_setconvectionFan1Level'=>array(
@@ -2070,7 +2070,7 @@ class rikaha extends eqLogic {
           'visible'=>1,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Level'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Level')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Set convectionFan2Active
         'local_setconvectionFan2Active'=>array(
@@ -2085,7 +2085,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan2Active'),array('k1'=>'stovekey', 'k2'=>'convectionFan2Active')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         ),
         //Set convectionFan2Area
         'local_setconvectionFan2Area'=>array(
@@ -2100,7 +2100,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan2Area'),array('k1'=>'stovekey', 'k2'=>'convectionFan2Area')),
           'unite'=>'%',
-          'order'=>0
+          'order'=>99
         ),
         //Set convectionFan2Level
         'local_setconvectionFan2Level'=>array(
@@ -2115,7 +2115,7 @@ class rikaha extends eqLogic {
           'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan2Level'),array('k1'=>'stovekey', 'k2'=>'convectionFan2Level')),
           'unite'=>'',
-          'order'=>0
+          'order'=>99
         )
       );
     }
@@ -2593,9 +2593,9 @@ class rikaha extends eqLogic {
       if($retry===false){
         // no retry
         $this->getInfo();
-        sleep(2);
+        sleep(3);
         $this->setStove($stovekey, $_options);
-        sleep(6);
+        sleep(7);
         $this->getInfo();
         $returnValue=true;
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry OFF');
@@ -2829,6 +2829,7 @@ class rikaha extends eqLogic {
         if (!is_object($rikahaCmd)){
           $rikahaCmd=new rikahaCmd();
           $rikahaCmd->setLogicalId($value['id']);
+          $rikahaCmd->setOrder($value['order']);
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' created');
         }
 
@@ -3020,6 +3021,12 @@ class rikaha extends eqLogic {
       $local_refresh = $this->getCmd(null, 'local_refresh');
       if(is_object($local_refresh)){
         $replace['#local_refresh_id#']=$local_refresh->getId();
+      }
+
+      $replace['#local_stovetype#']='';
+      $local_stovetype = $this->getCmd(null, 'stoveType');
+      if(is_object($local_stovetype)){
+        $replace['#local_stovetype#']=$local_stovetype->execCmd();
       }
 
       $replace['#local_lastupdate#']='';
