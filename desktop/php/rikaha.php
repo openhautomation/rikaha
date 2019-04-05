@@ -134,6 +134,20 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 {{Permet de gérer des alertes en fonction du niveau de pellet restant. Saisissez 0 pour désactiver cette fonctionnalité}}
               </div>
             </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">{{Template du widget}}</label>
+              <div class="col-md-8">
+                <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="templateid">
+                  <?php
+                    $templateList=rikaha::getStoveTemplateList();
+                    for($i=0;$i<count($templateList);$i++){
+                      echo '<option value="' . $templateList[$i] . '">' . $templateList[$i] . '</option>';
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
 					</fieldset>
 					</form>
 				</div>

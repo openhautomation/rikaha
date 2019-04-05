@@ -130,7 +130,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>99
@@ -208,7 +208,7 @@ class rikaha extends eqLogic {
           'parent'=>'controls',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>1,
+          'historized'=>0,
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
@@ -521,7 +521,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'binary',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>99
@@ -534,7 +534,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
           'order'=>99
@@ -718,7 +718,7 @@ class rikaha extends eqLogic {
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>1,
+          'historized'=>0,
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'°C',
@@ -1213,7 +1213,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>99
@@ -1290,8 +1290,8 @@ class rikaha extends eqLogic {
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>1,
-          'visible'=>1,
+          'historized'=>0,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'h',
           'order'=>99
@@ -1303,7 +1303,7 @@ class rikaha extends eqLogic {
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>1,
+          'historized'=>0,
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'h',
@@ -1316,8 +1316,8 @@ class rikaha extends eqLogic {
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>1,
-          'visible'=>1,
+          'historized'=>0,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'kg',
           'order'=>99
@@ -1330,7 +1330,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'numeric',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'kg',
           'order'=>99
@@ -1920,7 +1920,7 @@ class rikaha extends eqLogic {
           'type'=>'info',
           'subtype'=>'string',
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(),
           'unite'=>'',
           'order'=>99
@@ -1961,7 +1961,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('Valeur de la température', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'settargetTemperature'),array('k1'=>'stovekey', 'k2'=>'targetTemperature')),
           'unite'=>'',
           'order'=>99
@@ -1976,7 +1976,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('0=MANUEL, 1=AUTOMATIQUE, 2=CONFORT', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setoperatingMode'),array('k1'=>'stovekey', 'k2'=>'operatingMode')),
           'unite'=>'',
           'order'=>99
@@ -1992,7 +1992,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('0=OFF, 1=ON', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setonOff'),array('k1'=>'stovekey', 'k2'=>'onOff')),
           'unite'=>'',
           'order'=>99
@@ -2007,7 +2007,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('De 30-100 pas de 5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setheatingPower'),array('k1'=>'stovekey', 'k2'=>'heatingPower')),
           'unite'=>'%',
           'order'=>99
@@ -2037,7 +2037,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('0=OFF, 1=ON', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Active'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Active')),
           'unite'=>'',
           'order'=>99
@@ -2052,7 +2052,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('De -30 à +30 % pas de 5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Area'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Area')),
           'unite'=>'%',
           'order'=>99
@@ -2067,7 +2067,7 @@ class rikaha extends eqLogic {
           'message_placeholder'=> __('De 0-5', __FILE__),
           'title_disable'=> 1,
           'historized'=>0,
-          'visible'=>1,
+          'visible'=>0,
           'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setconvectionFan1Level'),array('k1'=>'stovekey', 'k2'=>'convectionFan1Level')),
           'unite'=>'',
           'order'=>99
@@ -2118,6 +2118,88 @@ class rikaha extends eqLogic {
           'order'=>99
         )
       );
+    }
+
+    private function defStoveTemplate($type=NULL){
+      $stoveTemplate=array(
+        'default'=>array(
+          'local_statusCalculate'        => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
+          'local_setonOff'               => array('visible'=>1, 'historized'=>0, 'order'=>2, 'icon'=>'<i class="icon jeedom-off"></i>'),
+          'local_settargetTemperature'   => array('visible'=>1, 'historized'=>0, 'order'=>3, 'icon'=>'<i class="icon jeedom-thermo-froid"></i>'),
+          'local_setoperatingMode'       => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedomapp-preset2"></i>'),
+          'local_setheatingPower'        => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
+          'parameterRuntimePellets'      => array('visible'=>1, 'historized'=>1, 'order'=>6, 'icon'=>'<i class="fas fa-clock-o"></i>'),
+          'parameterFeedRateTotal'       => array('visible'=>1, 'historized'=>1, 'order'=>7, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'parameterFeedRateService'     => array('visible'=>1, 'historized'=>1, 'order'=>8, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'frostProtectionTemperature'   => array('visible'=>1, 'historized'=>0, 'order'=>9, 'icon'=>'<i class="icon nature-snowflake"></i>'),
+          'parameterVersionMainBoard'    => array('visible'=>1, 'historized'=>0, 'order'=>10, 'icon'=>'<i class="icon techno-pc"></i>')
+        ),
+        'domo'=>array(
+          'local_statusCalculate'         => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
+          'inputRoomTemperature'          => array('visible'=>1, 'historized'=>1, 'order'=>2, 'icon'=>'<i class="icon jeedom-thermo-moyen"></i>'),
+          'local_setonOff'                => array('visible'=>1, 'historized'=>0, 'order'=>3, 'icon'=>'<i class="icon jeedom-off"></i>'),
+          'local_settargetTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedom-thermo-froid"></i>'),
+          'local_setoperatingMode'        => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="icon jeedomapp-preset2"></i>'),
+          'local_setheatingPower'         => array('visible'=>1, 'historized'=>0, 'order'=>6, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
+          'local_setconvectionFan1Active' => array('visible'=>1, 'historized'=>0, 'order'=>7, 'icon'=>'<i class="icon jeedomapp-reload"></i>'),
+          'local_setconvectionFan1Area'   => array('visible'=>1, 'historized'=>0, 'order'=>8, 'icon'=>'<i class="icon techno-ventilation"></i>'),
+          'local_setconvectionFan1Level'  => array('visible'=>1, 'historized'=>0, 'order'=>9, 'icon'=>'<i class="icon jeedom2-fdp1-signal4"></i>'),
+          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>10, 'icon'=>'<i class="fas fa-clock-o"></i>'),
+          'parameterFeedRateTotal'        => array('visible'=>1, 'historized'=>1, 'order'=>11, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'parameterFeedRateService'      => array('visible'=>1, 'historized'=>1, 'order'=>12, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'frostProtectionTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>13, 'icon'=>'<i class="icon nature-snowflake"></i>'),
+          'parameterVersionMainBoard'     => array('visible'=>1, 'historized'=>0, 'order'=>14, 'icon'=>'<i class="icon techno-pc"></i>')
+        ),
+        'induo'=>array(
+          'local_statusCalculate'         => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
+          'ecoMode'                       => array('visible'=>1, 'historized'=>1, 'order'=>2, 'icon'=>'<i class="icon divers-triangular42"></i>'),
+          'inputRoomTemperature'          => array('visible'=>1, 'historized'=>1, 'order'=>3, 'icon'=>'<i class="icon jeedom-thermo-moyen"></i>'),
+          'local_settargetTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedom-thermo-froid"></i>'),
+          'local_setonOff'                => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="icon jeedom-off"></i>'),
+          'local_setoperatingMode'        => array('visible'=>1, 'historized'=>0, 'order'=>6, 'icon'=>'<i class="icon jeedomapp-preset2"></i>'),
+          'local_setfullTank'             => array('visible'=>1, 'historized'=>0, 'order'=>7, 'icon'=>'<i class="icon divers-fuel4"></i>'),
+          'local_setheatingPower'         => array('visible'=>1, 'historized'=>0, 'order'=>8, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
+          'local_tankLevel'               => array('visible'=>1, 'historized'=>1, 'order'=>9, 'icon'=>'<i class="icon jeedom2-fdp1-signal02"></i>'),
+          'parameterRuntimeLogs'          => array('visible'=>1, 'historized'=>1, 'order'=>10, 'icon'=>'<i class="fas fa-clock-o"></i>'),
+          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>11, 'icon'=>'<i class="fas fa-clock-o"></i>'),
+          'parameterFeedRateService'      => array('visible'=>1, 'historized'=>1, 'order'=>12, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'parameterFeedRateTotal'        => array('visible'=>1, 'historized'=>1, 'order'=>13, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'parameterVersionMainBoard'     => array('visible'=>1, 'historized'=>0, 'order'=>14, 'icon'=>'<i class="icon techno-pc"></i>'),
+          'lastSeenMinutes'               => array('visible'=>1, 'historized'=>0, 'order'=>15, 'icon'=>'<i class="icon divers-vlc1"></i>'),
+          'frostProtectionTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>16, 'icon'=>'<i class="icon nature-snowflake"></i>')
+        )
+      );
+
+      if(is_null($type)===true){
+        return $stoveTemplate ;
+      }else{
+        if(isset($stoveTemplate[$type])===false){
+          $type='default';
+        }
+        return $stoveTemplate[$type];
+      }
+    }
+
+    private function setStoveTemplate($type){
+      $stoveTemplate=$this->defStoveTemplate($type);
+
+      foreach ($stoveTemplate as $key => $value) {
+        $rikahaCmd = $this->getCmd(null, $key);
+        if (is_object($rikahaCmd)){
+          $rikahaCmd->setIsHistorized($value['historized']);
+          $rikahaCmd->setIsVisible($value['visible']);
+          $rikahaCmd->setOrder($value['order']);
+          $rikahaCmd->setDisplay('icon', $value['icon']);
+          $rikahaCmd->save();
+        }
+      }
+      return true;
+    }
+
+    public function getStoveTemplateList(){
+      $stoveTemplate=rikaha::defStoveTemplate();
+      $stoveTemplateList=array_keys($stoveTemplate);
+      return $stoveTemplateList;
     }
 
     private function cleanCookieFile($cookieFile){
@@ -2816,34 +2898,41 @@ class rikaha extends eqLogic {
       if (trim($this->getConfiguration('tankcapacity'))=='' || $this->getConfiguration('tankcapacity') < 0 ) {
         throw new Exception(__('Vous avez oublié de saisir la capacité du réservoir de pellet (en Kg)',__FILE__));
       }
+      if (empty($this->getConfiguration('templateid'))) {
+        throw new Exception(__('Aucun template sélectionné',__FILE__));
+      }
     }
 
     public function postUpdate() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
       $this->getStoveStructure($stoveStructure);
 
+      $newObj=0;
       foreach ($stoveStructure as $key => $value) {
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' in process');
 
         $rikahaCmd = $this->getCmd(null, $value['id']);
         if (!is_object($rikahaCmd)){
           $rikahaCmd=new rikahaCmd();
+
           $rikahaCmd->setLogicalId($value['id']);
+          $rikahaCmd->setName($value['name']);
           $rikahaCmd->setOrder($value['order']);
+          $rikahaCmd->setIsHistorized($value['historized']);
+          $rikahaCmd->setIsVisible($value['visible']);
+          if(trim($value['unite'])!=''){
+            $rikahaCmd->setUnite($value['unite']);
+          }
+
+          $newObj++;
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' created');
         }
 
-        $rikahaCmd->setName($value['name']);
         $rikahaCmd->setEqLogic_id($this->id);
-        for($i=0;$i<count($value['configuration']);$i++){
-          $rikahaCmd->setConfiguration($value['configuration'][$i]['k1'], $value['configuration'][$i]['k2']);
-        }
         $rikahaCmd->setType($value['type']);
         $rikahaCmd->setSubType($value['subtype']);
-        $rikahaCmd->setIsHistorized($value['historized']);
-        $rikahaCmd->setIsVisible($value['visible']);
-        if(trim($value['unite'])!=''){
-          $rikahaCmd->setUnite($value['unite']);
+        for($i=0;$i<count($value['configuration']);$i++){
+          $rikahaCmd->setConfiguration($value['configuration'][$i]['k1'], $value['configuration'][$i]['k2']);
         }
         if(array_key_exists('message_placeholder', $value)===true){
           $rikahaCmd->setDisplay('message_placeholder', $value['message_placeholder']);
@@ -2865,6 +2954,10 @@ class rikaha extends eqLogic {
         if(!is_numeric($tankLevel)){
           $this->cmdSave('local_tankLevel', 0);
         }
+      }
+
+      if($newObj>0){
+        $this->setStoveTemplate($this->getConfiguration('templateid'));
       }
     }
 
