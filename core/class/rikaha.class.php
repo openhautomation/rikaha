@@ -2122,7 +2122,7 @@ class rikaha extends eqLogic {
 
     private function defStoveTemplate($type=NULL){
       $stoveTemplate=array(
-        'default'=>array(
+        'standard'=>array(
           'local_statusCalculate'        => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
           'local_setonOff'               => array('visible'=>1, 'historized'=>0, 'order'=>2, 'icon'=>'<i class="icon jeedom-off"></i>'),
           'local_settargetTemperature'   => array('visible'=>1, 'historized'=>0, 'order'=>3, 'icon'=>'<i class="icon jeedom-thermo-froid"></i>'),
@@ -2174,7 +2174,7 @@ class rikaha extends eqLogic {
         return $stoveTemplate ;
       }else{
         if(isset($stoveTemplate[$type])===false){
-          $type='default';
+          $type='standard';
         }
         return $stoveTemplate[$type];
       }
