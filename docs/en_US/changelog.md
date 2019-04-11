@@ -4,6 +4,52 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+12 04 2019
+
+/!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
+
+**1. Modification des commandes et du widget**
+
+toutes les commandes peuvent désormais être affichées sur le widget, pas uniquement celles pré-sélectionnées.  
+Pour cela, il faut utiliser la case à cocher "Afficher" présente sur la liste des Commandes
+
+Ajout du champ "ordre d'affichage" sur la liste des Commandes
+Il permet de gérer l'ordre d'affichage des commandes sur le widget.
+
+Ajout du bouton "Icone" sur la liste des Commandes
+Il permet d'afficher la commande avec l'icone sélectionnée sur le widget.
+
+Supression d'un ensemble de commande non utilisé (debug, compteur d'erreur...)
+L'objectif est de moins solliciter votre Jeedom.
+
+
+**2. Commandes envoyées au poêle**
+
+Ajout des commandes :  
+Modif état Convection MultiAir 1 et 2  
+Modif étendue de convection MultiAir 1 et 2  
+Modif degré de convection MultiAir 1 et 2
+
+Gestion de l'envoi des commandes  
+Abandon du sytème qui envoyait automatiquement plusieurs fois la commande demandée. Aux utilisateurs de gérer l'eventuelle non execution de la commande demandée dans l'environnement Rika.  
+Il est recommandé d'attendre 12 secondes au minimum entre 2 commandes ou une demande de mise à jour.
+
+**3. Ajout des templates dans la configuration des équipements**
+
+Les templates pré-sélectionnent des commandes qui seront affichées sur le widget.  
+Sur cette version 3 templates sont disponibles : standard, domo, induo
+
+**4. correction de bugs**
+
+bug d'affichage sur le widget après l'envoi d'une commandes  
+bugs mineurs
+
+19 11 2018
+
+Validation du fonctionnement du plugin après la mise à jour de la clef Firenet
+
+Modification du système de retry des ordres envoyés au poêle
+
 30 10 2018 /!\ attention après la mise à jour, il est nécessaire de supprimer puis, de créer à nouveau vos équipements
 
 Gestion du niveau de pellet dans le réservoir. Vous pouvez gérer des actions en configurant dans votre Jeedom la commande "Niveau du réservoir à pellet"
