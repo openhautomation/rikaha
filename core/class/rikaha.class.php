@@ -2506,6 +2506,7 @@ class rikaha extends eqLogic {
           break;
         case 21:
           switch ($statusSubState) {
+            case 11:
             case 12:
               $translate=__('Mode bois', __FILE__);
               break;
@@ -2848,11 +2849,10 @@ class rikaha extends eqLogic {
                 log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' previus value: ' . $previusCons);
 
                 $cons=$currentCons-$previusCons;
-                // Correction de la conso : ajustement à +10% - a tester
-                $cons=$cons*1.1;
-                $cons=ceil($cons);
-                // fin de correction
                 if($cons>0){
+                  // Correction de la conso : ajustement à +25% - a tester
+                  $cons=$cons*1.25;
+
                   $newTankLevel=$currentTankLevel-$cons;
                   if($newTankLevel<0){
                     $newTankLevel=0;
