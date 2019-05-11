@@ -45,6 +45,20 @@ class rikaha extends eqLogic {
       }
     }
 
+    public static function cron10() {
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      foreach (eqLogic::byType('rikaha') as $rikaha) {
+        $rikaha->getInfo();
+        $rikaha->calcTankLevel();
+        // Dashboard
+        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
+        $mc->remove();
+        $rikaha->toHtml('dashboard');
+        $rikaha->refreshWidget();
+      }
+    }
+
     public static function cron15() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
