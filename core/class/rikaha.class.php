@@ -45,6 +45,20 @@ class rikaha extends eqLogic {
       }
     }
 
+    public static function cron10() {
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      foreach (eqLogic::byType('rikaha') as $rikaha) {
+        $rikaha->getInfo();
+        $rikaha->calcTankLevel();
+        // Dashboard
+        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
+        $mc->remove();
+        $rikaha->toHtml('dashboard');
+        $rikaha->refreshWidget();
+      }
+    }
+
     public static function cron15() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
@@ -1316,7 +1330,7 @@ class rikaha extends eqLogic {
           'parent'=>'sensors',
           'type'=>'info',
           'subtype'=>'numeric',
-          'historized'=>0,
+          'historized'=>1,
           'visible'=>0,
           'configuration'=>array(),
           'unite'=>'kg',
@@ -2506,6 +2520,7 @@ class rikaha extends eqLogic {
           break;
         case 21:
           switch ($statusSubState) {
+            case 11:
             case 12:
               $translate=__('Mode bois', __FILE__);
               break;
@@ -2849,6 +2864,9 @@ class rikaha extends eqLogic {
 
                 $cons=$currentCons-$previusCons;
                 if($cons>0){
+                  // Correction de la conso : ajustement à +25% - a tester
+                  $cons=$cons*1.25;
+
                   $newTankLevel=$currentTankLevel-$cons;
                   if($newTankLevel<0){
                     $newTankLevel=0;
@@ -2871,20 +2889,20 @@ class rikaha extends eqLogic {
       $this->cmdSave('local_tankLevel', $this->getConfiguration('tankcapacity'));
       return true;
     }
-
+    /*
     public function preInsert() {
     }
 
     public function postInsert() {
     }
-
+    */
     public function preSave() {
       $this->setDisplay("width","300px");
     }
-
+    /*
     public function postSave() {
     }
-
+    */
     public function preUpdate() {
       if (empty($this->getConfiguration('login'))) {
         throw new Exception(__('Vous avez oublié de saisir votre identifiant',__FILE__));
@@ -2960,13 +2978,13 @@ class rikaha extends eqLogic {
         $this->setStoveTemplate($this->getConfiguration('templateid'));
       }
     }
-
+    /*
     public function preRemove() {
     }
 
     public function postRemove() {
     }
-
+    */
     public static $_widgetPossibility = array('custom' => array(
         'visibility'         => true,
         'displayName'        => true,
