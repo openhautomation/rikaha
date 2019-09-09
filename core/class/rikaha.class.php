@@ -28,6 +28,13 @@ class rikaha extends eqLogic {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
       foreach (eqLogic::byType('rikaha') as $rikaha) {
+        $rikaha->getInfo();
+        //$rikaha->calcTankLevel();
+        // Dashboard
+        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
+        $mc->remove();
+        $rikaha->toHtml('dashboard');
+        $rikaha->refreshWidget();
       }
     }
     */
@@ -2242,17 +2249,19 @@ class rikaha extends eqLogic {
 
       curl_setopt($ch, CURLOPT_HEADER, FALSE);
       curl_setopt($ch, CURLOPT_NOBODY, FALSE);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+      curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
       curl_setopt($ch, CURLOPT_FAILONERROR, TRUE);
       curl_setopt($ch, CURLOPT_USERAGENT,$this->getUA());
+      curl_setopt($ch, CURLOPT_REFERER, 'https://www.rika-firenet.com/web/login');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POST, TRUE);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 6);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 60);
       curl_setopt($ch, CURLOPT_COOKIEJAR, $cookieFile);
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $postinfo);
@@ -2263,6 +2272,8 @@ class rikaha extends eqLogic {
       $curl_error = curl_error($ch);
 
       curl_close($ch);
+
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' return value: \''.$return.'\'');
 
       if($curl_errno > 0){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
@@ -2291,8 +2302,8 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 20);
       curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/status?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -2340,16 +2351,16 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 20);
       curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/controls?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
-      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POST, TRUE);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
       curl_setopt($ch, CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded'));
 
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-      curl_setopt($ch, CURLOPT_HEADER, 0);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,TRUE);
+      curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
       $return = curl_exec($ch);
       $curl_errno = curl_errno($ch);
@@ -2380,8 +2391,8 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
       curl_setopt($ch, CURLOPT_NOBODY, TRUE);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 6);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 20);
       curl_setopt($ch, CURLOPT_URL, $url);
       if (preg_match('`^https://`i', $url)){
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -2421,7 +2432,9 @@ class rikaha extends eqLogic {
 
     private function getUA(){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
-      return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0";
+      //return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0";
+      return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
+
     }
 
     private function translateSubTypeBinary($value=''){
