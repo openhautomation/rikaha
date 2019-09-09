@@ -2267,16 +2267,19 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_POSTFIELDS, $postinfo);
       curl_setopt($ch, CURLOPT_URL, $url);
 
-      $return = curl_exec($ch);
+      $return     = curl_exec($ch);
       $curl_errno = curl_errno($ch);
       $curl_error = curl_error($ch);
+      $curl_info  = curl_getinfo($ch);
 
       curl_close($ch);
 
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' return value: \''.$return.'\'');
-
       if($curl_errno > 0){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        foreach ($curl_info as $key => $value) {
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+        }
         return false;
       }elseif(trim($return)!='Found. Redirecting to /web/summary'){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' auth FAILED check your login/password');
@@ -2303,20 +2306,24 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
 
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 40);
       curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/status?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_FILE, $fp);
-      $return = curl_exec($ch);
 
+      $return     = curl_exec($ch);
       $curl_errno = curl_errno($ch);
       $curl_error = curl_error($ch);
+      $curl_info  = curl_getinfo($ch);
 
       curl_close($ch);
       fclose($fp);
 
       if($curl_errno > 0){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        foreach ($curl_info as $key => $value) {
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+        }
         return false;
       }
 
@@ -2352,7 +2359,7 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
 
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 40);
       curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/controls?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -2362,9 +2369,10 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER,TRUE);
       curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
-      $return = curl_exec($ch);
+      $return     = curl_exec($ch);
       $curl_errno = curl_errno($ch);
       $curl_error = curl_error($ch);
+      $curl_info  = curl_getinfo($ch);
 
       curl_close($ch);
 
@@ -2372,6 +2380,9 @@ class rikaha extends eqLogic {
 
       if($curl_errno > 0){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        foreach ($curl_info as $key => $value) {
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+        }
         return false;
       }
       if(strstr($data, 'OK')===false){
@@ -2392,21 +2403,25 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_NOBODY, TRUE);
 
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 40);
       curl_setopt($ch, CURLOPT_URL, $url);
       if (preg_match('`^https://`i', $url)){
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
       }
 
-      $return = curl_exec($ch);
+      $return     = curl_exec($ch);
       $curl_errno = curl_errno($ch);
       $curl_error = curl_error($ch);
+      $curl_info  = curl_getinfo($ch);
 
       curl_close($ch);
 
       if($curl_errno > 0){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        foreach ($curl_info as $key => $value) {
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+        }
         return false;
       }
       return true;
