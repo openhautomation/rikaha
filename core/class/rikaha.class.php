@@ -2266,7 +2266,7 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
       curl_setopt($ch, CURLOPT_POST, TRUE);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
       curl_setopt($ch, CURLOPT_TIMEOUT, 60);
       curl_setopt($ch, CURLOPT_COOKIEJAR, $cookieFile);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $postinfo);
@@ -2310,8 +2310,8 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 40);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 60);
       curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/status?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -2332,15 +2332,6 @@ class rikaha extends eqLogic {
         return false;
       }
 
-      $data=file_get_contents($jsonFile);
-      if($data===false){
-        log::add('rikaha', 'error', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to read json file');
-        return false;
-      }
-      if(strstr($data, 'is not registered for user')!==false){
-        log::add('rikaha', 'error', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data check your stove number');
-        return false;
-      }
       return true;
     }
 
@@ -2363,8 +2354,8 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 40);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 60);
       curl_setopt($ch, CURLOPT_URL, $url.$this->getConfiguration('stoveid').'/controls?nocache='.round(microtime(true)*1000,0));
       curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -2408,8 +2399,8 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
       curl_setopt($ch, CURLOPT_NOBODY, TRUE);
 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 40);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 60);
       curl_setopt($ch, CURLOPT_URL, $url);
       if (preg_match('`^https://`i', $url)){
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -2464,6 +2455,7 @@ class rikaha extends eqLogic {
         return false;
       }elseif(strstr($data, 'Authorisation required')!==false){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Authorisation required (raw data: '.$jsonFile.')');
+        $stovedata='Authorisation required';
         return false;
       }else{
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data (raw data: '.$jsonFile.')');
@@ -2535,9 +2527,7 @@ class rikaha extends eqLogic {
 
     private function getUA(){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
-      //return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0";
       return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
-
     }
 
     private function translateSubTypeBinary($value=''){
@@ -2725,12 +2715,10 @@ class rikaha extends eqLogic {
       }
       //rikaStatus
       if($this->rikaStatus($cookieFile, $jsonFile)===false){
-        $this->cleanCookieFile($cookieFile);
         $this->cleanJsonFile($jsonFile);
         // Retry
         sleep(2);
         if($this->rikaStatus($cookieFile, $jsonFile)===false){
-          $this->cleanCookieFile($cookieFile);
           $this->cleanJsonFile($jsonFile);
           throw new Exception(__('Récupération des données KO consulter vos logs en mode debug',__FILE__));
         }
@@ -2739,19 +2727,22 @@ class rikaha extends eqLogic {
       // Read json data
       $stovedata="";
       if($this->readJsonFile($jsonFile,$stovedata)===false){
-        $this->cleanCookieFile($cookieFile);
-        $this->cleanJsonFile($jsonFile);
+        sleep(2);
+        if($stovedata=='Authorisation required'){
+          $this->cleanCookieFile($cookieFile);
+          if($this->rikaLogin($cookieFile)===false){
+            $this->cleanCookieFile($cookieFile);
+            throw new Exception(__('Authentification KO consulter vos logs en mode debug',__FILE__));
+          }
+        }
 
         // Retry rikaStatus
-        sleep(2);
         if($this->rikaStatus($cookieFile, $jsonFile)===false){
-          $this->cleanCookieFile($cookieFile);
           $this->cleanJsonFile($jsonFile);
           throw new Exception(__('Récupération des données KO consulter vos logs en mode debug',__FILE__));
         }
 
         if($this->readJsonFile($jsonFile,$stovedata)===false){
-          $this->cleanCookieFile($cookieFile);
           $this->cleanJsonFile($jsonFile);
           throw new Exception(__('Lecture des données KO consulter vos logs en mode debug',__FILE__));
         }
@@ -2972,7 +2963,6 @@ class rikaha extends eqLogic {
         // Retry
         sleep(2);
         if($this->rikaControls($cookieFile, $stoveStructure)===false){
-          $this->cleanCookieFile($cookieFile);
           throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
         }
       }
