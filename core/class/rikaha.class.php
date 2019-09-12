@@ -2241,6 +2241,12 @@ class rikaha extends eqLogic {
 
     private function rikaLogin($cookieFile){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      if($this->checkCookie($cookieFile)===true){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Session OK passe login');
+        return true;
+      }
+
       $postinfo = "email=".$this->getConfiguration('login')."&password=".$this->getConfiguration('password');
       $url='https://www.rika-firenet.com/web/login';
 
@@ -2263,7 +2269,6 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
       curl_setopt($ch, CURLOPT_TIMEOUT, 60);
       curl_setopt($ch, CURLOPT_COOKIEJAR, $cookieFile);
-      curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieFile);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $postinfo);
       curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -2276,7 +2281,7 @@ class rikaha extends eqLogic {
 
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' return value: \''.$return.'\'');
       if($curl_errno > 0){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaLogin URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
         foreach ($curl_info as $key => $value) {
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
         }
@@ -2320,7 +2325,7 @@ class rikaha extends eqLogic {
       fclose($fp);
 
       if($curl_errno > 0){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaStatus URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
         foreach ($curl_info as $key => $value) {
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
         }
@@ -2386,7 +2391,7 @@ class rikaha extends eqLogic {
         return false;
       }
       if(strstr($data, 'OK')===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' write stove request FAILED: ' . $return);
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Write stove request FAILED: ' . $return);
         return false;
       }
       return true ;
@@ -2394,6 +2399,7 @@ class rikaha extends eqLogic {
 
     private function rikaLogout($cookieFile=''){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
       $url='https://www.rika-firenet.com/web/logout';
 
       $ch = curl_init();
@@ -2418,20 +2424,21 @@ class rikaha extends eqLogic {
       curl_close($ch);
 
       if($curl_errno > 0){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaLogout URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
         foreach ($curl_info as $key => $value) {
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
         }
         return false;
       }
+      $this->cleanCookieFile($cookieFile);
       return true;
     }
 
-    private function readJsonFile($jsonFile){
+    private function readJsonFile($jsonFile,&$stovedata=""){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
-      if (file_exists($jsonFile)===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' no json file: '.$jsonFile);
+      if(is_file($jsonFile)===false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' File not found: '.$jsonFile);
         return false;
       }
 
@@ -2441,9 +2448,90 @@ class rikaha extends eqLogic {
         return false;
       }
 
-      return json_decode($data, true);
+      $stovedata=json_decode($data, true);
+      if(json_last_error()===JSON_ERROR_NONE){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Decode json OK');
+        return true;
+      }
+      $stovedata="";
+
+      $data=trim(strip_tags($data));
+      if(strstr($data, 'is not registered for user')!==false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Check your stove number (raw data: '.$jsonFile.')');
+        return false;
+      }elseif(strstr($data, 'Rika Application Error')!==false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Rika Application Error (raw data: '.$jsonFile.')');
+        return false;
+      }elseif(strstr($data, 'Authorisation required')!==false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Authorisation required (raw data: '.$jsonFile.')');
+        return false;
+      }else{
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data (raw data: '.$jsonFile.')');
+        return false;
+      }
     }
 
+    private function checkCookie($cookieFile){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+
+      if(is_file($cookieFile)===false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' File not found: '.$cookieFile);
+        return false;
+      }
+
+      $fileContent=file($cookieFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      if ($fileContent === false) {
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Unable to read file: '.$cookieFile);
+        $this->cleanCookieFile($cookieFile);
+        return false;
+      }
+
+      $cookieInfo=array();
+      for($i=0;$i<count($fileContent);$i++){
+        $fileContent[$i] = trim($fileContent[$i]);
+        $cookieData = array_map('trim', explode("\t", $fileContent[$i], 7));
+        if (count($cookieData) !== 7) {
+          //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Missing cookie data');
+          continue;
+        }
+        if (substr($cookieData[0], 0, 10) == '#HttpOnly_') {
+          $cookieInfo['domain']=substr($cookieData[0], 10);
+        }else{
+          //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' No httpOnly prefix');
+          continue;
+        }
+        $cookieInfo['flag']=$cookieData[1];
+        $cookieInfo['path']=$cookieData[2];
+        $cookieInfo['secure']=$cookieData[3];
+        $cookieInfo['expire']=$cookieData[4];
+        $cookieInfo['name']=$cookieData[5];
+        $cookieInfo['value']=$cookieData[6];
+      }
+      foreach ($cookieInfo as $key => $value) {
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+      }
+      if(count($cookieInfo)!=7){
+        $this->cleanCookieFile($cookieFile);
+        return false;
+      }
+      if(empty($cookieInfo['expire'])===true){
+        $this->cleanCookieFile($cookieFile);
+        return false;
+      }
+      if(is_numeric($cookieInfo['expire'])===false){
+        $this->cleanCookieFile($cookieFile);
+        return false;
+      }
+      $compExpire=($cookieInfo['expire']-600);
+      $compTime=time();
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Expire if '.$compExpire.'<'.$compTime);
+      if((int)$compExpire<(int)$compTime){
+        $this->cleanCookieFile($cookieFile);
+        return false;
+      }
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Cookie is ok');
+      return true;
+    }
 
     private function getUA(){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
@@ -2622,42 +2710,65 @@ class rikaha extends eqLogic {
     public function getInfo(){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
-      $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.uniqid();
+      $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.$this->getId();
       $jsonFile=jeedom::getTmpFolder('rikaha').'/rikaha_json_'.uniqid().'.json';
 
       //rikaLogin
       if($this->rikaLogin($cookieFile)===false){
         $this->cleanCookieFile($cookieFile);
-        $this->cleanJsonFile($jsonFile);
-        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+        // Retry
+        sleep(2);
+        if($this->rikaLogin($cookieFile)===false){
+          $this->cleanCookieFile($cookieFile);
+          throw new Exception(__('Authentification KO consulter vos logs en mode debug',__FILE__));
+        }
       }
-      //rikaControls
+      //rikaStatus
       if($this->rikaStatus($cookieFile, $jsonFile)===false){
         $this->cleanCookieFile($cookieFile);
         $this->cleanJsonFile($jsonFile);
-        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+        // Retry
+        sleep(2);
+        if($this->rikaStatus($cookieFile, $jsonFile)===false){
+          $this->cleanCookieFile($cookieFile);
+          $this->cleanJsonFile($jsonFile);
+          throw new Exception(__('Récupération des données KO consulter vos logs en mode debug',__FILE__));
+        }
       }
-      //rikaLogout
-      if($this->rikaLogout($cookieFile)===false){
+
+      // Read json data
+      $stovedata="";
+      if($this->readJsonFile($jsonFile,$stovedata)===false){
         $this->cleanCookieFile($cookieFile);
         $this->cleanJsonFile($jsonFile);
-        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+
+        // Retry rikaStatus
+        sleep(2);
+        if($this->rikaStatus($cookieFile, $jsonFile)===false){
+          $this->cleanCookieFile($cookieFile);
+          $this->cleanJsonFile($jsonFile);
+          throw new Exception(__('Récupération des données KO consulter vos logs en mode debug',__FILE__));
+        }
+
+        if($this->readJsonFile($jsonFile,$stovedata)===false){
+          $this->cleanCookieFile($cookieFile);
+          $this->cleanJsonFile($jsonFile);
+          throw new Exception(__('Lecture des données KO consulter vos logs en mode debug',__FILE__));
+        }
       }
-
-      $stovedata=$this->readJsonFile($jsonFile);
-
-      $this->cleanCookieFile($cookieFile);
       $this->cleanJsonFile($jsonFile);
 
-      if($stovedata===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to decode json: '.$jsonFile);
-        throw new Exception(__('Impossible de décoder les données JSON, merci de consulter vos logs en mode debug',__FILE__));
+      //rikaLogout
+      /*
+      if($this->rikaLogout($cookieFile)===false){
+        // Retry
+        sleep(2);
+        if($this->rikaLogout($cookieFile, $jsonFile)===false){
+          $this->cleanCookieFile($cookieFile);
+          throw new Exception(__('Déconnection KO consulter vos logs en mode debug',__FILE__));
+        }
       }
-      if(is_array($stovedata)===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to process data: '.$jsonFile);
-        throw new Exception(__('Impossible de lire les données, merci de consulter vos logs en mode debug',__FILE__));
-      }
-
+      */
       // Store data
       $this->getStoveStructure($stoveStructure);
       $mainState="";
@@ -2845,23 +2956,38 @@ class rikaha extends eqLogic {
         }
       }
 
-      $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.uniqid();
+      $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.$this->getId();
       //rikaLogin
       if($this->rikaLogin($cookieFile)===false){
         $this->cleanCookieFile($cookieFile);
-        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+        // Retry
+        sleep(2);
+        if($this->rikaLogin($cookieFile)===false){
+          $this->cleanCookieFile($cookieFile);
+          throw new Exception(__('Authentification KO consulter vos logs en mode debug',__FILE__));
+        }
       }
       //rikaControls
       if($this->rikaControls($cookieFile, $stoveStructure)===false){
-        $this->cleanCookieFile($cookieFile);
-        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+        // Retry
+        sleep(2);
+        if($this->rikaControls($cookieFile, $stoveStructure)===false){
+          $this->cleanCookieFile($cookieFile);
+          throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+        }
       }
       //rikaLogout
+      /*
       if($this->rikaLogout($cookieFile)===false){
-        $this->cleanCookieFile($cookieFile);
-        throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
+        // Retry
+        sleep(2);
+        if($this->rikaLogout($cookieFile, $jsonFile)===false){
+          $this->cleanCookieFile($cookieFile);
+          $this->cleanJsonFile($jsonFile);
+          throw new Exception(__('Déconnection KO consulter vos logs en mode debug',__FILE__));
+        }
       }
-      $this->cleanCookieFile($cookieFile);
+      */
 
       return true ;
     }
