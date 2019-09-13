@@ -5,6 +5,7 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 Liste des évolutions majeures de la version courante :
 
 13 09 2019
+
 Patch pour prendre en compte les lenteurs du site Rika
 
 12 04 2019
