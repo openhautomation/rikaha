@@ -2145,11 +2145,11 @@ class rikaha extends eqLogic {
       $stoveTemplate=array(
         'standard'=>array(
           'local_statusCalculate'        => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
-          'local_setonOff'               => array('visible'=>1, 'historized'=>0, 'order'=>2, 'icon'=>'<i class="icon jeedom-off"></i>'),
-          'local_settargetTemperature'   => array('visible'=>1, 'historized'=>0, 'order'=>3, 'icon'=>'<i class="icon jeedom-thermo-froid"></i>'),
+          'local_setonOff'               => array('visible'=>1, 'historized'=>0, 'order'=>2, 'icon'=>'<i class="fas fa-power-off"></i>'),
+          'local_settargetTemperature'   => array('visible'=>1, 'historized'=>0, 'order'=>3, 'icon'=>'<i class="icon jeedomapp-temperature"></i>'),
           'local_setoperatingMode'       => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedomapp-preset2"></i>'),
           'local_setheatingPower'        => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
-          'parameterRuntimePellets'      => array('visible'=>1, 'historized'=>1, 'order'=>6, 'icon'=>'<i class="fas fa-clock-o"></i>'),
+          'parameterRuntimePellets'      => array('visible'=>1, 'historized'=>1, 'order'=>6, 'icon'=>'<i class="far fa-clock"></i>'),
           'parameterFeedRateTotal'       => array('visible'=>1, 'historized'=>1, 'order'=>7, 'icon'=>'<i class="icon divers-weight11"></i>'),
           'parameterFeedRateService'     => array('visible'=>1, 'historized'=>1, 'order'=>8, 'icon'=>'<i class="icon divers-weight11"></i>'),
           'frostProtectionTemperature'   => array('visible'=>1, 'historized'=>0, 'order'=>9, 'icon'=>'<i class="icon nature-snowflake"></i>'),
@@ -2157,15 +2157,15 @@ class rikaha extends eqLogic {
         ),
         'domo'=>array(
           'local_statusCalculate'         => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
-          'inputRoomTemperature'          => array('visible'=>1, 'historized'=>1, 'order'=>2, 'icon'=>'<i class="icon jeedom-thermo-moyen"></i>'),
-          'local_setonOff'                => array('visible'=>1, 'historized'=>0, 'order'=>3, 'icon'=>'<i class="icon jeedom-off"></i>'),
-          'local_settargetTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedom-thermo-froid"></i>'),
+          'inputRoomTemperature'          => array('visible'=>1, 'historized'=>1, 'order'=>2, 'icon'=>'<i class="icon jeedomapp-temperature"></i>'),
+          'local_setonOff'                => array('visible'=>1, 'historized'=>0, 'order'=>3, 'icon'=>'<i class="fas fa-power-off"></i>'),
+          'local_settargetTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedomapp-temperature"></i>'),
           'local_setoperatingMode'        => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="icon jeedomapp-preset2"></i>'),
           'local_setheatingPower'         => array('visible'=>1, 'historized'=>0, 'order'=>6, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
           'local_setconvectionFan1Active' => array('visible'=>1, 'historized'=>0, 'order'=>7, 'icon'=>'<i class="icon jeedomapp-reload"></i>'),
           'local_setconvectionFan1Area'   => array('visible'=>1, 'historized'=>0, 'order'=>8, 'icon'=>'<i class="icon techno-ventilation"></i>'),
           'local_setconvectionFan1Level'  => array('visible'=>1, 'historized'=>0, 'order'=>9, 'icon'=>'<i class="icon jeedom2-fdp1-signal4"></i>'),
-          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>10, 'icon'=>'<i class="fas fa-clock-o"></i>'),
+          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>10, 'icon'=>'<i class="far fa-clock"></i>'),
           'parameterFeedRateTotal'        => array('visible'=>1, 'historized'=>1, 'order'=>11, 'icon'=>'<i class="icon divers-weight11"></i>'),
           'parameterFeedRateService'      => array('visible'=>1, 'historized'=>1, 'order'=>12, 'icon'=>'<i class="icon divers-weight11"></i>'),
           'frostProtectionTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>13, 'icon'=>'<i class="icon nature-snowflake"></i>'),
@@ -2174,15 +2174,15 @@ class rikaha extends eqLogic {
         'induo'=>array(
           'local_statusCalculate'         => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
           'ecoMode'                       => array('visible'=>1, 'historized'=>1, 'order'=>2, 'icon'=>'<i class="icon divers-triangular42"></i>'),
-          'inputRoomTemperature'          => array('visible'=>1, 'historized'=>1, 'order'=>3, 'icon'=>'<i class="icon jeedom-thermo-moyen"></i>'),
-          'local_settargetTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedom-thermo-froid"></i>'),
-          'local_setonOff'                => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="icon jeedom-off"></i>'),
+          'inputRoomTemperature'          => array('visible'=>1, 'historized'=>1, 'order'=>3, 'icon'=>'<i class="icon jeedomapp-temperature"></i>'),
+          'local_settargetTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedomapp-temperature"></i>'),
+          'local_setonOff'                => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="fas fa-power-off"></i>'),
           'local_setoperatingMode'        => array('visible'=>1, 'historized'=>0, 'order'=>6, 'icon'=>'<i class="icon jeedomapp-preset2"></i>'),
           'local_setfullTank'             => array('visible'=>1, 'historized'=>0, 'order'=>7, 'icon'=>'<i class="icon divers-fuel4"></i>'),
           'local_setheatingPower'         => array('visible'=>1, 'historized'=>0, 'order'=>8, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
           'local_tankLevel'               => array('visible'=>1, 'historized'=>1, 'order'=>9, 'icon'=>'<i class="icon jeedom2-fdp1-signal02"></i>'),
-          'parameterRuntimeLogs'          => array('visible'=>1, 'historized'=>1, 'order'=>10, 'icon'=>'<i class="fas fa-clock-o"></i>'),
-          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>11, 'icon'=>'<i class="fas fa-clock-o"></i>'),
+          'parameterRuntimeLogs'          => array('visible'=>1, 'historized'=>1, 'order'=>10, 'icon'=>'<i class="far fa-clock"></i>'),
+          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>11, 'icon'=>'<i class="far fa-clock"></i>'),
           'parameterFeedRateService'      => array('visible'=>1, 'historized'=>1, 'order'=>12, 'icon'=>'<i class="icon divers-weight11"></i>'),
           'parameterFeedRateTotal'        => array('visible'=>1, 'historized'=>1, 'order'=>13, 'icon'=>'<i class="icon divers-weight11"></i>'),
           'parameterVersionMainBoard'     => array('visible'=>1, 'historized'=>0, 'order'=>14, 'icon'=>'<i class="icon techno-pc"></i>'),
@@ -3351,7 +3351,7 @@ class rikaha extends eqLogic {
                   $replaceInfo['#historized#']="history cursor";
                 }
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_action#']='<select style="width:35%;background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
                 $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
                 $replaceInfo['#action#']="change";
@@ -3370,7 +3370,7 @@ class rikaha extends eqLogic {
                   $replaceInfo['#historized#']="history cursor";
                 }
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_action#']='<select style="width:35%;background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
                 $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
                 $replaceInfo['#action#']="change";
@@ -3390,7 +3390,7 @@ class rikaha extends eqLogic {
                   $replaceInfo['#historized#']="history cursor";
                 }
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_action#']='<select style="width:35%;background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
                 $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
                 $replaceInfo['#action#']="change";
@@ -3410,7 +3410,7 @@ class rikaha extends eqLogic {
                   $replaceInfo['#historized#']="history cursor";
                 }
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_action#']='<select style="width:35%;background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
                 $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
                 $replaceInfo['#action#']="change";
@@ -3431,7 +3431,7 @@ class rikaha extends eqLogic {
                   $replaceInfo['#historized#']="history cursor";
                 }
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_action#']='<select style="width:35%;background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
                 $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
                 $replaceInfo['#action#']="change";
@@ -3451,7 +3451,7 @@ class rikaha extends eqLogic {
                   $replaceInfo['#historized#']="history cursor";
                 }
                 $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
-                $replaceInfo['#cmd_action#']='<select style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
+                $replaceInfo['#cmd_action#']='<select style="width:35%;background-color:transparent;" class="select-xs '.$value[$i]['id'].'_selectCmd">'.$this->HtmlBuildOptions($options, $value[$i]['value']).'</select>';
                 $replaceInfo['#cmd_name#']=$value[$i]['name'];
                 $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
                 $replaceInfo['#action#']="change";
