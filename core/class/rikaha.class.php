@@ -2881,6 +2881,24 @@ class rikaha extends eqLogic {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
 
       // Step 1
+      /*
+      // TODO:
+      operatingMode=0&
+      heatingPower=75&
+      targetTemperature=21&
+      onOff=true&
+      heatingTimesActiveForComfort=false&
+      setBackTemperature=12&
+      convectionFan1Active=true&
+      convectionFan1Level=0&
+      convectionFan1Area=0&
+      convectionFan2Active=false&
+      convectionFan2Level=0&
+      convectionFan2Area=0&
+      frostProtectionActive=false&
+      frostProtectionTemperature=6&
+      revision=1570871277
+      */
       $valideKeys=array(
         'targetTemperature'    => '',
         'onOff'                => '',
@@ -3014,6 +3032,8 @@ class rikaha extends eqLogic {
                   $newTankLevel=$currentTankLevel-$cons;
                   if($newTankLevel<0){
                     $newTankLevel=0;
+                  }else{
+                    $newTankLevel=number_format($newTankLevel, 2, '.', '');
                   }
                   $this->cmdSave('local_tankLevel', $newTankLevel);
                   log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' New tank level: '.$newTankLevel);
