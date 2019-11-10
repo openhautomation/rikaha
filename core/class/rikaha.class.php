@@ -2906,8 +2906,8 @@ class rikaha extends eqLogic {
         }
       }
 
-      sleep(7);
-      $this->getInfo();
+      //sleep(7);
+      //$this->getInfo();
 
       return true ;
     }
