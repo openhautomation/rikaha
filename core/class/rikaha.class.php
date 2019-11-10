@@ -2598,13 +2598,8 @@ class rikaha extends eqLogic {
           }
           break;
         case 2:
-          switch ($statusSubState) {
-            case 6:
-              $translate=__('Allumage', __FILE__);
-              break;
-            default:
-              $translate=__('Réveil', __FILE__);
-          }
+          $translate=__('Allumage', __FILE__);
+          break;
         case 3:
           $translate=__('Démarrage', __FILE__);
           break;
@@ -2624,15 +2619,17 @@ class rikaha extends eqLogic {
         case 6:
           $translate=__('Fin de combustion', __FILE__);
           break;
+        case 11:
+        case 13:
+        case 14:
+        case 16:
+        case 17:
+        case 50:
+          $translate=__('Contrôle présence bois', __FILE__);
+          break;
+        case 20:
         case 21:
-          switch ($statusSubState) {
-            case 11:
-            case 12:
-              $translate=__('Mode bois', __FILE__);
-              break;
-            default:
-              $translate=__('Etat inconnu', __FILE__);
-          }
+          $translate=__('Mode bois', __FILE__);
           break;
         default:
           $translate=__('Etat inconnu', __FILE__);
@@ -2812,112 +2809,44 @@ class rikaha extends eqLogic {
       $this->cmdSave('local_lastupdate', date('d-m-Y H:i:s'));
     }
 
-    public function controlStove($stovekey='', $_options=array(), $retry=true){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' started');
-
-      $returnValue=false;
-
-      if($retry===false){
-        // no retry
-        $this->getInfo();
-        sleep(3);
-        $this->setStove($stovekey, $_options);
-        sleep(7);
-        $this->getInfo();
-        $returnValue=true;
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry OFF');
-      }else{
-        // with retry
-        // 1 store target value
-        if(is_array($_options)===true){
-          if(array_key_exists('message', $_options)===true){
-            $targetValue=trim($_options['message']);
-          }
-        }else{
-          $targetValue=trim($_options);
-        }
-
-        // 2 define retry
-        $timerRetry=array(
-          array(15, 30, 45),
-          array(60, 60, 60)
-        );
-
-        // 3 start to send stove command
-        for($i=0;$i<count($timerRetry);$i++){
-          // Global retry
-          for($j=0;$j<count($timerRetry[$i]);$j++){
-            // Retry before ckeck
-            $this->getInfo();
-            sleep(3);
-
-            $this->setStove($stovekey, $_options);
-            sleep($timerRetry[$i][$j]);
-          }
-
-          // check
-          $this->getInfo();
-          $currentValue='';
-          $objValue=$this->getCmd(null, $stovekey);
-          if(is_object($objValue)){
-            $currentValue=$objValue->execCmd();
-            if($currentValue==$targetValue){
-              log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' ------------ update OK');
-              $returnValue=true;
-              break;
-            }
-          }else{
-            log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' stovekey: '.$stovekey . ' not an object');
-            break;
-          }
-        }
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__. ' retry ON');
-      }
-
-      return $returnValue;
-    }
-
     public function setStove($stovekey='', $_options=array()){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
 
-      // Step 1
-      /*
-      // TODO:
-      operatingMode=0&
-      heatingPower=75&
-      targetTemperature=21&
-      onOff=true&
-      heatingTimesActiveForComfort=false&
-      setBackTemperature=12&
-      convectionFan1Active=true&
-      convectionFan1Level=0&
-      convectionFan1Area=0&
-      convectionFan2Active=false&
-      convectionFan2Level=0&
-      convectionFan2Area=0&
-      frostProtectionActive=false&
-      frostProtectionTemperature=6&
-      revision=1570871277
-      */
-      $valideKeys=array(
-        'targetTemperature'    => '',
-        'onOff'                => '',
-        'operatingMode'        => '',
-        'heatingPower'         => '',
-        'convectionFan1Active' => '',
-        'convectionFan1Area'   => '',
-        'convectionFan1Level'  => '',
-        'convectionFan2Active' => '',
-        'convectionFan2Area'   => '',
-        'convectionFan2Level'  => ''
+      $stoveStructure=array(
+        'operatingMode'                 => '',
+        'heatingPower'                  => '',
+        'targetTemperature'             => '',
+        'onOff'                         => '',
+        'heatingTimesActiveForComfort'  => '',
+        'setBackTemperature'            => '',
+        'convectionFan1Active'          => '',
+        'convectionFan1Level'           => '',
+        'convectionFan1Area'            => '',
+        'convectionFan2Active'          => '',
+        'convectionFan2Level'           => '',
+        'convectionFan2Area'            => '',
+        'frostProtectionActive'         => '',
+        'frostProtectionTemperature'    => '',
+        'revision'                      => ''
       );
-      if(array_key_exists($stovekey, $valideKeys)===false){
+
+      // Check value
+      if(array_key_exists($stovekey, $stoveStructure)===false){
         log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' not found in allowed structure');
         throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
       }
 
-      // Step 2
-      $stoveStructure=array();
+      // pre set with db values
+      $this->getInfo();
+      foreach(array_keys($stoveStructure) as $key){
+        $cmddata=$this->getCmd(null,$key);
+        if(is_object($cmddata)){
+          $stoveStructure[$key]=$cmddata->execCmd();
+        }
+        unset($cmddata);
+      }
+
+      // set value
       if(is_array($_options)===true){
         if(array_key_exists('message', $_options)===true){
           $stoveStructure[$stovekey]=trim($_options['message']);
@@ -2926,24 +2855,14 @@ class rikaha extends eqLogic {
         $stoveStructure[$stovekey]=trim($_options);
       }
 
-      // Step 3 (required)
-      $revision=$this->getCmd(null,'revision');
-      if(is_object($revision)){
-        $stoveStructure['revision']=$revision->execCmd();
-      }
-      if(isset($stoveStructure['onOff'])===false){
-        $onOff=$this->getCmd(null,'onOff');
-        if(is_object($onOff)){
-          $stoveStructure['onOff']=$onOff->execCmd();
-        }
-      }
-
-      // Step 4 Specifics process
+      // translate
       foreach(array_keys($stoveStructure) as $key){
         switch ($key) {
           case 'onOff':
+          case 'heatingTimesActiveForComfort':
           case 'convectionFan1Active':
           case 'convectionFan2Active':
+          case 'frostProtectionActive':
             if($stoveStructure[$key]==1){
               $stoveStructure[$key]='true';
             }else{
@@ -2958,6 +2877,7 @@ class rikaha extends eqLogic {
         }
       }
 
+      // final check
       foreach ($stoveStructure as $key => $value) {
         if(trim($value)==''){
           log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' is not set');
@@ -2965,6 +2885,7 @@ class rikaha extends eqLogic {
         }
       }
 
+      // send to Rika
       $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.$this->getId();
       //rikaLogin
       if($this->rikaLogin($cookieFile)===false){
@@ -2984,18 +2905,9 @@ class rikaha extends eqLogic {
           throw new Exception(__('Votre action a èchouée, merci de consulter vos logs en mode debug',__FILE__));
         }
       }
-      //rikaLogout
-      /*
-      if($this->rikaLogout($cookieFile)===false){
-        // Retry
-        sleep(2);
-        if($this->rikaLogout($cookieFile, $jsonFile)===false){
-          $this->cleanCookieFile($cookieFile);
-          $this->cleanJsonFile($jsonFile);
-          throw new Exception(__('Déconnection KO consulter vos logs en mode debug',__FILE__));
-        }
-      }
-      */
+
+      sleep(7);
+      $this->getInfo();
 
       return true ;
     }
@@ -3026,8 +2938,8 @@ class rikaha extends eqLogic {
 
                 $cons=$currentCons-$previusCons;
                 if($cons>0){
-                  // Correction de la conso : ajustement à +25% - a tester
-                  $cons=$cons*1.25;
+                  // Correction de la conso : ajustement à +30% - a tester
+                  $cons=$cons*1.30;
 
                   $newTankLevel=$currentTankLevel-$cons;
                   if($newTankLevel<0){
@@ -3563,7 +3475,7 @@ class rikahaCmd extends cmd {
           case 'setconvectionFan2Active':
           case 'setconvectionFan2Area':
           case 'setconvectionFan2Level':
-            if($this->getEqLogic()->controlStove($this->getConfiguration('stovekey'), $_options, false)===true){
+            if($this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options, false)===true){
               $this->getEqLogic()->refreshWidget();
             }
             break;

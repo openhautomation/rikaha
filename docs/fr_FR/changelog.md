@@ -4,6 +4,14 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+10 11 2019
+
+Modifications de la gestion des états
+
+Modifications du calcul de la consommation de pellets
+
+Modification de la gestion des commandes
+
 24 09 2019
 
 Modifications nécessaires afin d'assurer la compatibilité avec Jeedom v4
