@@ -4,6 +4,18 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+17 11 2019
+
+Gestion des commandes d'information d'ouverture de porte et de couvercle de réservoire à pellets.
+
+Attention, pour que cela fonctionne il faut :
+
+que l’information d’ouverture (porte ou couvercle) soit intégrée dans l’environnement Rika,
+
+que la mise à jour des commandes du plugin soit exécutée pendant cet événement.
+
+Les commandes sont inputCover et inputDoor.
+
 10 11 2019
 
 Modifications de la gestion des états

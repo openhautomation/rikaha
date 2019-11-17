@@ -2759,8 +2759,10 @@ class rikaha extends eqLogic {
       */
       // Store data
       $this->getStoveStructure($stoveStructure);
-      $mainState="";
-      $subState="";
+      $mainState ="";
+      $subState  ="";
+      $inputCover=0;
+      $inputDoor =0;
       foreach ($stoveStructure as $key => $value) {
         if(substr($key, 0, 6)=='local_'){
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '. $key . ' skiped');
@@ -2793,6 +2795,20 @@ class rikaha extends eqLogic {
                     $stoveValue=0;
                   }
                   break;
+                case 'statusWarning':
+                  switch ($stoveValue) {
+                    case 2:
+                      $inputCover=1;
+                      break;
+                    case 4:
+                      $inputDoor=1;
+                      break;
+                    case 6:
+                      $inputCover=1;
+                      $inputDoor=1;
+                      break;
+                  }
+                  break;
               }
               $this->cmdSave($value['id'], $stoveValue);
             }
@@ -2805,6 +2821,10 @@ class rikaha extends eqLogic {
       if(trim($mainState)!='' && trim($subState)!=''){
         $this->cmdSave('local_statusCalculate', $this->translateStatus($mainState, $subState));
       }
+      // Update Input cover status (warning #2)
+      $this->cmdSave('inputCover', $inputCover);
+      // Update Input door status (warning #4)
+      $this->cmdSave('inputDoor', $inputDoor);
       // Store last update
       $this->cmdSave('local_lastupdate', date('d-m-Y H:i:s'));
     }
@@ -2906,7 +2926,7 @@ class rikaha extends eqLogic {
         }
       }
 
-      //sleep(7);
+      //sleep(20);
       //$this->getInfo();
 
       return true ;
