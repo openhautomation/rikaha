@@ -2048,6 +2048,20 @@ class rikaha extends eqLogic {
           'unite'=>'',
           'order'=>99
         ),
+        //Set add bag action
+        'local_setaddBag'=>array(
+          'name'=>__("+1 sac dans le réservoir", __FILE__),
+          'id'=>'local_setaddBag',
+          'parent'=>'0',
+          'type'=>'action',
+          'subtype'=>'message',
+          'title_disable'=> 1,
+          'historized'=>0,
+          'visible'=>0,
+          'configuration'=>array(array('k1'=>'actionCmd', 'k2'=>'setaddBag'),array('k1'=>'stovekey', 'k2'=>'tankLevel')),
+          'unite'=>'',
+          'order'=>99
+        ),
         //Set convectionFan1Active
         'local_setconvectionFan1Active'=>array(
           'name'=>__("Modif état Convection MultiAir 1", __FILE__),
@@ -2178,16 +2192,17 @@ class rikaha extends eqLogic {
           'local_settargetTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>4, 'icon'=>'<i class="icon jeedomapp-temperature"></i>'),
           'local_setonOff'                => array('visible'=>1, 'historized'=>0, 'order'=>5, 'icon'=>'<i class="fas fa-power-off"></i>'),
           'local_setoperatingMode'        => array('visible'=>1, 'historized'=>0, 'order'=>6, 'icon'=>'<i class="icon jeedomapp-preset2"></i>'),
-          'local_setfullTank'             => array('visible'=>1, 'historized'=>0, 'order'=>7, 'icon'=>'<i class="icon divers-fuel4"></i>'),
-          'local_setheatingPower'         => array('visible'=>1, 'historized'=>0, 'order'=>8, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
-          'local_tankLevel'               => array('visible'=>1, 'historized'=>1, 'order'=>9, 'icon'=>'<i class="icon jeedom2-fdp1-signal02"></i>'),
-          'parameterRuntimeLogs'          => array('visible'=>1, 'historized'=>1, 'order'=>10, 'icon'=>'<i class="far fa-clock"></i>'),
-          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>11, 'icon'=>'<i class="far fa-clock"></i>'),
-          'parameterFeedRateService'      => array('visible'=>1, 'historized'=>1, 'order'=>12, 'icon'=>'<i class="icon divers-weight11"></i>'),
-          'parameterFeedRateTotal'        => array('visible'=>1, 'historized'=>1, 'order'=>13, 'icon'=>'<i class="icon divers-weight11"></i>'),
-          'parameterVersionMainBoard'     => array('visible'=>1, 'historized'=>0, 'order'=>14, 'icon'=>'<i class="icon techno-pc"></i>'),
-          'lastSeenMinutes'               => array('visible'=>1, 'historized'=>0, 'order'=>15, 'icon'=>'<i class="icon divers-vlc1"></i>'),
-          'frostProtectionTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>16, 'icon'=>'<i class="icon nature-snowflake"></i>')
+          'local_setheatingPower'         => array('visible'=>1, 'historized'=>0, 'order'=>7, 'icon'=>'<i class="fas fa-tachometer-alt"></i>'),
+          'local_tankLevel'               => array('visible'=>1, 'historized'=>1, 'order'=>8, 'icon'=>'<i class="icon jeedom2-fdp1-signal02"></i>'),
+          'local_setfullTank'             => array('visible'=>1, 'historized'=>0, 'order'=>9, 'icon'=>'<i class="icon divers-fuel4"></i>'),
+          'local_setaddBag'               => array('visible'=>1, 'historized'=>0, 'order'=>10, 'icon'=>'<i class="fas fa-plus-circle"></i>'),
+          'parameterRuntimeLogs'          => array('visible'=>1, 'historized'=>1, 'order'=>11, 'icon'=>'<i class="far fa-clock"></i>'),
+          'parameterRuntimePellets'       => array('visible'=>1, 'historized'=>1, 'order'=>12, 'icon'=>'<i class="far fa-clock"></i>'),
+          'parameterFeedRateService'      => array('visible'=>1, 'historized'=>1, 'order'=>13, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'parameterFeedRateTotal'        => array('visible'=>1, 'historized'=>1, 'order'=>14, 'icon'=>'<i class="icon divers-weight11"></i>'),
+          'parameterVersionMainBoard'     => array('visible'=>1, 'historized'=>0, 'order'=>15, 'icon'=>'<i class="icon techno-pc"></i>'),
+          'lastSeenMinutes'               => array('visible'=>1, 'historized'=>0, 'order'=>16, 'icon'=>'<i class="icon divers-vlc1"></i>'),
+          'frostProtectionTemperature'    => array('visible'=>1, 'historized'=>0, 'order'=>17, 'icon'=>'<i class="icon nature-snowflake"></i>')
         )
       );
 
@@ -2247,7 +2262,7 @@ class rikaha extends eqLogic {
         return true;
       }
 
-      $postinfo = "email=".$this->getConfiguration('login')."&password=".$this->getConfiguration('password');
+      $postinfo = "email=".urldecode($this->getConfiguration('login'))."&password=".urldecode($this->getConfiguration('password'));
       $url='https://www.rika-firenet.com/web/login';
 
       $ch = curl_init();
@@ -2430,6 +2445,11 @@ class rikaha extends eqLogic {
 
       if(is_file($jsonFile)===false){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' File not found: '.$jsonFile);
+        return false;
+      }
+
+      if(is_readable($jsonFile)===false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' File not readable: '.$jsonFile);
         return false;
       }
 
@@ -2958,8 +2978,12 @@ class rikaha extends eqLogic {
 
                 $cons=$currentCons-$previusCons;
                 if($cons>0){
-                  // Correction de la conso : ajustement à +30% - a tester
-                  $cons=$cons*1.30;
+                  //Correction de la conso
+                  if($this->getConfiguration('correctionrate')>0){
+                    $fixcons=1+($this->getConfiguration('bagcapacity')/100);
+                    log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Correct conso: ' . $fixcons);
+                    $cons=$cons*$fixcons;
+                  }
 
                   $newTankLevel=$currentTankLevel-$cons;
                   if($newTankLevel<0){
@@ -2983,6 +3007,17 @@ class rikaha extends eqLogic {
 
     public function setfullTank(){
       $this->cmdSave('local_tankLevel', $this->getConfiguration('tankcapacity'));
+      return true;
+    }
+
+    public function setaddBag(){
+      $local_tankLevel=$this->getCmd(null,'local_tankLevel');
+      if(is_object($local_tankLevel)){
+        $currentTankLevel=$local_tankLevel->execCmd()+$this->getConfiguration('bagcapacity');
+        if($currentTankLevel <= $this->getConfiguration('tankcapacity')){
+          $this->cmdSave('local_tankLevel', $currentTankLevel);
+        }
+      }
       return true;
     }
     /*
@@ -3009,9 +3044,16 @@ class rikaha extends eqLogic {
       if (empty($this->getConfiguration('stoveid'))) {
         throw new Exception(__('Vous avez oublié de saisir le numéro du poêle',__FILE__));
       }
-      if (trim($this->getConfiguration('tankcapacity'))=='' || $this->getConfiguration('tankcapacity') < 0 ) {
-        throw new Exception(__('Vous avez oublié de saisir la capacité du réservoir de pellet (en Kg)',__FILE__));
+      if (trim($this->getConfiguration('tankcapacity'))=='' || $this->getConfiguration('tankcapacity') < 0 || $this->getConfiguration('tankcapacity') > 50) {
+        throw new Exception(__('Vous avez oublié de saisir la capacité du réservoir de pellet (en Kg) ou la valeur est incorrecte (0-50)',__FILE__));
       }
+      if (trim($this->getConfiguration('bagcapacity'))=='' || $this->getConfiguration('bagcapacity') < 0 || $this->getConfiguration('bagcapacity') > 20) {
+        throw new Exception(__('Vous avez oublié de saisir le poids d un sac de pellet (en Kg) ou la valeur est incorrecte (0-20)',__FILE__));
+      }
+      if (trim($this->getConfiguration('correctionrate'))=='' || $this->getConfiguration('correctionrate') < 0 || $this->getConfiguration('correctionrate') > 100) {
+        throw new Exception(__('Vous avez oublié de saisir le poucentage de correction à appliquer au calcul de consomation ou la valeur est incorrecte (0-100)',__FILE__));
+      }
+
       if (empty($this->getConfiguration('templateid'))) {
         throw new Exception(__('Aucun template sélectionné',__FILE__));
       }
@@ -3183,6 +3225,9 @@ class rikaha extends eqLogic {
               break;
             case 'local_setfullTank':
               $needed_value=$this->getConfiguration('tankcapacity');
+              break;
+            case 'local_setaddBag':
+              $needed_value=$this->getConfiguration('bagcapacity');
               break;
           }
 
@@ -3427,6 +3472,24 @@ class rikaha extends eqLogic {
                   $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
                 }
                 break;
+
+              case 'local_setaddBag':
+                if($value[$i]['value']>0){
+                  $info_template = getTemplate('core', $version, 'action', 'rikaha');
+                  $replaceInfo['#cmd_id#']=$value[$i]['id'];
+                  $replaceInfo['#historized#']="";
+                  if($value[$i]['historized']==1){
+                    $replaceInfo['#historized#']="history cursor";
+                  }
+                  $replaceInfo['#cmd_icon#']=$value[$i]['icon'];
+                  //$replaceInfo['#cmd_action#']='<button style="background-color:transparent;" class="'.$value[$i]['id'].'_selectCmd" type="button">'.$value[$i]['name'].'</button>';
+                  $replaceInfo['#cmd_action#']='<a class="'.$value[$i]['id'].'_selectCmd btn btn-xs btn-default action" style="background-color: transparent; border-color: transparent; margin-top: 2px;" title="'.$value[$i]['name'].'">'.$value[$i]['name'].'</a>';
+                  $replaceInfo['#cmd_name#']="";
+                  $replaceInfo['#eqlogicid#']=$value[$i]['eqlogicid'];
+                  $replaceInfo['#action#']="click";
+                  $replace['#cmd#'] .= template_replace($replaceInfo, $info_template);
+                }
+                break;
             }
           }
         }
@@ -3502,6 +3565,10 @@ class rikahaCmd extends cmd {
 
           case 'setfullTank':
             $this->getEqLogic()->setfullTank();
+            $this->getEqLogic()->refreshWidget();
+            break;
+          case 'setaddBag':
+            $this->getEqLogic()->setaddBag();
             $this->getEqLogic()->refreshWidget();
             break;
           default:
