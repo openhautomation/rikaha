@@ -19,7 +19,7 @@ Il est nécéssaire d'afficher la commande "+1 sac dans le réservoir" sur le wi
 
 17 11 2019
 
-Gestion des commandes d'information d'ouverture de porte et de couvercle de réservoire à pellets.
+Gestion des commandes d'information d'ouverture de porte et de couvercle de réservoir à pellets.
 
 Attention, pour que cela fonctionne il faut :
 
