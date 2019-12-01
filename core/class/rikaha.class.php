@@ -2262,7 +2262,7 @@ class rikaha extends eqLogic {
         return true;
       }
 
-      $postinfo = "email=".urldecode($this->getConfiguration('login'))."&password=".urldecode($this->getConfiguration('password'));
+      $postinfo = "email=".urlencode($this->getConfiguration('login'))."&password=".urlencode($this->getConfiguration('password'));
       $url='https://www.rika-firenet.com/web/login';
 
       $ch = curl_init();
