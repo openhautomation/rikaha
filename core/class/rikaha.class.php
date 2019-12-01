@@ -2468,17 +2468,17 @@ class rikaha extends eqLogic {
 
       $data=trim(strip_tags($data));
       if(strstr($data, 'is not registered for user')!==false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Check your stove number (raw data: '.$jsonFile.')');
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Check your stove number (raw data: '.$data.')');
         return false;
       }elseif(strstr($data, 'Rika Application Error')!==false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Rika Application Error (raw data: '.$jsonFile.')');
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Rika Application Error (raw data: '.$data.')');
         return false;
       }elseif(strstr($data, 'Authorisation required')!==false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Authorisation required (raw data: '.$jsonFile.')');
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Authorisation required (raw data: '.$data.')');
         $stovedata='Authorisation required';
         return false;
       }else{
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data (raw data: '.$jsonFile.')');
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data (raw data: '.$data.')');
         return false;
       }
     }
@@ -2730,10 +2730,10 @@ class rikaha extends eqLogic {
           throw new Exception(__('Authentification KO consulter vos logs en mode debug',__FILE__));
         }
       }
-      //rikaStatus
+      //rikaStatus Read info from rika
       if($this->rikaStatus($cookieFile, $jsonFile)===false){
         $this->cleanJsonFile($jsonFile);
-        // Retry
+        // Retry (curl error)
         sleep(2);
         if($this->rikaStatus($cookieFile, $jsonFile)===false){
           $this->cleanJsonFile($jsonFile);
@@ -2744,39 +2744,30 @@ class rikaha extends eqLogic {
       // Read json data
       $stovedata="";
       if($this->readJsonFile($jsonFile,$stovedata)===false){
-        sleep(2);
         if($stovedata=='Authorisation required'){
+          // New auth
           $this->cleanCookieFile($cookieFile);
           if($this->rikaLogin($cookieFile)===false){
             $this->cleanCookieFile($cookieFile);
             throw new Exception(__('Authentification KO consulter vos logs en mode debug',__FILE__));
           }
-        }
-
-        // Retry rikaStatus
-        if($this->rikaStatus($cookieFile, $jsonFile)===false){
+          // Retry rikaStatus
           $this->cleanJsonFile($jsonFile);
-          throw new Exception(__('Récupération des données KO consulter vos logs en mode debug',__FILE__));
-        }
-
-        if($this->readJsonFile($jsonFile,$stovedata)===false){
+          if($this->rikaStatus($cookieFile, $jsonFile)===false){
+            $this->cleanJsonFile($jsonFile);
+            throw new Exception(__('Récupération des données KO consulter vos logs en mode debug',__FILE__));
+          }
+          if($this->readJsonFile($jsonFile,$stovedata)===false){
+            $this->cleanJsonFile($jsonFile);
+            throw new Exception(__('Lecture des données KO consulter vos logs en mode debug',__FILE__));
+          }
+        }else{
           $this->cleanJsonFile($jsonFile);
           throw new Exception(__('Lecture des données KO consulter vos logs en mode debug',__FILE__));
         }
       }
       $this->cleanJsonFile($jsonFile);
 
-      //rikaLogout
-      /*
-      if($this->rikaLogout($cookieFile)===false){
-        // Retry
-        sleep(2);
-        if($this->rikaLogout($cookieFile, $jsonFile)===false){
-          $this->cleanCookieFile($cookieFile);
-          throw new Exception(__('Déconnection KO consulter vos logs en mode debug',__FILE__));
-        }
-      }
-      */
       // Store data
       $this->getStoveStructure($stoveStructure);
       $mainState ="";
