@@ -4,9 +4,22 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+24 11 2019
+
+Ajout des paramètres suivants dans la configuration des équipements :
+
+* Poids d'un sac de pellet (Kg)
+
+ Ce paramètre, lorsqu'il est activé, permet de remplir le réservoir sac par sac.
+Il est nécéssaire d'afficher la commande "+1 sac dans le réservoir" sur le widget
+
+* Correction de la consommation (%)
+
+ Ce paramètre, lorsqu'il est activé, permet de corriger la consommation calculée, en applicant un poucentage. Par exemple, si vous saisissez 30, la consommation sera majoré de 30 %
+
 17 11 2019
 
-Gestion des commandes d'information d'ouverture de porte et de couvercle de réservoire à pellets.
+Gestion des commandes d'information d'ouverture de porte et de couvercle de réservoir à pellets.
 
 Attention, pour que cela fonctionne il faut :
 
