@@ -136,6 +136,22 @@ $eqLogics = eqLogic::byType($plugin->getId());
             </div>
 
             <div class="form-group">
+              <label class="col-md-4 control-label">{{Poids d'un sac de pellet (Kg)}}</label>
+              <div class="col-md-8">
+                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="bagcapacity" placeholder="Poids d'un sac de pellet"/>
+                {{Permet de gérer le remplissage du réservoir au sac. Saisissez 0 pour désactiver cette fonctionnalité. Ne fonctionne que si la conso totale est historisée}}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">{{Correction de la consommation (%)}}</label>
+              <div class="col-md-8">
+                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="correctionrate" placeholder="Correction de la consommation"/>
+                {{Permet de corriger la consommation calculée en applicant un poucentage. Par exemple, si vous saisissez 30, la consommation sera majoré de 30 %. Ne fonctionne que si la conso totale est historisée}}
+              </div>
+            </div>
+
+            <div class="form-group">
               <label class="col-md-4 control-label">{{Template du widget}}</label>
               <div class="col-md-8">
                 <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="templateid">
