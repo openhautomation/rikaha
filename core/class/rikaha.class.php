@@ -2681,7 +2681,7 @@ class rikaha extends eqLogic {
 
     private function cmdSave($cmd, $data){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
-      if(is_bool($data===true)===true){
+      if(is_bool($data)===true){
         if($data===true){
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' TRUE');
         }else{
