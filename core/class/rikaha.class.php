@@ -2683,9 +2683,9 @@ class rikaha extends eqLogic {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
       if(is_bool($data)===true){
         if($data===true){
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' TRUE');
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' true');
         }else{
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' FALSE');
+          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' false');
         }
       }else{
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' ' . $data);
@@ -2697,20 +2697,17 @@ class rikaha extends eqLogic {
         if($name->getIsHistorized()){
           $name->addHistoryValue($data);
         }
-        $name->save();
         if($name->getSubtype()=='binary'){
           switch ($data) {
             case 0:
-              $data="FALSE";
+              $data="false";
               break;
             case 1:
-              $data="TRUE";
+              $data="true";
               break;
-            default:
-              $data="NOT binary value";
             }
         }
-        //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ID: ' . $cmd . ' Subtype: '.$name->getSubtype().' Value: '.$data.' saved');
+        $name->save();
       }
     }
 
@@ -2770,10 +2767,10 @@ class rikaha extends eqLogic {
 
       // Store data
       $this->getStoveStructure($stoveStructure);
-      $mainState ="";
-      $subState  ="";
-      $inputCover=0;
-      $inputDoor =0;
+      $mainState  = "";
+      $subState   = "";
+      $inputCover = true;
+      $inputDoor  = true;
       foreach ($stoveStructure as $key => $value) {
         if(substr($key, 0, 6)=='local_'){
           log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '. $key . ' skiped');
@@ -2809,17 +2806,20 @@ class rikaha extends eqLogic {
                 case 'statusWarning':
                   switch ($stoveValue) {
                     case 2:
-                      $inputCover=1;
+                      $inputCover=false;
                       break;
                     case 4:
-                      $inputDoor=1;
+                      $inputDoor=false;
                       break;
                     case 6:
-                      $inputCover=1;
-                      $inputDoor=1;
+                      $inputCover=false;
+                      $inputDoor=false;
                       break;
                   }
                   break;
+                case 'inputCover':
+                case 'inputDoor':
+                  continue 2;
               }
               $this->cmdSave($value['id'], $stoveValue);
             }
