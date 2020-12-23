@@ -47,13 +47,14 @@ Le plugin Rikaha a été testé sur les modèles :
 3. Sumo
 4. Domo
 5. Corso
+6. Paro
 
 Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 
 **Activation**
 
 Une seule action, vous devez cliquer sur _Activer_.
-Le plugin est planifié toute les 30 mn.
+Le plugin est planifié toutes les 30 mn.
 
 ![rikaha-config2](../images/rikaha_config2.png)
 
