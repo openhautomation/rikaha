@@ -46,6 +46,7 @@ Le plugin Rikaha a été testé sur les modèles :
 2. Revo
 3. Sumo
 4. Domo
+5. Corso
 
 Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 
