@@ -53,7 +53,7 @@ Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 **Activation**
 
 Une seule action, vous devez cliquer sur _Activer_.
-Le plugin est croné toute les 30 mn.
+Le plugin est planifié toute les 30 mn.
 
 ![rikaha-config2](../images/rikaha_config2.png)
 
