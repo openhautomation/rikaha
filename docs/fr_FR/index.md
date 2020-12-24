@@ -10,7 +10,7 @@ Les principales fonctionnalités de Rikaha sont :
 **Le monitoring**
 > De nombreuses informations sont accessibles et permettent le monitoring de votre poêle dans votre Jeedom.
 
-Ex: La puissance de chauffre, la température de consigne, la température de flamme, la température de la sonde externe, la consommation de pellets ...
+Ex: La puissance de chauffe, la température de consigne, la température de flamme, la température de la sonde externe, la consommation de pellets ...
 
 **Le pilotage**
 > Vous pouvez depuis votre Jeedom piloter des fonctionnalités du poêle.  
@@ -47,13 +47,14 @@ Le plugin Rikaha a été testé sur les modèles :
 3. Sumo
 4. Domo
 5. Corso
+6. Paro
 
 Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 
 **Activation**
 
 Une seule action, vous devez cliquer sur _Activer_.
-Le plugin est planifié toute les 30 mn.
+Le plugin est planifié toutes les 30 mn.
 
 ![rikaha-config2](../images/rikaha_config2.png)
 
