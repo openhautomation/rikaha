@@ -1241,7 +1241,7 @@ class rikaha extends eqLogic {
         ),
         //parameterVersionTFT
         'parameterVersionTFT'=>array(
-          'name'=>__('Version firmeware écran', __FILE__),
+          'name'=>__('Version firmware écran', __FILE__),
           'id'=>'parameterVersionTFT',
           'parent'=>'sensors',
           'type'=>'info',
