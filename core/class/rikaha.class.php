@@ -1241,7 +1241,7 @@ class rikaha extends eqLogic {
         ),
         //parameterVersionTFT
         'parameterVersionTFT'=>array(
-          'name'=>__('Version firmware écran', __FILE__),
+          'name'=>__('Version firmeware écran', __FILE__),
           'id'=>'parameterVersionTFT',
           'parent'=>'sensors',
           'type'=>'info',
@@ -2263,7 +2263,12 @@ class rikaha extends eqLogic {
       }
 
       $postinfo = "email=".urlencode($this->getConfiguration('login'))."&password=".urlencode($this->getConfiguration('password'));
-      $url='https://www.rika-firenet.com/web/login';
+      if($this->getConfiguration('brand') != "animo") {
+        $url='https://www.rika-firenet.com/web/login';
+      }
+      else {
+        $url='https://www.animo-wifire.com/web/login';
+      }
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2275,7 +2280,7 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
       curl_setopt($ch, CURLOPT_FAILONERROR, TRUE);
       curl_setopt($ch, CURLOPT_USERAGENT,$this->getUA());
-      curl_setopt($ch, CURLOPT_REFERER, 'https://www.rika-firenet.com/web/login');
+      curl_setopt($ch, CURLOPT_REFERER, $url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -2315,7 +2320,12 @@ class rikaha extends eqLogic {
         log::add('rikaha', 'error', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to open json file');
         return false;
       }
-      $url='https://www.rika-firenet.com/api/client/';
+      if($this->getConfiguration('brand') != "animo") {
+        $url='https://www.rika-firenet.com/api/client/';
+      }
+      else {
+        $url='https://www.animo-wifire.com/api/client/';
+      }
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2359,7 +2369,12 @@ class rikaha extends eqLogic {
 
       $postfields=http_build_query($data, "\n");
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $postfields);
-      $url = 'https://www.rika-firenet.com/api/client/';
+      if($this->getConfiguration('brand') != "animo") {
+        $url='https://www.rika-firenet.com/api/client/';
+      }
+      else {
+        $url='https://www.animo-wifire.com/api/client/';
+      }
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2406,7 +2421,12 @@ class rikaha extends eqLogic {
     private function rikaLogout($cookieFile=''){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
-      $url='https://www.rika-firenet.com/web/logout';
+      if($this->getConfiguration('brand') != "animo") {
+        $url='https://www.rika-firenet.com/web/logout';
+      }
+      else {
+        $url='https://www.animo-wifire.com/web/logout';
+      }
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2759,8 +2779,18 @@ class rikaha extends eqLogic {
             throw new Exception(__('Lecture des données KO consulter vos logs en mode debug',__FILE__));
           }
         }else{
-          $this->cleanJsonFile($jsonFile);
-          throw new Exception(__('Lecture des données KO consulter vos logs en mode debug',__FILE__));
+          // Gestion des valeurs de retour sans forcément lever une exception (les serveurs Rika sont parfois capricieux)
+	        $this->cleanJsonFile($jsonFile);
+	        if($this->rikaStatus($cookieFile, $jsonFile)===false){
+            $this->cleanJsonFile($jsonFile);
+	          log::add('rikaha', 'warning', __FUNCTION__ . '()-ln:'.__LINE__.' Retry done - Récupération des données KO');
+	          return 1;
+          }
+          if($this->readJsonFile($jsonFile,$stovedata)===false){
+	          $this->cleanJsonFile($jsonFile);
+	          log::add('rikaha', 'warning', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get json data (raw data: '.$stovedata.')');
+	          return 1;
+          }
         }
       }
       $this->cleanJsonFile($jsonFile);
@@ -2950,8 +2980,8 @@ class rikaha extends eqLogic {
           $currentTankLevel=$local_tankLevel->execCmd();
           if($currentTankLevel>0){
             $endUT=time();
-            $startUT=$endUT-7200; // 2 heures
-            $start = date("Y-m-d H:i:s", $startUT);
+            // On utilise la date de la dernière modification du niveau du réservoir
+	          $start = $local_tankLevel->getValueDate();
             $end = date("Y-m-d H:i:s", $endUT);
             log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' start: ' . $start);
             log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' end: ' . $end);
@@ -2969,14 +2999,19 @@ class rikaha extends eqLogic {
 
                 $cons=$currentCons-$previusCons;
                 if($cons>0){
-                  //Correction de la conso
-                  if($this->getConfiguration('correctionrate')>0){
-                    $fixcons=1+($this->getConfiguration('bagcapacity')/100);
-                    log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Correct conso: ' . $fixcons);
-                    $cons=$cons*$fixcons;
+                  //Correction de la conso - On autorise une correction en négatif
+                  if($this->getConfiguration('correctionrate') > -99){
+                    $fixcons=1+($this->getConfiguration('correctionrate')/100);
+                    log::add('rikaha', 'info',  __FUNCTION__ . '()-ln:'.__LINE__.' Correct conso: ' . $fixcons);
+		                $cons=$cons*$fixcons;
+		                log::add('rikaha', 'info',  __FUNCTION__ . '()-ln:'.__LINE__.' Conso: ' . $cons);
                   }
 
-                  $newTankLevel=$currentTankLevel-$cons;
+		              log::add('rikaha', 'info',  __FUNCTION__ . '()-ln:'.__LINE__.' TankLevel: ' . $currentTankLevel);
+
+		              $newTankLevel=$currentTankLevel-$cons;
+		              log::add('rikaha', 'info',  __FUNCTION__ . '()-ln:'.__LINE__.' NewTankLevel: ' . $newTankLevel);
+
                   if($newTankLevel<0){
                     $newTankLevel=0;
                   }else{
@@ -3041,8 +3076,8 @@ class rikaha extends eqLogic {
       if (trim($this->getConfiguration('bagcapacity'))=='' || $this->getConfiguration('bagcapacity') < 0 || $this->getConfiguration('bagcapacity') > 20) {
         throw new Exception(__('Vous avez oublié de saisir le poids d un sac de pellet (en Kg) ou la valeur est incorrecte (0-20)',__FILE__));
       }
-      if (trim($this->getConfiguration('correctionrate'))=='' || $this->getConfiguration('correctionrate') < 0 || $this->getConfiguration('correctionrate') > 100) {
-        throw new Exception(__('Vous avez oublié de saisir le poucentage de correction à appliquer au calcul de consomation ou la valeur est incorrecte (0-100)',__FILE__));
+      if (trim($this->getConfiguration('correctionrate'))=='' || $this->getConfiguration('correctionrate') < -99 || $this->getConfiguration('correctionrate') > 100) {
+        throw new Exception(__('Vous avez oublié de saisir le poucentage de correction à appliquer au calcul de consomation ou la valeur est incorrecte (-99 => 100)',__FILE__));
       }
 
       if (empty($this->getConfiguration('templateid'))) {
@@ -3537,7 +3572,7 @@ class rikahaCmd extends cmd {
         switch ($this->getConfiguration('actionCmd')) {
           case 'getInfo':
             $this->getEqLogic()->getInfo();
-            $this->getEqLogic()->refreshWidget();
+	          $this->getEqLogic()->refreshWidget();
             break;
           case 'settargetTemperature':
           case 'setoperatingMode':

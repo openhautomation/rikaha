@@ -109,6 +109,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-sm-4 control-label">{{Marque}}</label>
+							<div class="col-sm-8">
+								<select class="eqLogicAttr form-control" data-l1key='configuration' data-l2key='brand'>
+											<option value='rika'>Rika</option>
+											<option value='animo'>Animo</option>
+										</select>
+							</div>
+						</div>
+						<div class="form-group">
 								<label class="col-md-4 control-label">{{Identifiant}}</label>
 								<div class="col-md-8">
 										<input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="login" placeholder="Identifiant"/>

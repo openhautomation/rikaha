@@ -48,6 +48,7 @@ Le plugin Rikaha a été testé sur les modèles :
 4. Domo
 5. Corso
 6. Paro
+7. Animo Avito
 
 Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 
