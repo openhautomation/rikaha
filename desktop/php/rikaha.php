@@ -128,6 +128,20 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 
             <div class="form-group">
+              <label class="col-md-4 control-label">{{Marque du poêle}}</label>
+              <div class="col-md-8">
+                <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="stovebrand">
+                  <?php
+                    $templateList=rikaha::getStoveTemplateList();
+                    for($i=0;$i<count($templateList);$i++){
+                      echo '<option value="' . $templateList[$i] . '">' . $templateList[$i] . '</option>';
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label class="col-md-4 control-label">{{Capacité du réservoir (Kg)}}</label>
               <div class="col-md-8">
                 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tankcapacity" placeholder="Capacité du réservoir à pellet"/>
