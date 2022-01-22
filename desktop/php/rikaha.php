@@ -128,6 +128,20 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 
             <div class="form-group">
+              <label class="col-md-4 control-label">{{Marque du poêle}}</label>
+              <div class="col-md-8">
+                <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="stovebrand">
+                  <?php
+                    $StoveBrandList=rikaha::getStoveBrandList();
+                    for($i=0;$i<count($StoveBrandList);$i++){
+                      echo '<option value="' . $StoveBrandList[$i]['id'] . '">' . $StoveBrandList[$i]['label'] . '</option>';
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label class="col-md-4 control-label">{{Capacité du réservoir (Kg)}}</label>
               <div class="col-md-8">
                 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tankcapacity" placeholder="Capacité du réservoir à pellet"/>
@@ -147,7 +161,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
               <label class="col-md-4 control-label">{{Correction de la consommation (%)}}</label>
               <div class="col-md-8">
                 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="correctionrate" placeholder="Correction de la consommation"/>
-                {{Permet de corriger la consommation calculée en applicant un poucentage. Par exemple, si vous saisissez 30, la consommation sera majoré de 30 %. Ne fonctionne que si la conso totale est historisée}}
+                {{Permet de corriger la consommation calculée en applicant un poucentage (-99 à 100). Par exemple, si vous saisissez 30, la consommation sera majoré de 30 %. Ne fonctionne que si la conso totale est historisée}}
               </div>
             </div>
 

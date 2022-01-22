@@ -4,6 +4,17 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/ope
 
 Liste des évolutions majeures de la version courante :
 
+20 01 2022
+
+Ajout de la possibilité de gérer les poêles de la marque Animo (filiale de Rika).
+
+Correction de la gestion du coefficient pour le calcul de la consommation de pellets, possibilité de saisir un coefficient négatif.
+
+/!\ attention après la mise à jour, il est nécessaire de sauvegarder vos équipements
+
+Merci pour les contributions de jbx
+
+
 24 11 2019
 
 Ajout des paramètres suivants dans la configuration des équipements :

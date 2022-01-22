@@ -1,7 +1,7 @@
 Présentation
 ============
 
-**Le plugin Rikaha** interface les poêles de la marque Autrichienne Rika avec Jeedom.
+**Le plugin Rikaha** interface les poêles de la marque Autrichienne Rika (et de sa filiale Animo) avec Jeedom.
 
 ![rikaha-logo](../images/rikaha_icon.png)
 
@@ -48,6 +48,7 @@ Le plugin Rikaha a été testé sur les modèles :
 4. Domo
 5. Corso
 6. Paro
+7. Avito (Animo)
 
 Vous pouvez me contacter afin d'ajouter d'autres modèles à la liste
 

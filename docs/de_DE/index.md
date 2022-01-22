@@ -1,7 +1,7 @@
 Présentation
 ============
 
-**Le plugin Rikaha** interface les poêles de la marque Autrichienne Rika avec Jeedom.
+**Le plugin Rikaha** interface les poêles de la marque Autrichienne Rika (et de sa filiale Animo) avec Jeedom.
 
 ![rikaha-logo](../images/rikaha_icon.png)
 

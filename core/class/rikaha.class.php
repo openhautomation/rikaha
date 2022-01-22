@@ -21,7 +21,20 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
 class rikaha extends eqLogic {
     /*     * *************************Attributs****************************** */
-
+    public static $_StoveBrand = array(
+      0 => array(
+                  'id'       =>0,
+                  'label'    =>'Rika',
+                  'urllogin' =>'https://www.rika-firenet.com/web/login',
+                  'urlapi'   =>'https://www.rika-firenet.com/api/client/',
+                  'urllogout'=>'https://www.rika-firenet.com/web/logout'),
+      1 => array(
+                  'id'       =>1,
+                  'label'    =>'Animo',
+                  'urllogin' =>'https://www.animo-wifire.com/web/login',
+                  'urlapi'   =>'https://www.animo-wifire.com/api/client/',
+                  'urllogout'=>'https://www.animo-wifire.com/web/logout')
+    );
     /*     * ***********************Methode static*************************** */
     /*
     public static function cron() {
@@ -2238,6 +2251,59 @@ class rikaha extends eqLogic {
       return $stoveTemplateList;
     }
 
+    public function getStoveBrandList(){
+      $stovebrandList=array();
+      foreach (rikaha::$_StoveBrand as $key => $value) {
+        $stovebrandList[]=array('id'=>$value['id'], 'label'=>$value['label']);
+      }
+      return $stovebrandList;
+    }
+
+    private function getStoveBrandUrlLogin($id=0){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogin() Called');
+      $url=false;
+      foreach (rikaha::$_StoveBrand as $key => $value) {
+        if($id!=$value['id']){
+          continue;
+        }
+
+        $url=$value['urllogin'];
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogin() url found ('.$url.')');
+        break;
+      }
+      return $url;
+    }
+
+    private function getStoveBrandUrlApi($id=0){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlApi() Called');
+      $url=false;
+      foreach (rikaha::$_StoveBrand as $key => $value) {
+        if($id!=$value['id']){
+          continue;
+        }
+
+        $url=$value['urlapi'];
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlApi() url found ('.$url.')');
+        break;
+      }
+      return $url;
+    }
+
+    private function getStoveBrandUrlLogout($id=0){
+      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogout() Called');
+      $url=false;
+      foreach (rikaha::$_StoveBrand as $key => $value) {
+        if($id!=$value['id']){
+          continue;
+        }
+
+        $url=$value['urllogout'];
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogout() url found ('.$url.')');
+        break;
+      }
+      return $url;
+    }
+
     private function cleanCookieFile($cookieFile){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
@@ -2261,9 +2327,14 @@ class rikaha extends eqLogic {
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Session OK passe login');
         return true;
       }
+      $url=$this->getStoveBrandUrlLogin($this->getConfiguration('stovebrand'));
+      if($url===false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogin() FAILED');
+        $url='https://www.rika-firenet.com/web/login';
+        #return false;
+      }
 
       $postinfo = "email=".urlencode($this->getConfiguration('login'))."&password=".urlencode($this->getConfiguration('password'));
-      $url='https://www.rika-firenet.com/web/login';
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2275,7 +2346,8 @@ class rikaha extends eqLogic {
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
       curl_setopt($ch, CURLOPT_FAILONERROR, TRUE);
       curl_setopt($ch, CURLOPT_USERAGENT,$this->getUA());
-      curl_setopt($ch, CURLOPT_REFERER, 'https://www.rika-firenet.com/web/login');
+      #curl_setopt($ch, CURLOPT_REFERER, 'https://www.rika-firenet.com/web/login');
+      curl_setopt($ch, CURLOPT_REFERER, $url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -2315,7 +2387,12 @@ class rikaha extends eqLogic {
         log::add('rikaha', 'error', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to open json file');
         return false;
       }
-      $url='https://www.rika-firenet.com/api/client/';
+      $url=$this->getStoveBrandUrlApi($this->getConfiguration('stovebrand'));
+      if($url===false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlApi() FAILED');
+        $url='https://www.rika-firenet.com/api/client/';
+        #return false;
+      }
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2356,10 +2433,15 @@ class rikaha extends eqLogic {
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' POST fields not valid');
         return false;
       }
+      $url=$this->getStoveBrandUrlApi($this->getConfiguration('stovebrand'));
+      if($url===false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlApi() FAILED');
+        $url = 'https://www.rika-firenet.com/api/client/';
+        #return false;
+      }
 
       $postfields=http_build_query($data, "\n");
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $postfields);
-      $url = 'https://www.rika-firenet.com/api/client/';
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2406,7 +2488,12 @@ class rikaha extends eqLogic {
     private function rikaLogout($cookieFile=''){
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
 
-      $url='https://www.rika-firenet.com/web/logout';
+      $url=$this->getStoveBrandUrlLogout($this->getConfiguration('stovebrand'));
+      if($url===false){
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogout() FAILED');
+        $url='https://www.rika-firenet.com/web/logout';
+        #return false;
+      }
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2950,8 +3037,9 @@ class rikaha extends eqLogic {
           $currentTankLevel=$local_tankLevel->execCmd();
           if($currentTankLevel>0){
             $endUT=time();
-            $startUT=$endUT-7200; // 2 heures
-            $start = date("Y-m-d H:i:s", $startUT);
+            #$startUT=$endUT-7200; // 2 heures
+            #$start = date("Y-m-d H:i:s", $startUT);
+            $start = $local_tankLevel->getValueDate();
             $end = date("Y-m-d H:i:s", $endUT);
             log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' start: ' . $start);
             log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' end: ' . $end);
@@ -2970,8 +3058,8 @@ class rikaha extends eqLogic {
                 $cons=$currentCons-$previusCons;
                 if($cons>0){
                   //Correction de la conso
-                  if($this->getConfiguration('correctionrate')>0){
-                    $fixcons=1+($this->getConfiguration('bagcapacity')/100);
+                  if($this->getConfiguration('correctionrate')!=0){
+                    $fixcons=1+($this->getConfiguration('correctionrate')/100);
                     log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Correct conso: ' . $fixcons);
                     $cons=$cons*$fixcons;
                   }
@@ -2983,6 +3071,7 @@ class rikaha extends eqLogic {
                     $newTankLevel=number_format($newTankLevel, 2, '.', '');
                   }
                   $this->cmdSave('local_tankLevel', $newTankLevel);
+                  log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Current tank level: '.$currentTankLevel);
                   log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' New tank level: '.$newTankLevel);
                 }
               }else{
@@ -3041,12 +3130,14 @@ class rikaha extends eqLogic {
       if (trim($this->getConfiguration('bagcapacity'))=='' || $this->getConfiguration('bagcapacity') < 0 || $this->getConfiguration('bagcapacity') > 20) {
         throw new Exception(__('Vous avez oublié de saisir le poids d un sac de pellet (en Kg) ou la valeur est incorrecte (0-20)',__FILE__));
       }
-      if (trim($this->getConfiguration('correctionrate'))=='' || $this->getConfiguration('correctionrate') < 0 || $this->getConfiguration('correctionrate') > 100) {
-        throw new Exception(__('Vous avez oublié de saisir le poucentage de correction à appliquer au calcul de consomation ou la valeur est incorrecte (0-100)',__FILE__));
+      if (trim($this->getConfiguration('correctionrate'))=='' || $this->getConfiguration('correctionrate') < -99 || $this->getConfiguration('correctionrate') > 100) {
+        throw new Exception(__('Vous avez oublié de saisir le poucentage de correction à appliquer au calcul de consomation ou la valeur est incorrecte (-99 à 100)',__FILE__));
       }
-
       if (empty($this->getConfiguration('templateid'))) {
         throw new Exception(__('Aucun template sélectionné',__FILE__));
+      }
+      if ($this->getConfiguration('stovebrand')=='' || $this->getConfiguration('stovebrand') < 0 || $this->getConfiguration('stovebrand') > 1) {
+        throw new Exception(__('Aucune marque de poêle sélectionnée',__FILE__));
       }
     }
 
