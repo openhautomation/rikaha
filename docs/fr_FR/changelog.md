@@ -12,6 +12,8 @@ Correction de la gestion du coefficient pour le calcul de la consommation de pel
 
 /!\ attention après la mise à jour, il est nécessaire de sauvegarder vos équipements
 
+Merci pour les contributions de jbx
+
 
 24 11 2019
 
