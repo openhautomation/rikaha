@@ -2966,8 +2966,13 @@ class rikaha extends eqLogic {
 
       // set value
       if(is_array($_options)===true){
-        if(array_key_exists('message', $_options)===true){
-          $stoveStructure[$stovekey]=trim($_options['message']);
+        foreach(array_keys($_options) as $key){
+          switch ($key) {
+            case 'message':
+            case 'rhvalue':
+              $stoveStructure[$stovekey]=trim($_options[$key]);
+              break;
+          }
         }
       }else{
         $stoveStructure[$stovekey]=trim($_options);
