@@ -3646,8 +3646,10 @@ class rikahaCmd extends cmd {
           case 'setconvectionFan2Area':
           case 'setconvectionFan2Level':
             if($this->getEqLogic()->setStove($this->getConfiguration('stovekey'), $_options, false)===true){
-              $this->getEqLogic()->refreshWidget();
+              sleep(5);
+              $this->getEqLogic()->getInfo();
             }
+            $this->getEqLogic()->refreshWidget();
             break;
 
           case 'setfullTank':
